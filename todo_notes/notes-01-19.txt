@@ -1,0 +1,39 @@
+
+- 2nd paragraph rewritten why we use it on muscle patterns 
+but usedful for other diffraction patterns 
+
+- talk more about equatorial streaks 
+
+- SAXS - not exactly fiber diffarction 
+
+- why poeple do diffraction on muscle and why its popular 
+background - non diffuse
+multiple fillamental structures guvung rise to diffarction features 
+
+- large amlunt of non crystallyne stuctures - backrouns 
+
+- unlike purified systems 
+
+lorentz for 1/r
+
+
+- fix references - see ccp13 references
+
+- z scale being logarithmic to visualize diffraction images 
+
+
+- 1d works not badly for meridian and equatorial
+
+
+- 2d is needed to analyize meridian layer lines
+give reason why 2d bg rm is needed 
+- information in the shape of the meridional reflectoons 
+- for detailed modelling we want to know the detailed shape of the reflections 
+
+- process diagram at the beginning of the methodology 
+- artificial stricture at the start awkward 
+
+- all the methpds - shorten for paper but keep for later 
+
+
+- friber diffraction journals - lorentz correction for fiber patterns - figure 3 

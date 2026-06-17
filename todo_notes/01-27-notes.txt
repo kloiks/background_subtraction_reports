@@ -1,0 +1,3 @@
+
+- downsample to the point it doent work anymore
+- include a table of different downsampling and how it affects 

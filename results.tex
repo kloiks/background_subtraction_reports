@@ -1,0 +1,368 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{underscore}
+\usepackage{longtable}
+
+\begin{document}
+
+\begin{table}[ht]
+\centering
+\caption{Cross-dataset method summary --- WITHOUT equator (Norm\_*)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+ & method & n\_datasets & n\_images & avg\_Norm\_MSE & avg\_Norm\_Share\_Neg\_Synthetic & avg\_Norm\_Share\_Non\_Baseline & avg\_Norm\_Share\_Neg\_Connected & avg\_Norm\_Smoothness & calc\_loss\_mean & calc\_loss\_std & calc\_loss\_CV \\
+\midrule
+0 & avg & 6 & 300 & 25.39 & 1.45 & 0.49 & 4.18 & 0.00 & 3.72 & 16.04 & 4.31 \\
+1 & ch  & 5 & 250 & 18.76 & 0.52 & 1.87 & 0.15 & 3.99 & 3.50 & 2.12 & 0.61 \\
+2 & wth & 6 & 300 & 25.17 & 0.51 & 0.52 & 0.83 & 0.93 & 3.13 & 3.86 & 1.23 \\
+3 & sg  & 6 & 290 & 1.88  & 1.03 & 0.48 & 0.96 & 1.61 & 0.99 & 0.29 & 0.29 \\
+4 & sb  & 5 & 207 & 2.68  & 1.12 & 0.77 & 0.47 & 1.75 & 1.13 & 0.42 & 0.37 \\
+5 & cs  & 3 & 20  & 11.04 & 0.99 & 0.39 & 3.10 & 3.39 & 2.66 & 1.57 & 0.59 \\
+6 & rw  & 1 & 7   & 1.49  & 0.78 & 0.31 & 0.84 & 2.73 & 1.06 & 0.14 & 0.13 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Cross-dataset method summary (new run)}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{llrrrrrrrrrr}
+    \toprule
+        & method & n_datasets & n_images & avg_Norm_MSE & avg_Norm_Share_Neg_Synthetic & avg_Norm_Share_Non_Baseline & avg_Norm_Share_Neg_Connected & avg_Norm_Smoothness & calc_loss_mean & calc_loss_std & calc_loss_CV \\
+    \midrule
+    0 & avg & 11 & 546 & 0.93 & 1.34 & 0.56 & 4.01 & 0.00 & 0.73 & 0.12 & 0.17 \\
+    1 & ch & 11 & 545 & 45.31 & 0.75 & 1.42 & 0.19 & 3.96 & 2.03 & 1.52 & 0.75 \\
+    2 & wth & 11 & 546 & 4.23 & 0.93 & 0.37 & 1.10 & 1.66 & 0.61 & 0.24 & 0.40 \\
+    3 & sg & 11 & 546 & 1.56 & 1.14 & 0.36 & 1.07 & 2.00 & 0.62 & 0.24 & 0.40 \\
+    4 & sb & 11 & 546 & 2.25 & 1.22 & 0.29 & 1.32 & 2.95 & 0.68 & 0.20 & 0.30 \\
+    5 & cs & 11 & 503 & 2.20 & 1.00 & 0.68 & 1.20 & 2.93 & 0.97 & 0.53 & 0.55 \\
+    \bottomrule
+    \end{tabular}%
+    }
+    \end{table}
+    
+
+\begin{table}[ht]
+\centering
+\caption{Cross-dataset method summary --- WITH equator (Norm\_*)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+ & method & n\_datasets & n\_images & avg\_Norm\_MSE & avg\_Norm\_Share\_Neg\_Synthetic & avg\_Norm\_Share\_Non\_Baseline & avg\_Norm\_Share\_Neg\_Connected & avg\_Norm\_Smoothness & calc\_loss\_mean & calc\_loss\_std & calc\_loss\_CV \\
+\midrule
+0 & ch     & 5 & 250 & 18.76    & 0.52 & 1.87 & 0.15 & 3.99 & 3.50    & 2.12     & 0.61  \\
+1 & avg+eq & 8 & 397 & 39.26    & 1.34 & 0.48 & 4.16 & 0.00 & 5.09    & 18.31    & 3.60  \\
+2 & sg+eq  & 8 & 371 & 1.66     & 1.20 & 0.34 & 0.96 & 1.79 & 0.97    & 0.22     & 0.23  \\
+3 & wth+eq & 7 & 347 & 0.97     & 0.80 & 0.44 & 0.94 & 0.90 & 0.72    & 0.20     & 0.28  \\
+4 & sb+eq  & 7 & 321 & 0.84     & 1.22 & 0.74 & 0.61 & 1.58 & 0.94    & 0.19     & 0.20  \\
+5 & cs+eq  & 6 & 250 & 27878.75 & 0.23 & 2.39 & 0.47 & 0.35 & 2789.02 & 37283.91 & 13.37 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+
+
+
+\begin{table}[ht]
+\centering
+\caption{Cross-dataset method summary --- WITH equator (Equator\_Norm\_* metrics, equator-region)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+ & method & n\_datasets & n\_images & avg\_Equator\_Norm\_MSE & avg\_Equator\_Norm\_Share\_Neg\_Synthetic & avg\_Equator\_Norm\_Share\_Non\_Baseline & avg\_Equator\_Norm\_Share\_Neg\_Connected & avg\_Equator\_Norm\_Smoothness & calc\_loss\_eq\_mean & calc\_loss\_eq\_std & calc\_loss\_eq\_CV \\
+\midrule
+0 & ch     & 5 & 250 & 18.57    & 0.52 & 1.52 & 0.07 & 21.78 & 6.89    & 3.53     & 0.51  \\
+1 & avg+eq & 8 & 397 & 39.26    & 1.34 & 1.30 & 2.67 & 0.00  & 5.11    & 18.31    & 3.58  \\
+2 & sg+eq  & 8 & 371 & 1.66     & 1.20 & 1.00 & 0.63 & 1.71  & 1.15    & 0.42     & 0.37  \\
+3 & wth+eq & 7 & 347 & 0.97     & 0.80 & 1.24 & 0.55 & 0.31  & 0.85    & 0.15     & 0.18  \\
+4 & sb+eq  & 7 & 321 & 0.84     & 1.22 & 1.33 & 0.43 & 4.18  & 1.66    & 0.58     & 0.35  \\
+5 & cs+eq  & 6 & 250 & 27878.75 & 0.23 & 2.48 & 0.25 & 10.53 & 2791.04 & 37284.78 & 13.36 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-dataset method ranking --- WITHOUT equator}
+\begin{tabular}{lllrr}
+\toprule
+ & dataset & method & calc\_loss\_mean & rank \\
+\midrule
+0  & 2024\_0508\_Weikang        & sg  & 1.29 & 1 \\
+1  & 2024\_0508\_Weikang        & sb  & 1.73 & 2 \\
+2  & 2024\_0508\_Weikang        & wth & 4.60 & 3 \\
+3  & 2024\_0508\_Weikang        & avg & 16.13 & 4 \\
+4  & 2024\_1213\_Weikang\_air    & sg  & 0.68 & 1 \\
+5  & 2024\_1213\_Weikang\_air    & sb  & 0.87 & 2 \\
+6  & 2024\_1213\_Weikang\_air    & cs  & 1.16 & 3 \\
+7  & 2024\_1213\_Weikang\_air    & avg & 1.26 & 4 \\
+8  & 2024\_1213\_Weikang\_air    & wth & 4.60 & 5 \\
+9  & 2024\_1213\_Weikang\_air    & ch  & 4.86 & 6 \\
+10 & 2024\_1213\_Weikang\_buffer & sg  & 0.71 & 1 \\
+11 & 2024\_1213\_Weikang\_buffer & sb  & 0.90 & 2 \\
+12 & 2024\_1213\_Weikang\_buffer & cs  & 1.10 & 3 \\
+13 & 2024\_1213\_Weikang\_buffer & avg & 1.22 & 4 \\
+14 & 2024\_1213\_Weikang\_buffer & ch  & 4.77 & 5 \\
+15 & 2024\_1213\_Weikang\_buffer & wth & 4.99 & 6 \\
+16 & 2025\_0227\_Jani           & rw  & 1.06 & 1 \\
+17 & 2025\_0227\_Jani           & avg & 1.21 & 2 \\
+18 & 2025\_0227\_Jani           & sg  & 1.21 & 3 \\
+19 & 2025\_0227\_Jani           & sb  & 1.62 & 4 \\
+20 & 2025\_0227\_Jani           & wth & 2.62 & 5 \\
+21 & 2025\_0227\_Jani           & cs  & 3.04 & 6 \\
+22 & 2025\_0227\_Jani           & ch  & 3.50 & 7 \\
+23 & 2025\_04\_02\_Ma\_P1         & wth & 1.00 & 1 \\
+24 & 2025\_04\_02\_Ma\_P1         & sg  & 1.11 & 2 \\
+25 & 2025\_04\_02\_Ma\_P1         & avg & 1.28 & 3 \\
+26 & 2025\_04\_02\_Ma\_P1         & ch  & 2.56 & 4 \\
+27 & LP\_P2\_F6\_639              & wth & 0.96 & 1 \\
+28 & LP\_P2\_F6\_639              & sg  & 1.01 & 2 \\
+29 & LP\_P2\_F6\_639              & sb  & 1.05 & 3 \\
+30 & LP\_P2\_F6\_639              & avg & 1.25 & 4 \\
+31 & LP\_P2\_F6\_639              & ch  & 1.84 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-dataset method ranking --- WITH equator}
+\begin{tabular}{lllrr}
+\toprule
+ & dataset & method & calc\_loss\_mean & rank \\
+\midrule
+0  & 2024\_0508\_Weikang        & wth+eq & 0.74     & 1 \\
+1  & 2024\_0508\_Weikang        & sg+eq  & 0.91     & 2 \\
+2  & 2024\_0508\_Weikang        & sb+eq  & 1.05     & 3 \\
+3  & 2024\_0508\_Weikang        & avg+eq & 26.84    & 4 \\
+4  & 2024\_0508\_Weikang        & cs+eq  & 287.30   & 5 \\
+5  & 2024\_1213\_Weikang\_air    & wth+eq & 0.45     & 1 \\
+6  & 2024\_1213\_Weikang\_air    & sg+eq  & 0.65     & 2 \\
+7  & 2024\_1213\_Weikang\_air    & sb+eq  & 0.74     & 3 \\
+8  & 2024\_1213\_Weikang\_air    & avg+eq & 1.25     & 4 \\
+9  & 2024\_1213\_Weikang\_air    & ch     & 4.86     & 5 \\
+10 & 2024\_1213\_Weikang\_air    & cs+eq  & 13654.11 & 6 \\
+11 & 2024\_1213\_Weikang\_buffer & sg+eq  & 0.65     & 1 \\
+12 & 2024\_1213\_Weikang\_buffer & avg+eq & 1.29     & 2 \\
+13 & 2024\_1213\_Weikang\_buffer & ch     & 4.77     & 3 \\
+14 & 2025\_0227\_Jani           & wth+eq & 0.68     & 1 \\
+15 & 2025\_0227\_Jani           & sb+eq  & 0.95     & 2 \\
+16 & 2025\_0227\_Jani           & cs+eq  & 1.16     & 3 \\
+17 & 2025\_0227\_Jani           & avg+eq & 1.19     & 4 \\
+18 & 2025\_0227\_Jani           & sg+eq  & 1.24     & 5 \\
+19 & 2025\_0227\_Jani           & ch     & 3.50     & 6 \\
+20 & 2025\_04\_02\_Ma\_P1         & wth+eq & 1.02     & 1 \\
+21 & 2025\_04\_02\_Ma\_P1         & sg+eq  & 1.13     & 2 \\
+22 & 2025\_04\_02\_Ma\_P1         & avg+eq & 1.22     & 3 \\
+23 & 2025\_04\_02\_Ma\_P1         & sb+eq  & 1.25     & 4 \\
+24 & 2025\_04\_02\_Ma\_P1         & ch     & 2.56     & 5 \\
+25 & 2026\_0409\_Ma\_air         & wth+eq & 0.54     & 1 \\
+26 & 2026\_0409\_Ma\_air         & sb+eq  & 0.99     & 2 \\
+27 & 2026\_0409\_Ma\_air         & sg+eq  & 1.07     & 3 \\
+28 & 2026\_0409\_Ma\_air         & cs+eq  & 1.14     & 4 \\
+29 & 2026\_0409\_Ma\_air         & avg+eq & 1.15     & 5 \\
+30 & LP\_P2\_F6\_639              & wth+eq & 0.93     & 1 \\
+31 & LP\_P2\_F6\_639              & sb+eq  & 0.95     & 2 \\
+32 & LP\_P2\_F6\_639              & sg+eq  & 0.97     & 3 \\
+33 & LP\_P2\_F6\_639              & cs+eq  & 1.16     & 4 \\
+34 & LP\_P2\_F6\_639              & avg+eq & 1.21     & 5 \\
+35 & LP\_P2\_F6\_639              & ch     & 1.84     & 6 \\
+36 & MyokardiaPatternsWithLL   & wth+eq & 0.69     & 1 \\
+37 & MyokardiaPatternsWithLL   & sb+eq  & 0.83     & 2 \\
+38 & MyokardiaPatternsWithLL   & sg+eq  & 0.97     & 3 \\
+39 & MyokardiaPatternsWithLL   & avg+eq & 6.93     & 4 \\
+40 & MyokardiaPatternsWithLL   & cs+eq  & 13.07    & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section*{New Tables}
+
+\begin{table}[ht]
+\centering
+\caption{Cross-dataset method summary (new run)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+ & method & n_datasets & n_images & avg_Norm_MSE & avg_Norm_Share_Neg_Synthetic & avg_Norm_Share_Non_Baseline & avg_Norm_Share_Neg_Connected & avg_Norm_Smoothness & calc_loss_mean & calc_loss_std & calc_loss_CV \\
+\midrule
+0 & avg & 11 & 546 & 0.93 & 1.34 & 0.56 & 4.01 & 0.00 & 0.73 & 0.12 & 0.17 \\
+1 & ch & 11 & 545 & 45.31 & 0.75 & 1.42 & 0.19 & 3.96 & 2.03 & 1.52 & 0.75 \\
+2 & wth & 11 & 546 & 4.23 & 0.93 & 0.37 & 1.10 & 1.66 & 0.61 & 0.24 & 0.40 \\
+3 & sg & 11 & 546 & 1.56 & 1.14 & 0.36 & 1.07 & 2.00 & 0.62 & 0.24 & 0.40 \\
+4 & sb & 11 & 546 & 2.25 & 1.22 & 0.29 & 1.32 & 2.95 & 0.68 & 0.20 & 0.30 \\
+5 & cs & 11 & 503 & 2.20 & 1.00 & 0.68 & 1.20 & 2.93 & 0.97 & 0.53 & 0.55 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-dataset method summary (new run, full metrics)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrrrrrrrrrr}
+\toprule
+ & dataset & method & n_images & bg_sum_mean & bg_sum_std & bg_sum_CV & avg_Norm_MSE & avg_Norm_Share_Neg_Synthetic & avg_Norm_Share_Non_Baseline & avg_Norm_Share_Neg_Connected & avg_Norm_Smoothness & calc_loss_mean \\
+\midrule
+0 & 2022_1028_Granzier_addedup_frames & avg & 47 & 4123026.37 & 2390977.84 & 0.58 & 0.35 & 1.31 & 0.66 & 3.88 & 0.00 & 0.79 \\
+1 & 2022_1028_Granzier_addedup_frames & ch & 47 & 2684497.56 & 1633820.00 & 0.61 & 0.16 & 0.75 & 1.27 & 0.18 & 4.00 & 1.46 \\
+2 & 2022_1028_Granzier_addedup_frames & wth & 47 & 2537705.40 & 1479561.80 & 0.58 & 0.13 & 0.86 & 0.40 & 1.65 & 1.76 & 0.62 \\
+3 & 2022_1028_Granzier_addedup_frames & sg & 47 & 2478113.01 & 1474910.07 & 0.60 & 0.04 & 0.98 & 0.53 & 1.23 & 1.72 & 0.71 \\
+4 & 2022_1028_Granzier_addedup_frames & sb & 47 & 2598407.81 & 1504657.27 & 0.58 & 0.52 & 1.11 & 0.35 & 1.98 & 2.17 & 0.66 \\
+5 & 2022_1028_Granzier_addedup_frames & cs & 47 & 2411245.90 & 1921524.93 & 0.80 & 0.20 & 0.99 & 1.00 & 2.01 & 1.95 & 1.15 \\
+6 & 2024_0508_Weikang & avg & 50 & 2735459217.19 & 127979584.43 & 0.05 & 5.86 & 1.33 & 0.64 & 3.97 & 0.00 & 0.83 \\
+7 & 2024_0508_Weikang & ch & 50 & 218.68 & 1207.96 & 5.52 & 1.38 & 0.26 & 2.90 & 0.00 & 0.00 & 2.35 \\
+8 & 2024_0508_Weikang & wth & 50 & 446598614.80 & 48835496.08 & 0.11 & 10.36 & 1.18 & 0.35 & 0.11 & 2.61 & 0.71 \\
+9 & 2024_0508_Weikang & sg & 50 & 425599650.47 & 36633492.99 & 0.09 & 2.99 & 1.45 & 0.39 & 0.14 & 2.11 & 0.63 \\
+10 & 2024_0508_Weikang & sb & 50 & 531888978.66 & 40362452.59 & 0.08 & 5.35 & 1.42 & 0.20 & 0.52 & 3.89 & 0.70 \\
+11 & 2024_0508_Weikang & cs & 50 & 440311855.08 & 92516944.94 & 0.21 & 4.47 & 1.17 & 0.71 & 0.12 & 2.48 & 0.93 \\
+12 & 2024_1213_Weikang_air & avg & 50 & 968585412.94 & 390834052.13 & 0.40 & 0.57 & 1.33 & 0.56 & 4.01 & 0.00 & 0.72 \\
+13 & 2024_1213_Weikang_air & ch & 50 & 147400666.29 & 61957005.13 & 0.42 & 16.05 & 0.90 & 0.23 & 0.15 & 6.77 & 1.07 \\
+14 & 2024_1213_Weikang_air & wth & 50 & 180755294.65 & 70013180.56 & 0.39 & 3.56 & 0.90 & 0.39 & 0.58 & 2.55 & 0.68 \\
+15 & 2024_1213_Weikang_air & sg & 50 & 165185670.85 & 69070108.25 & 0.42 & 2.79 & 1.12 & 0.39 & 0.84 & 3.01 & 0.74 \\
+16 & 2024_1213_Weikang_air & sb & 50 & 215559418.84 & 94738753.87 & 0.44 & 4.00 & 1.15 & 0.14 & 0.87 & 6.47 & 0.90 \\
+17 & 2024_1213_Weikang_air & cs & 50 & 155626779.98 & 132849861.43 & 0.85 & 4.96 & 0.85 & 1.26 & 0.96 & 3.94 & 1.55 \\
+18 & 2024_1213_Weikang_buffer & avg & 50 & 479394027.04 & 127362097.80 & 0.27 & 0.68 & 1.41 & 0.40 & 4.15 & 0.00 & 0.60 \\
+19 & 2024_1213_Weikang_buffer & ch & 50 & 126942691.16 & 32890773.26 & 0.26 & 259.92 & 0.68 & 1.59 & 0.05 & 2.80 & 4.19 \\
+20 & 2024_1213_Weikang_buffer & wth & 50 & 164307710.31 & 43505940.42 & 0.26 & 2.73 & 1.05 & 0.09 & 0.64 & 0.95 & 0.28 \\
+21 & 2024_1213_Weikang_buffer & sg & 50 & 154906106.22 & 43525904.18 & 0.28 & 1.44 & 1.24 & 0.06 & 0.77 & 1.28 & 0.29 \\
+22 & 2024_1213_Weikang_buffer & sb & 50 & 178103699.03 & 44299348.71 & 0.25 & 1.23 & 1.22 & 0.12 & 0.81 & 1.79 & 0.38 \\
+23 & 2024_1213_Weikang_buffer & cs & 50 & 186694948.09 & 48809185.16 & 0.26 & 1.45 & 1.15 & 0.06 & 0.49 & 1.82 & 0.33 \\
+24 & 2025_0227_Jani & avg & 50 & 441326080.80 & 84890667.84 & 0.19 & 0.29 & 1.40 & 0.54 & 4.10 & 0.00 & 0.71 \\
+25 & 2025_0227_Jani & ch & 50 & 207359448.42 & 57094916.53 & 0.28 & 94.16 & 0.41 & 1.79 & 0.06 & 3.81 & 2.78 \\
+26 & 2025_0227_Jani & wth & 50 & 141918785.54 & 24658783.08 & 0.17 & 21.06 & 0.37 & 0.38 & 0.60 & 0.90 & 0.65 \\
+27 & 2025_0227_Jani & sg & 50 & 218702855.53 & 51029306.92 & 0.23 & 4.82 & 1.08 & 0.09 & 0.71 & 3.50 & 0.56 \\
+28 & 2025_0227_Jani & sb & 50 & 212035621.37 & 49633195.38 & 0.23 & 3.66 & 1.06 & 0.33 & 0.44 & 2.68 & 0.65 \\
+29 & 2025_0227_Jani & cs & 50 & 215924539.28 & 55083385.13 & 0.26 & 0.34 & 0.78 & 0.47 & 0.62 & 2.34 & 0.68 \\
+30 & 2025_04_02_Ma_P1 & avg & 50 & 30428467.53 & 2687637.72 & 0.09 & 0.23 & 1.31 & 0.66 & 3.91 & 0.00 & 0.79 \\
+31 & 2025_04_02_Ma_P1 & ch & 50 & 24160963.05 & 2170547.15 & 0.09 & 2.15 & 0.91 & 0.29 & 0.47 & 5.81 & 0.90 \\
+32 & 2025_04_02_Ma_P1 & wth & 50 & 14511788.22 & 1305543.75 & 0.09 & 0.28 & 0.96 & 0.40 & 1.81 & 1.75 & 0.64 \\
+33 & 2025_04_02_Ma_P1 & sg & 50 & 15212053.75 & 1378685.41 & 0.09 & 0.19 & 1.14 & 0.36 & 1.85 & 2.01 & 0.64 \\
+34 & 2025_04_02_Ma_P1 & sb & 50 & 15180983.66 & 1486485.30 & 0.10 & 1.33 & 1.31 & 0.43 & 1.95 & 2.09 & 0.73 \\
+35 & 2025_04_02_Ma_P1 & cs & 50 & 24513092.75 & 3774911.83 & 0.15 & 0.36 & 0.97 & 0.47 & 1.18 & 4.51 & 0.94 \\
+36 & 2026_0409_Ma_air & avg & 50 & 228044178.09 & 46310473.81 & 0.20 & 0.20 & 1.34 & 0.49 & 4.11 & 0.00 & 0.67 \\
+37 & 2026_0409_Ma_air & ch & 50 & 72760061.88 & 17220593.87 & 0.24 & 49.33 & 0.89 & 1.42 & 0.10 & 4.10 & 2.09 \\
+38 & 2026_0409_Ma_air & wth & 50 & 72188783.02 & 11607898.91 & 0.16 & 1.55 & 1.05 & 0.23 & 1.05 & 1.32 & 0.43 \\
+39 & 2026_0409_Ma_air & sg & 50 & 66207152.17 & 11464597.54 & 0.17 & 1.73 & 1.21 & 0.18 & 1.06 & 1.99 & 0.47 \\
+40 & 2026_0409_Ma_air & sb & 50 & 90291681.43 & 19935808.45 & 0.22 & 2.10 & 1.26 & 0.13 & 1.28 & 3.35 & 0.59 \\
+41 & 2026_0409_Ma_air & cs & 50 & 89359563.87 & 29933521.40 & 0.33 & 0.24 & 1.19 & 0.51 & 1.28 & 2.46 & 0.78 \\
+42 & 2026_0409_Ma_sol & avg & 49 & 114261938.94 & 17279766.58 & 0.15 & 0.21 & 1.33 & 0.51 & 3.95 & 0.00 & 0.67 \\
+43 & 2026_0409_Ma_sol & ch & 48 & 60660689.05 & 12435771.65 & 0.21 & 9.01 & 0.91 & 1.43 & 0.09 & 2.95 & 1.58 \\
+44 & 2026_0409_Ma_sol & wth & 49 & 75929736.46 & 9477113.84 & 0.12 & 1.86 & 0.95 & 0.11 & 1.06 & 1.52 & 0.36 \\
+45 & 2026_0409_Ma_sol & sg & 49 & 70998892.25 & 8647462.17 & 0.12 & 0.73 & 1.22 & 0.10 & 0.90 & 1.67 & 0.36 \\
+46 & 2026_0409_Ma_sol & sb & 49 & 84799816.81 & 14069121.29 & 0.17 & 1.05 & 1.36 & 0.08 & 1.30 & 2.38 & 0.45 \\
+47 & 2026_0409_Ma_sol & cs & 49 & 86515816.24 & 14084040.98 & 0.16 & 0.19 & 1.20 & 0.13 & 1.09 & 2.00 & 0.42 \\
+48 & LP_P2_F6_639 & avg & 50 & 9810468.89 & 60286.90 & 0.01 & 0.40 & 1.34 & 0.51 & 4.17 & 0.00 & 0.68 \\
+49 & LP_P2_F6_639 & ch & 50 & 4764869.00 & 67700.59 & 0.01 & 0.68 & 0.83 & 1.80 & 0.35 & 4.79 & 1.99 \\
+50 & LP_P2_F6_639 & wth & 50 & 4501593.51 & 58657.42 & 0.01 & 0.18 & 0.95 & 0.75 & 1.96 & 1.44 & 0.89 \\
+51 & LP_P2_F6_639 & sg & 50 & 4141967.99 & 104404.01 & 0.03 & 0.08 & 1.05 & 0.80 & 1.85 & 1.39 & 0.92 \\
+52 & LP_P2_F6_639 & sb & 50 & 4356168.65 & 152144.68 & 0.03 & 0.72 & 1.18 & 0.63 & 2.29 & 1.90 & 0.87 \\
+53 & LP_P2_F6_639 & cs & 50 & 4513860.46 & 840973.14 & 0.19 & 0.07 & 1.03 & 0.93 & 1.86 & 3.78 & 1.26 \\
+54 & LP_P3_F4_675 & avg & 50 & 24278276.94 & 748195.46 & 0.03 & 0.78 & 1.36 & 0.67 & 3.94 & 0.00 & 0.81 \\
+55 & LP_P3_F4_675 & ch & 50 & 5668205.48 & 224718.31 & 0.04 & 0.69 & 0.88 & 1.66 & 0.49 & 4.29 & 1.83 \\
+56 & LP_P3_F4_675 & wth & 50 & 5012451.16 & 148008.34 & 0.03 & 0.31 & 0.97 & 0.80 & 2.05 & 1.95 & 0.99 \\
+57 & LP_P3_F4_675 & sg & 50 & 4524459.76 & 304693.92 & 0.07 & 0.09 & 0.99 & 0.92 & 1.82 & 1.65 & 1.04 \\
+58 & LP_P3_F4_675 & sb & 50 & 5081676.68 & 157518.26 & 0.03 & 1.67 & 1.21 & 0.65 & 2.41 & 2.60 & 0.98 \\
+59 & LP_P3_F4_675 & cs & 50 & 4845001.09 & 331631.71 & 0.07 & 9.95 & 0.63 & 1.29 & 2.48 & 4.02 & 1.69 \\
+60 & MyokardiaPatternsWithLL & avg & 50 & 917490075.03 & 802112362.44 & 0.87 & 0.49 & 1.28 & 0.54 & 3.95 & 0.00 & 0.70 \\
+61 & MyokardiaPatternsWithLL & ch & 50 & 301588898.91 & 282522967.61 & 0.94 & 83.97 & 0.88 & 1.22 & 0.07 & 3.94 & 2.26 \\
+62 & MyokardiaPatternsWithLL & wth & 50 & 293306673.05 & 246828880.94 & 0.84 & 4.18 & 0.96 & 0.16 & 0.66 & 1.53 & 0.40 \\
+63 & MyokardiaPatternsWithLL & sg & 50 & 266676014.67 & 221129839.48 & 0.83 & 2.12 & 1.07 & 0.16 & 0.61 & 1.67 & 0.40 \\
+64 & MyokardiaPatternsWithLL & sb & 50 & 361674179.19 & 328161691.98 & 0.91 & 2.98 & 1.14 & 0.12 & 0.65 & 3.09 & 0.52 \\
+65 & MyokardiaPatternsWithLL & cs & 7 & 313708036.63 & 492613323.63 & 1.57 & 0.65 & 1.12 & 0.32 & 1.26 & 2.58 & 0.64 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{longtable}{lllrr}
+\caption{Per-dataset method ranking (new run)}\\
+\toprule
+ & dataset & method & calc_loss_mean & rank \\
+\midrule
+\endfirsthead
+\toprule
+ & dataset & method & calc_loss_mean & rank \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0 & 2022_1028_Granzier_addedup_frames & wth & 0.62 & 1 \\
+1 & 2022_1028_Granzier_addedup_frames & sb & 0.66 & 2 \\
+2 & 2022_1028_Granzier_addedup_frames & sg & 0.71 & 3 \\
+3 & 2022_1028_Granzier_addedup_frames & avg & 0.79 & 4 \\
+4 & 2022_1028_Granzier_addedup_frames & cs & 1.15 & 5 \\
+5 & 2022_1028_Granzier_addedup_frames & ch & 1.46 & 6 \\
+6 & 2024_0508_Weikang & sg & 0.63 & 1 \\
+7 & 2024_0508_Weikang & sb & 0.70 & 2 \\
+8 & 2024_0508_Weikang & wth & 0.71 & 3 \\
+9 & 2024_0508_Weikang & avg & 0.83 & 4 \\
+10 & 2024_0508_Weikang & cs & 0.93 & 5 \\
+11 & 2024_0508_Weikang & ch & 2.35 & 6 \\
+12 & 2024_1213_Weikang_air & wth & 0.68 & 1 \\
+13 & 2024_1213_Weikang_air & avg & 0.72 & 2 \\
+14 & 2024_1213_Weikang_air & sg & 0.74 & 3 \\
+15 & 2024_1213_Weikang_air & sb & 0.90 & 4 \\
+16 & 2024_1213_Weikang_air & ch & 1.07 & 5 \\
+17 & 2024_1213_Weikang_air & cs & 1.55 & 6 \\
+18 & 2024_1213_Weikang_buffer & wth & 0.28 & 1 \\
+19 & 2024_1213_Weikang_buffer & sg & 0.29 & 2 \\
+20 & 2024_1213_Weikang_buffer & cs & 0.33 & 3 \\
+21 & 2024_1213_Weikang_buffer & sb & 0.38 & 4 \\
+22 & 2024_1213_Weikang_buffer & avg & 0.60 & 5 \\
+23 & 2024_1213_Weikang_buffer & ch & 4.19 & 6 \\
+24 & 2025_0227_Jani & sg & 0.56 & 1 \\
+25 & 2025_0227_Jani & sb & 0.65 & 2 \\
+26 & 2025_0227_Jani & wth & 0.65 & 3 \\
+27 & 2025_0227_Jani & cs & 0.68 & 4 \\
+28 & 2025_0227_Jani & avg & 0.71 & 5 \\
+29 & 2025_0227_Jani & ch & 2.78 & 6 \\
+30 & 2025_04_02_Ma_P1 & wth & 0.64 & 1 \\
+31 & 2025_04_02_Ma_P1 & sg & 0.64 & 2 \\
+32 & 2025_04_02_Ma_P1 & sb & 0.73 & 3 \\
+33 & 2025_04_02_Ma_P1 & avg & 0.79 & 4 \\
+34 & 2025_04_02_Ma_P1 & ch & 0.90 & 5 \\
+35 & 2025_04_02_Ma_P1 & cs & 0.94 & 6 \\
+36 & 2026_0409_Ma_air & wth & 0.43 & 1 \\
+37 & 2026_0409_Ma_air & sg & 0.47 & 2 \\
+38 & 2026_0409_Ma_air & sb & 0.59 & 3 \\
+39 & 2026_0409_Ma_air & avg & 0.67 & 4 \\
+40 & 2026_0409_Ma_air & cs & 0.78 & 5 \\
+41 & 2026_0409_Ma_air & ch & 2.09 & 6 \\
+42 & 2026_0409_Ma_sol & wth & 0.36 & 1 \\
+43 & 2026_0409_Ma_sol & sg & 0.36 & 2 \\
+44 & 2026_0409_Ma_sol & cs & 0.42 & 3 \\
+45 & 2026_0409_Ma_sol & sb & 0.45 & 4 \\
+46 & 2026_0409_Ma_sol & avg & 0.67 & 5 \\
+47 & 2026_0409_Ma_sol & ch & 1.58 & 6 \\
+48 & LP_P2_F6_639 & avg & 0.68 & 1 \\
+49 & LP_P2_F6_639 & sb & 0.87 & 2 \\
+50 & LP_P2_F6_639 & wth & 0.89 & 3 \\
+51 & LP_P2_F6_639 & sg & 0.92 & 4 \\
+52 & LP_P2_F6_639 & cs & 1.26 & 5 \\
+53 & LP_P2_F6_639 & ch & 1.99 & 6 \\
+54 & LP_P3_F4_675 & avg & 0.81 & 1 \\
+55 & LP_P3_F4_675 & sb & 0.98 & 2 \\
+56 & LP_P3_F4_675 & wth & 0.99 & 3 \\
+57 & LP_P3_F4_675 & sg & 1.04 & 4 \\
+58 & LP_P3_F4_675 & cs & 1.69 & 5 \\
+59 & LP_P3_F4_675 & ch & 1.83 & 6 \\
+60 & MyokardiaPatternsWithLL & sg & 0.40 & 1 \\
+61 & MyokardiaPatternsWithLL & wth & 0.40 & 2 \\
+62 & MyokardiaPatternsWithLL & sb & 0.52 & 3 \\
+63 & MyokardiaPatternsWithLL & cs & 0.64 & 4 \\
+64 & MyokardiaPatternsWithLL & avg & 0.70 & 5 \\
+65 & MyokardiaPatternsWithLL & ch & 2.26 & 6 \\
+\end{longtable}
+
+\end{document}

@@ -1,0 +1,449 @@
+\appendix
+
+
+
+
+% filepath: /Users/irinaklein/Repos/PaperDraft/Appendix.tex
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccccc}
+% \hline
+% Freq & Amplitude & Sigmas & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+% \hline
+% dense & 0.01 & (5, 20) & $0.50 \pm 0.24$ & $0.61 \pm 1.05$ & $0.10 \pm 0.19$ & $0.80 \pm 0.59$ & $1.07 \pm 0.82$ & $0.20 \pm 0.14$ \\
+% medium & 0.005 & (5, 20) & $0.32 \pm 0.20$ & $0.20 \pm 0.38$ & $0.07 \pm 0.15$ & $0.55 \pm 0.55$ & $0.81 \pm 0.74$ & $0.12 \pm 0.10$ \\
+% medium & 0.01 & (3, 20) & $0.36 \pm 0.20$ & $0.23 \pm 0.39$ & $0.07 \pm 0.15$ & $0.61 \pm 0.55$ & $0.89 \pm 0.77$ & $0.14 \pm 0.11$ \\
+% medium & 0.01 & (5, 10) & $0.39 \pm 0.18$ & $0.29 \pm 0.45$ & $0.08 \pm 0.16$ & $0.67 \pm 0.58$ & $1.00 \pm 0.76$ & $0.13 \pm 0.09$ \\
+% medium & 0.01 & (5, 20) & $0.30 \pm 0.20$ & $0.20 \pm 0.40$ & $0.06 \pm 0.15$ & $0.49 \pm 0.49$ & $0.77 \pm 0.72$ & $0.12 \pm 0.10$ \\
+% medium & 0.01 & (5, 30) & $0.40 \pm 0.26$ & $0.14 \pm 0.33$ & $0.09 \pm 0.21$ & $0.71 \pm 0.71$ & $0.86 \pm 0.70$ & $0.20 \pm 0.19$ \\
+% medium & 0.01 & (10, 20) & $0.34 \pm 0.20$ & $0.22 \pm 0.38$ & $0.07 \pm 0.16$ & $0.59 \pm 0.55$ & $0.85 \pm 0.77$ & $0.12 \pm 0.10$ \\
+% medium & 0.02 & (5, 20) & $0.33 \pm 0.21$ & $0.22 \pm 0.42$ & $0.06 \pm 0.15$ & $0.57 \pm 0.55$ & $0.84 \pm 0.77$ & $0.12 \pm 0.10$ \\
+% sparse & 0.01 & (5, 20) & $0.46 \pm 0.18$ & $0.54 \pm 0.99$ & $0.10 \pm 0.18$ & $0.80 \pm 0.47$ & $0.91 \pm 0.78$ & $0.16 \pm 0.11$ \\
+% \hline
+% \end{tabular}
+% \caption{Synthetic Signal Parameter Variations}
+% \label{tab:synthetic_variations}
+% \end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccccccccr}
+\hline
+Samp. Freq. & $A_{\mathrm{max}}$  & ($\sigma_x$, $\sigma_y$) & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+dense & 0.01 & (5, 20) & $0.40 \pm 0.26$ & $0.46 \pm 0.94$ & $0.09 \pm 0.17$ & $0.62 \pm 0.57$ & $0.91 \pm 0.73$ & $0.16 \pm 0.13$  \\
+medium & 0.005 & (5, 20) & $0.33 \pm 0.20$ & $0.21 \pm 0.38$ & $0.07 \pm 0.15$ & $0.57 \pm 0.55$ & $0.84 \pm 0.74$ & $0.12 \pm 0.10$ \\
+medium & 0.01 & (3, 20) & $0.34 \pm 0.20$ & $0.23 \pm 0.39$ & $0.07 \pm 0.14$ & $0.57 \pm 0.53$ & $0.86 \pm 0.76$ & $0.13 \pm 0.10$ \\
+medium & 0.01 & (5, 10) & $0.33 \pm 0.20$ & $0.24 \pm 0.42$ & $0.07 \pm 0.15$ & $0.56 \pm 0.57$ & $0.89 \pm 0.73$ & $0.11 \pm 0.09$ \\
+medium & 0.01 & (5, 20) & $0.30 \pm 0.18$ & $0.27 \pm 0.45$ & $0.05 \pm 0.09$ & $0.48 \pm 0.41$ & $0.83 \pm 0.81$ & $0.10 \pm 0.08$ \\
+medium & 0.01 & (5, 30) & $0.31 \pm 0.26$ & $0.10 \pm 0.28$ & $0.06 \pm 0.18$ & $0.53 \pm 0.66$ & $0.70 \pm 0.64$ & $0.16 \pm 0.17$ \\
+medium & 0.01 & (10, 20) & $0.32 \pm 0.20$ & $0.22 \pm 0.39$ & $0.06 \pm 0.15$ & $0.56 \pm 0.52$ & $0.82 \pm 0.76$ & $0.11 \pm 0.10$ \\
+medium & 0.02 & (5, 20) & $0.34 \pm 0.20$ & $0.23 \pm 0.42$ & $0.07 \pm 0.15$ & $0.58 \pm 0.55$ & $0.87 \pm 0.76$ & $0.13 \pm 0.10$ \\
+sparse & 0.01 & (5, 20) & $0.36 \pm 0.22$ & $0.41 \pm 0.87$ & $0.07 \pm 0.15$ & $0.60 \pm 0.50$ & $0.77 \pm 0.72$ & $0.13 \pm 0.10$ \\
+\hline
+\end{tabular}
+\caption{Synthetic Signal Parameter Variations. Aggregated results for CS, B-ILPF, G-ILPF, and WTH methods for subset of images from all datasets.}
+\label{tab:synthetic_variations}
+\end{table}
+
+
+
+% ## TOTAL
+% | Freq | Amplitude | Sigmas | Loss | MSE Syn | %Neg Con | %Neg Syn | %Non Baseline | Smoothness | Count |
+% |------|-----------|------|--------|-------|---------|--------|-------------|------------------|---|
+% | dense | 0.01 | (5, 20) | 0.40 ± 0.26 | 0.46 ± 0.94 | 0.09 ± 0.17 | 0.62 ± 0.57 | 0.91 ± 0.73 | 0.16 ± 0.13 | 291
+% | medium | 0.005 | (5, 20) | 0.33 ± 0.20 | 0.21 ± 0.38 | 0.07 ± 0.15 | 0.57 ± 0.55 | 0.84 ± 0.74 | 0.12 ± 0.10 | 320
+% | medium | 0.01 | (3, 20) | 0.34 ± 0.20 | 0.23 ± 0.39 | 0.07 ± 0.14 | 0.57 ± 0.53 | 0.86 ± 0.76 | 0.13 ± 0.10 | 296
+% | medium | 0.01 | (5, 10) | 0.33 ± 0.20 | 0.24 ± 0.42 | 0.07 ± 0.15 | 0.56 ± 0.57 | 0.89 ± 0.73 | 0.11 ± 0.09 | 320
+% | medium | 0.01 | (5, 20) | 0.30 ± 0.18 | 0.27 ± 0.45 | 0.05 ± 0.09 | 0.48 ± 0.41 | 0.83 ± 0.81 | 0.10 ± 0.08 | 224
+% | medium | 0.01 | (5, 30) | 0.31 ± 0.26 | 0.10 ± 0.28 | 0.06 ± 0.18 | 0.53 ± 0.66 | 0.70 ± 0.64 | 0.16 ± 0.17 | 200
+% | medium | 0.01 | (10, 20) | 0.32 ± 0.20 | 0.22 ± 0.39 | 0.06 ± 0.15 | 0.56 ± 0.52 | 0.82 ± 0.76 | 0.11 ± 0.10 | 288
+% | medium | 0.02 | (5, 20) | 0.34 ± 0.20 | 0.23 ± 0.42 | 0.07 ± 0.15 | 0.58 ± 0.55 | 0.87 ± 0.76 | 0.13 ± 0.10 | 320
+% | sparce | 0.01 | (5, 20) | 0.36 ± 0.22 | 0.41 ± 0.87 | 0.07 ± 0.15 | 0.60 ± 0.50 | 0.77 ± 0.72 | 0.13 ± 0.10 | 290
+
+
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Factor & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+0.0 & $0.33 \pm 0.08$ & $0.58 \pm 0.48$ & $0.06 \pm 0.02$ & $0.44 \pm 0.05$ & $1.04 \pm 0.45$ & $0.07 \pm 0.02$ \\
+2.0 & $0.39 \pm 0.09$ & $0.90 \pm 0.51$ & $0.13 \pm 0.10$ & $0.40 \pm 0.16$ & $1.33 \pm 0.72$ & $0.08 \pm 0.07$ \\
+3.0 & $0.36 \pm 0.04$ & $0.35 \pm 0.32$ & $0.10 \pm 0.11$ & $0.36 \pm 0.17$ & $1.72 \pm 0.55$ & $0.08 \pm 0.08$ \\
+4.0 & $0.36 \pm 0.06$ & $0.21 \pm 0.16$ & $0.05 \pm 0.02$ & $0.36 \pm 0.10$ & $1.88 \pm 0.23$ & $0.11 \pm 0.07$ \\
+\hline
+\end{tabular}
+\caption{CS Results by Downsample Factor. 2025\_0227 Subset of 10 images}
+\label{tab:downsample_cs}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Factor & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+0.0 & $0.48 \pm 0.07$ & $0.40 \pm 0.23$ & $0.00 \pm 0.00$ & $0.96 \pm 0.21$ & $0.86 \pm 0.38$ & $0.17 \pm 0.10$ \\
+2.0 & $0.39 \pm 0.04$ & $0.08 \pm 0.04$ & $0.08 \pm 0.06$ & $0.96 \pm 0.06$ & $0.32 \pm 0.16$ & $0.13 \pm 0.07$ \\
+3.0 & $0.47 \pm 0.07$ & $0.09 \pm 0.08$ & $0.21 \pm 0.07$ & $1.07 \pm 0.08$ & $0.69 \pm 0.36$ & $0.14 \pm 0.10$ \\
+4.0 & $0.47 \pm 0.06$ & $0.05 \pm 0.06$ & $0.23 \pm 0.16$ & $0.99 \pm 0.20$ & $0.88 \pm 0.74$ & $0.13 \pm 0.08$ \\
+\hline
+\end{tabular}
+\caption{B-ILPF Results by Downsample Factor. 2025\_0227 Subset of 10 images}
+\label{tab:downsample_sb}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Factor & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+0.0 & $0.43 \pm 0.08$ & $0.01 \pm 0.02$ & $0.00 \pm 0.00$ & $1.14 \pm 0.29$ & $0.42 \pm 0.20$ & $0.13 \pm 0.04$ \\
+2.0 & $0.35 \pm 0.04$ & $0.07 \pm 0.04$ & $0.02 \pm 0.01$ & $0.87 \pm 0.04$ & $0.32 \pm 0.12$ & $0.13 \pm 0.08$ \\
+3.0 & $0.41 \pm 0.04$ & $0.03 \pm 0.01$ & $0.20 \pm 0.05$ & $1.02 \pm 0.06$ & $0.24 \pm 0.10$ & $0.13 \pm 0.08$ \\
+4.0 & $0.46 \pm 0.04$ & $0.01 \pm 0.01$ & $0.40 \pm 0.09$ & $1.14 \pm 0.07$ & $0.22 \pm 0.09$ & $0.14 \pm 0.08$ \\
+\hline
+\end{tabular}
+\caption{G-ILPF Results by Downsample Factor. 2025\_0227 Subset of 10 images}
+\label{tab:downsample_sg}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Factor & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+0.0 & $0.41 \pm 0.04$ & $0.20 \pm 0.22$ & $0.00 \pm 0.00$ & $0.96 \pm 0.08$ & $0.55 \pm 0.17$ & $0.10 \pm 0.03$ \\
+2.0 & $0.41 \pm 0.06$ & $0.44 \pm 0.17$ & $0.06 \pm 0.04$ & $0.97 \pm 0.17$ & $0.29 \pm 0.10$ & $0.10 \pm 0.04$ \\
+3.0 & $0.51 \pm 0.12$ & $1.57 \pm 1.08$ & $0.17 \pm 0.22$ & $0.92 \pm 0.23$ & $0.46 \pm 0.15$ & $0.04 \pm 0.04$ \\
+4.0 & $0.57 \pm 0.15$ & $1.71 \pm 1.16$ & $0.27 \pm 0.41$ & $0.95 \pm 0.34$ & $0.73 \pm 0.28$ & $0.03 \pm 0.04$ \\
+\hline
+\end{tabular}
+\caption{WTH Results by Downsample Factor. 2025\_0227 Subset of 10 images.}
+\label{tab:downsample_wth}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccccccc}
+\hline
+Factor & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\hline
+0.0 & $0.59 \pm 0.13$ & $1.17 \pm 0.92$ & $0.86 \pm 0.38$ & $0.92 \pm 0.20$ & $0.80 \pm 0.22$ & $0.08 \pm 0.02$ \\
+2.0 & $0.52 \pm 0.12$ & $1.29 \pm 1.10$ & $0.14 \pm 0.20$ & $0.70 \pm 0.21$ & $1.42 \pm 0.26$ & $0.06 \pm 0.02$ \\
+3.0 & $0.53 \pm 0.10$ & $0.89 \pm 0.70$ & $0.29 \pm 0.22$ & $0.83 \pm 0.24$ & $1.27 \pm 0.35$ & $0.09 \pm 0.07$ \\
+4.0 & $0.51 \pm 0.10$ & $0.82 \pm 0.58$ & $0.16 \pm 0.07$ & $0.80 \pm 0.30$ & $1.37 \pm 0.30$ & $0.09 \pm 0.09$ \\
+8.0 & $0.40 \pm 0.08$ & $0.24 \pm 0.19$ & $0.09 \pm 0.09$ & $0.60 \pm 0.19$ & $1.52 \pm 0.27$ & $0.09 \pm 0.09$ \\
+\hline
+\end{tabular}
+\caption{RW Results by Downsample Factor. 2025\_0227 Subset of 10 images.}
+\label{tab:downsample_rw}
+\end{table}
+
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ & $c_3$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.3599 \pm 0.0581$ & $1.80 \pm 0.87$ & $22.90 \pm 7.91$ & $0.90 \pm 0.94$ & $9.70 \pm 4.63$ \\
+% medium & 0.2 & (5, 20) & $0.3004 \pm 0.0810$ & $1.70 \pm 1.19$ & $30.30 \pm 17.97$ & $0.50 \pm 0.50$ & $8.10 \pm 2.51$ \\
+% medium & 0.3 & (3, 20) & $0.3517 \pm 0.1079$ & $1.60 \pm 0.92$ & $24.20 \pm 9.86$ & $1.30 \pm 1.00$ & $8.80 \pm 3.34$ \\
+% medium & 0.3 & (5, 10) & $0.3130 \pm 0.0942$ & $1.70 \pm 1.00$ & $30.90 \pm 17.34$ & $1.20 \pm 1.25$ & $9.20 \pm 5.10$ \\
+% medium & 0.3 & (5, 20) & $0.3169 \pm 0.0651$ & $1.80 \pm 0.75$ & $29.20 \pm 17.81$ & $0.90 \pm 0.70$ & $5.80 \pm 0.87$ \\
+% medium & 0.3 & (5, 40) & $0.3819 \pm 0.0717$ & $1.80 \pm 0.87$ & $31.50 \pm 20.22$ & $1.20 \pm 1.08$ & $8.10 \pm 2.26$ \\
+% medium & 0.3 & (10, 20) & $0.3388 \pm 0.0587$ & $1.70 \pm 0.78$ & $19.60 \pm 8.43$ & $1.10 \pm 1.51$ & $8.70 \pm 3.23$ \\
+% medium & 0.4 & (5, 20) & $0.3514 \pm 0.0663$ & $1.70 \pm 0.78$ & $28.60 \pm 14.26$ & $1.70 \pm 0.90$ & $7.10 \pm 1.92$ \\
+% sparse & 0.3 & (5, 20) & $0.3559 \pm 0.0988$ & $2.00 \pm 1.18$ & $47.90 \pm 28.68$ & $0.90 \pm 0.70$ & $9.70 \pm 3.32$ \\
+% \hline
+% Total & --- & --- & $0.3411 \pm 0.0799$ & $1.76 \pm 0.95$ & $29.46 \pm 18.63$ & $1.08 \pm 1.05$ & $8.36 \pm 3.47$ \\
+% \hline
+% \end{tabular}
+% \caption{CS Results for Dataset 2025\_0227 (10 images per condition)}
+% \label{tab:2025_cs}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.2644 \pm 0.0292$ & $18.90 \pm 5.72$ & $14.00 \pm 8.00$ & $39.20 \pm 12.49$ \\
+% medium & 0.2 & (5, 20) & $0.2011 \pm 0.0387$ & $15.10 \pm 5.73$ & $22.30 \pm 9.90$ & $57.30 \pm 27.89$ \\
+% medium & 0.3 & (3, 20) & $0.2559 \pm 0.0555$ & $18.20 \pm 8.68$ & $20.30 \pm 8.90$ & $39.60 \pm 12.50$ \\
+% medium & 0.3 & (5, 10) & $0.2039 \pm 0.0308$ & $18.20 \pm 10.61$ & $17.50 \pm 6.93$ & $45.90 \pm 12.12$ \\
+% medium & 0.3 & (5, 20) & $0.2338 \pm 0.0209$ & $18.90 \pm 7.82$ & $22.80 \pm 6.24$ & $51.20 \pm 17.58$ \\
+% medium & 0.3 & (5, 40) & $0.2910 \pm 0.0352$ & $20.90 \pm 11.85$ & $17.50 \pm 11.77$ & $51.20 \pm 18.32$ \\
+% medium & 0.3 & (10, 20) & $0.2413 \pm 0.0296$ & $23.20 \pm 8.30$ & $24.30 \pm 12.17$ & $45.10 \pm 21.97$ \\
+% medium & 0.4 & (5, 20) & $0.2698 \pm 0.0341$ & $23.90 \pm 12.67$ & $21.80 \pm 10.57$ & $44.60 \pm 21.72$ \\
+% sparse & 0.3 & (5, 20) & $0.2274 \pm 0.0270$ & $18.40 \pm 9.15$ & $30.10 \pm 11.58$ & $38.60 \pm 19.33$ \\
+% \hline
+% Total & --- & --- & $0.2432 \pm 0.0347$ & $19.52 \pm 9.59$ & $21.18 \pm 10.72$ & $45.86 \pm 19.82$ \\
+% \hline
+% \end{tabular}
+% \caption{B-ILPF Results for Dataset 2025\_0227 (10 images per condition)}
+% \label{tab:2025_sb}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.2502 \pm 0.0278$ & $18.20 \pm 3.57$ & $76.60 \pm 7.30$ \\
+% medium & 0.2 & (5, 20) & $0.1795 \pm 0.0298$ & $17.70 \pm 2.61$ & $74.60 \pm 9.41$ \\
+% medium & 0.3 & (3, 20) & $0.2346 \pm 0.0589$ & $19.30 \pm 2.41$ & $72.00 \pm 5.22$ \\
+% medium & 0.3 & (5, 10) & $0.1943 \pm 0.0318$ & $19.40 \pm 1.50$ & $72.40 \pm 4.36$ \\
+% medium & 0.3 & (5, 20) & $0.2180 \pm 0.0287$ & $17.00 \pm 3.44$ & $73.70 \pm 8.76$ \\
+% medium & 0.3 & (5, 40) & $0.2740 \pm 0.0286$ & $15.80 \pm 4.66$ & $70.60 \pm 10.71$ \\
+% medium & 0.3 & (10, 20) & $0.2219 \pm 0.0295$ & $19.20 \pm 1.17$ & $70.70 \pm 6.21$ \\
+% medium & 0.4 & (5, 20) & $0.2508 \pm 0.0289$ & $19.20 \pm 1.54$ & $70.70 \pm 10.75$ \\
+% sparse & 0.3 & (5, 20) & $0.2082 \pm 0.0347$ & $20.00 \pm 0.00$ & $73.20 \pm 8.07$ \\
+% \hline
+% Total & --- & --- & $0.2257 \pm 0.0345$ & $18.42 \pm 2.98$ & $72.72 \pm 8.38$ \\
+% \hline
+% \end{tabular}
+% \caption{G-ILPF Results for Dataset 2025\_0227}
+% \label{tab:2025_sg}
+% \end{table}
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ & $c_3$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.7308 \pm 0.0575$ & $3.00 \pm 0.89$ & $43.90 \pm 18.07$ & $1.20 \pm 1.17$ & $7.90 \pm 2.66$ \\
+% medium & 0.2 & (5, 20) & $0.6789 \pm 0.0339$ & $2.40 \pm 0.92$ & $45.10 \pm 15.43$ & $1.50 \pm 1.20$ & $7.70 \pm 1.49$ \\
+% medium & 0.3 & (3, 20) & $0.6973 \pm 0.0433$ & $2.90 \pm 1.04$ & $46.10 \pm 20.57$ & $1.70 \pm 1.10$ & $8.00 \pm 2.61$ \\
+% medium & 0.3 & (5, 10) & $0.6749 \pm 0.0426$ & $2.60 \pm 1.02$ & $37.50 \pm 18.51$ & $1.50 \pm 0.92$ & $6.60 \pm 2.01$ \\
+% medium & 0.3 & (5, 20) & $0.6850 \pm 0.0404$ & $2.30 \pm 0.78$ & $41.90 \pm 22.32$ & $1.50 \pm 1.20$ & $6.70 \pm 1.19$ \\
+% medium & 0.3 & (5, 40) & $\mathrm{NaN}$ & $1.00 \pm 0.00$ & $10.00 \pm 0.00$ & $0.00 \pm 0.00$ & $20.00 \pm 0.00$ \\
+% medium & 0.3 & (10, 20) & $0.6895 \pm 0.0404$ & $2.20 \pm 0.98$ & $47.10 \pm 25.58$ & $2.10 \pm 1.14$ & $6.90 \pm 1.51$ \\
+% medium & 0.4 & (5, 20) & $0.7029 \pm 0.0375$ & $2.60 \pm 1.36$ & $42.30 \pm 25.62$ & $2.10 \pm 1.22$ & $6.80 \pm 1.89$ \\
+% sparse & 0.3 & (5, 20) & $0.6736 \pm 0.0199$ & $2.90 \pm 0.94$ & $44.90 \pm 24.40$ & $2.00 \pm 1.41$ & $7.50 \pm 2.66$ \\
+% \hline
+% Total & --- & --- & $0.6916 \pm 0.0406$ & $2.43 \pm 1.11$ & $39.87 \pm 23.10$ & $1.51 \pm 1.27$ & $8.68 \pm 4.48$ \\
+% \hline
+% \end{tabular}
+% \caption{CS Results for Dataset 2024\_0508 (10 images per condition)}
+% \label{tab:2024_cs}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.6642 \pm 0.0296$ & $14.10 \pm 4.89$ & $15.00 \pm 7.97$ & $42.50 \pm 25.77$ \\
+% medium & 0.2 & (5, 20) & $0.6381 \pm 0.0375$ & $27.20 \pm 14.77$ & $17.90 \pm 7.93$ & $29.10 \pm 17.17$ \\
+% medium & 0.3 & (3, 20) & $0.6470 \pm 0.0304$ & $14.50 \pm 6.73$ & $19.30 \pm 12.73$ & $37.80 \pm 14.46$ \\
+% medium & 0.3 & (5, 10) & $0.6314 \pm 0.0249$ & $18.80 \pm 8.20$ & $13.40 \pm 7.89$ & $41.40 \pm 22.48$ \\
+% medium & 0.3 & (5, 20) & $0.6429 \pm 0.0378$ & $12.80 \pm 7.51$ & $13.20 \pm 10.09$ & $58.60 \pm 21.60$ \\
+% medium & 0.3 & (5, 40) & $\mathrm{NaN}$ & $20.00 \pm 0.00$ & $5.00 \pm 0.00$ & $70.00 \pm 0.00$ \\
+% medium & 0.3 & (10, 20) & $0.6343 \pm 0.0231$ & $14.30 \pm 7.87$ & $17.20 \pm 11.21$ & $49.30 \pm 20.89$ \\
+% medium & 0.4 & (5, 20) & $0.6651 \pm 0.0519$ & $18.10 \pm 5.26$ & $11.00 \pm 6.23$ & $49.20 \pm 14.96$ \\
+% sparse & 0.3 & (5, 20) & $0.6239 \pm 0.0117$ & $15.90 \pm 6.93$ & $14.70 \pm 6.39$ & $42.30 \pm 19.03$ \\
+% \hline
+% Total & --- & --- & $0.6434 \pm 0.0328$ & $17.30 \pm 8.86$ & $14.08 \pm 9.45$ & $46.69 \pm 21.89$ \\
+% \hline
+% \end{tabular}
+% \caption{B-ILPF Results for Dataset 2024\_0508 (10 images per condition)}
+% \label{tab:2024_sb}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.6564 \pm 0.0242$ & $12.10 \pm 4.18$ & $72.40 \pm 16.67$ \\
+% medium & 0.2 & (5, 20) & $0.6291 \pm 0.0330$ & $14.10 \pm 4.97$ & $67.90 \pm 16.18$ \\
+% medium & 0.3 & (3, 20) & $0.6443 \pm 0.0339$ & $14.50 \pm 4.84$ & $69.60 \pm 17.02$ \\
+% medium & 0.3 & (5, 10) & $0.6303 \pm 0.0323$ & $18.40 \pm 4.34$ & $53.10 \pm 21.23$ \\
+% medium & 0.3 & (5, 20) & $0.6413 \pm 0.0333$ & $16.50 \pm 6.04$ & $63.90 \pm 21.22$ \\
+% medium & 0.3 & (5, 40) & $\mathrm{NaN}$ & $20.00 \pm 0.00$ & $70.00 \pm 0.00$ \\
+% medium & 0.3 & (10, 20) & $0.6331 \pm 0.0237$ & $15.70 \pm 4.22$ & $72.80 \pm 13.97$ \\
+% medium & 0.4 & (5, 20) & $0.6510 \pm 0.0304$ & $14.40 \pm 6.50$ & $66.10 \pm 13.24$ \\
+% sparse & 0.3 & (5, 20) & $0.6226 \pm 0.0149$ & $21.40 \pm 7.70$ & $57.40 \pm 20.75$ \\
+% \hline
+% Total & --- & --- & $0.6385 \pm 0.0289$ & $16.34 \pm 5.91$ & $65.91 \pm 17.94$ \\
+% \hline
+% \end{tabular}
+% \caption{G-ILPF Results for Dataset 2024\_0508 (10 images per condition)}
+% \label{tab:2024_sg}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ & $c_3$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.8009 \pm 0.4046$ & $2.30 \pm 1.19$ & $35.70 \pm 21.65$ & $2.00 \pm 1.34$ & $11.10 \pm 3.78$ \\
+% medium & 0.2 & (5, 20) & $0.4768 \pm 0.1396$ & $1.70 \pm 1.00$ & $37.80 \pm 16.65$ & $1.70 \pm 1.10$ & $10.80 \pm 3.71$ \\
+% medium & 0.3 & (3, 20) & $0.6613 \pm 0.2775$ & $1.67 \pm 0.75$ & $45.50 \pm 32.52$ & $2.33 \pm 1.89$ & $11.33 \pm 4.75$ \\
+% medium & 0.3 & (5, 20) & $0.5423 \pm 0.1775$ & $1.70 \pm 0.78$ & $32.90 \pm 18.06$ & $1.10 \pm 1.45$ & $13.90 \pm 4.93$ \\
+% medium & 0.3 & (10, 20) & $0.4704 \pm 0.0413$ & $1.50 \pm 0.50$ & $27.75 \pm 7.36$ & $2.50 \pm 1.50$ & $10.50 \pm 4.15$ \\
+% medium & 0.4 & (5, 20) & $0.5981 \pm 0.2122$ & $1.80 \pm 1.08$ & $35.80 \pm 24.51$ & $1.70 \pm 1.27$ & $14.00 \pm 5.53$ \\
+% sparse & 0.3 & (5, 20) & $0.4781 \pm 0.0947$ & $1.50 \pm 0.67$ & $35.00 \pm 18.69$ & $1.60 \pm 1.36$ & $13.60 \pm 4.61$ \\
+% \hline
+% Total & --- & --- & $0.5802 \pm 0.2293$ & $1.77 \pm 0.96$ & $35.93 \pm 21.50$ & $1.75 \pm 1.44$ & $12.40 \pm 4.78$ \\
+% \hline
+% \end{tabular}
+% \caption{CS Results for Dataset 2024\_1211 Air}
+% \label{tab:2024_1211_cs}
+% \end{table}
+
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lcccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ & $c_2$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.7865 \pm 0.3529$ & $67.80 \pm 26.40$ & $26.40 \pm 10.56$ & $44.50 \pm 25.01$ \\
+% medium & 0.2 & (5, 20) & $0.4670 \pm 0.0975$ & $52.10 \pm 21.97$ & $36.20 \pm 11.44$ & $41.50 \pm 23.32$ \\
+% medium & 0.3 & (3, 20) & $0.5908 \pm 0.1866$ & $57.30 \pm 20.43$ & $30.10 \pm 13.00$ & $38.70 \pm 19.64$ \\
+% medium & 0.3 & (5, 10) & $0.4390 \pm 0.0346$ & $79.50 \pm 5.50$ & $36.50 \pm 1.50$ & $40.50 \pm 17.50$ \\
+% medium & 0.3 & (5, 20) & $0.5346 \pm 0.1233$ & $53.80 \pm 20.25$ & $30.00 \pm 13.97$ & $42.50 \pm 23.95$ \\
+% medium & 0.3 & (10, 20) & $0.5029 \pm 0.0750$ & $49.70 \pm 17.26$ & $31.90 \pm 11.04$ & $41.90 \pm 19.89$ \\
+% medium & 0.4 & (5, 20) & $0.5862 \pm 0.1517$ & $64.60 \pm 20.47$ & $27.20 \pm 9.98$ & $40.10 \pm 24.13$ \\
+% sparse & 0.3 & (5, 20) & $0.4654 \pm 0.0568$ & $47.20 \pm 20.37$ & $33.70 \pm 13.15$ & $39.40 \pm 25.92$ \\
+% \hline
+% Total & --- & --- & $0.5585 \pm 0.1733$ & $56.72 \pm 22.37$ & $30.94 \pm 12.25$ & $41.21 \pm 23.16$ \\
+% \hline
+% \end{tabular}
+% \caption{B-ILPF Results for Dataset 2024\_1211}
+% \label{tab:2024_1211_sb}
+% \end{table}
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{lccccc}
+% \hline
+% Freq & Amplitude & Shape ($\sigma_x, \sigma_y$) & Loss & $c_0$ & $c_1$ \\
+% \hline
+% dense & 0.3 & (5, 20) & $0.7883 \pm 0.3524$ & $71.80 \pm 22.61$ & $49.90 \pm 22.90$ \\
+% medium & 0.2 & (5, 20) & $0.4688 \pm 0.0966$ & $69.20 \pm 21.02$ & $50.80 \pm 25.64$ \\
+% medium & 0.3 & (3, 20) & $0.5920 \pm 0.1856$ & $61.10 \pm 25.71$ & $47.00 \pm 25.70$ \\
+% medium & 0.3 & (5, 10) & $0.4574 \pm 0.0960$ & $72.71 \pm 17.83$ & $56.86 \pm 18.77$ \\
+% medium & 0.3 & (5, 20) & $0.5369 \pm 0.1248$ & $77.60 \pm 10.83$ & $42.60 \pm 22.26$ \\
+% medium & 0.3 & (5, 40) & $\mathrm{NaN}$ & $20.00 \pm 0.00$ & $70.00 \pm 0.00$ \\
+% medium & 0.3 & (10, 20) & $0.5052 \pm 0.0764$ & $73.20 \pm 23.57$ & $49.70 \pm 22.41$ \\
+% medium & 0.4 & (5, 20) & $0.5872 \pm 0.1533$ & $74.60 \pm 14.18$ & $40.80 \pm 23.49$ \\
+% sparse & 0.3 & (5, 20) & $0.4662 \pm 0.0580$ & $71.70 \pm 18.77$ & $42.50 \pm 25.85$ \\
+% \hline
+% Total & --- & --- & $0.5539 \pm 0.1701$ & $67.15 \pm 24.21$ & $49.06 \pm 23.95$ \\
+% \hline
+% \end{tabular}
+% \caption{G-ILPF Results for Dataset 2024\_1211}
+% \label{tab:2024_1211_sg}
+% \end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figs/Fig10_wth_weight_adjustment.png}
+\caption{Image sample from dataset 2025\_0227. Background subtraction method: White-top-hats.\\ 
+Left: Domain-guided weights. Right: User-adjusted weights. Top: Background removed image. Middle: Background. Bottom: Negative value with synthetic data mask.}
+\label{fig:example_wth_weight}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+
+% Row 1
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_base1_rest0.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_mse1_rest0.png}
+\end{minipage}
+
+\vspace{0.8em}
+
+% Row 2
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_negcon1_rest0.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_negsyn1_rest0.png}
+\end{minipage}
+
+\vspace{0.8em}
+
+% Row 3
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_smooth1_rest0.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Fig14_example_negsyn0.5_smooth0.5_rest0.png}
+\end{minipage}
+
+\caption{Image sample from dataset 2025\_0227 when guided using metrics individually or a combination of the two most significant. Left of each pair: Background removed image. Right: Background.}
+\label{fig:example_1img_metrics}
+\end{figure}
+
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.45\textwidth]{figs/F10_I1_w0_low_loss.png}
+% \includegraphics[width=0.45\textwidth]{figs/F11_I1_w1_low_loss.png}
+% \caption{Dataset 2025\_0227. Top: equal weights. Bottom: Domain-guided weights.}
+% \label{fig:example1}
+
+% \end{figure}
+
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.45\textwidth]{figs/F12_I2_w0_low_loss.png}
+% \includegraphics[width=0.45\textwidth]{figs/F13_I2_w1_low_loss.png}
+% \caption{Dataset 2024\_0508. Top: equal weights. Bottom: Domain-guided weights.}
+% \label{fig:example2}
+% \end{figure}
+
+
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.45\textwidth]{figs/F14_I3_low_loss_w0.png}
+% \includegraphics[width=0.45\textwidth]{figs/F15_I3_low_loss_w1.png}
+% \caption{Dataset 2024\_1211 Air. Top: equal weights. Bottom: Domain-guided weights.}
+% \label{fig:example3}
+% \end{figure}

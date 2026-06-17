@@ -1,0 +1,628 @@
+%\documentclass[iucr,review]{iucrjournals}
+% \documentclass[11pt]{article}
+% \documentclass[iucr]{iucrjournals}
+% \documentclass[11pt]{article}
+% \documentclass[conference]{IEEEtran}
+\documentclass[11pt,onecolumn]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{graphicx}
+%\usepackage[dvipsnames]{xcolor}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{url}
+% IUCr class loads harvard; undefine overlapping commands before natbib.
+\makeatletter
+% \@ifpackageloaded{harvard}{%
+%     \let\citename\relax
+%     \let\harvarditem\relax
+%     \let\harvardleft\relax
+%     \let\harvardright\relax
+%     \let\harvardyearleft\relax
+%     \let\harvardyearright\relax
+%     \let\harvardurl\relax
+% }{}
+\def\@IEEEtablestring{Table} % change "TABLE" to "Table"
+% \def\@IEEEtablecaption@process#1{#1}
+\makeatother
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage[justification=centering]{caption}
+\captionsetup[table]{justification=centering, font=footnotesize}
+\captionsetup[figure]{justification=centering, font=footnotesize}
+
+
+% Ability to review and synthesize relevant literature 
+% Ability to formulate a clear scientific question 
+% Ability to develop empirical or theoretical support 
+% Ability to present scientific results effectively 
+% Technical depth and understanding 
+% Identification of major limitations or deficiencies
+
+
+\title{A Framework for Global Background Subtraction in Fiber Diffraction Patterns from Striated Muscle}
+\author{}
+\date{}
+
+\begin{document}
+\singlespacing
+
+% IUCr class turns on line numbers globally; disable them just for the title page.
+\nolinenumbers
+\begin{titlepage}
+    \centering
+
+    {\Large PhD Oral Qualifier Report\par}
+
+    % \vspace{1cm}
+
+    % {\LARGE\bfseries Project Proposal}
+
+    \vspace{3cm}
+
+    {\LARGE\bfseries A Framework for Global Background Subtraction in Fiber Diffraction Patterns from Striated Muscle\par}
+
+    \vspace{3cm}
+
+    % {\large Students:\par}
+    \vspace{0.5cm}
+    Student: Irina Klein, A20495613\par
+
+    \vspace{1cm}
+
+    {\large Advisor: Gady Agam\par}
+    \vspace{1cm}
+
+    
+	\footnotesize{Dept.~of Computer Science, College of Computing}\\[.5ex] \large{\bf Illinois Institute of Technology}
+
+    \vspace{2cm}
+
+    The work in this report was conducted primarily by Irina Klein under the supervision of Professor Gady Agam and Professor Thomas Irving (Dept.~of Biology, Illinois Institute of Technology). \par
+
+    \vspace{2cm}
+
+
+    \vfill
+
+    % Optional date, or leave blank
+    {\large\today\par}
+\end{titlepage}
+
+% \linenumbers
+
+\setcounter{page}{1}
+
+% \begin{synopsis}
+% A quantitative framework is presented for evaluating and optimizing background subtraction methods for synchrotron X-ray fiber diffraction patterns from striated muscle.
+% \end{synopsis}
+
+
+%%%%%%%%%%%%%%%%
+\begin{abstract}
+%%%%%%%%%%%%%%%%
+
+Accurate background subtraction is a critical preprocessing step for quantitative analysis of X-ray fiber diffraction patterns from striated muscle but is often performed heuristically, with limited guidance for parameter selection, leading to variability in downstream quantitative analyses. We present a unified framework that systematically evaluates and optimizes background subtraction methods using physically motivated image-quality metrics and synthetic signal validation to perform automated parameter search. Applied to synchrotron X-ray muscle fiber diffraction datasets, the framework improves subtraction consistency relative to ad hoc settings while preserving key diffraction features such as equatorial reflections and layer lines, and the resulting aggregate loss correlates with expert visual assessment and highlights characteristic failure modes of different subtraction strategies. Although developed for striated muscle diffraction, the approach is based on general signal and background properties and can be extended to other classes of fiber diffraction data. By formalizing evaluation and optimization, it supports more reliable quantitative analysis of synchrotron diffraction experiments.
+
+\end{abstract}
+
+
+% \keywords{background subtraction, synchrotron X-ray diffraction, fiber diffraction, striated muscle, quantitative evaluation, image analysis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%
+
+Reliable background subtraction is essential for quantitative analysis of muscle fiber diffraction patterns but remains challenging because strong, non-uniform scattering can obscure weak diffraction features.
+
+\subsection{Motivation}
+
+Scientific imaging techniques used in structural biology and materials science that rely on diffraction analysis often face a common challenge: extracting weak diffraction signals from images dominated by complex, non-uniform backgrounds, which arise from amorphous regions within the sample, lattice disorder, instrumental artifacts, and scattering from the experimental environment. Together, these contributions complicate quantitative analysis. One situation where these concerns are particularly relevant is the case of fiber diffraction from striated muscle.
+
+X-ray fiber diffraction provides unique insight into the sarcomere-level molecular structure of muscle and has proven valuable for studying the structural consequences of cardiac and skeletal myopathies. Analysis of muscle diffraction patterns can therefore contribute to understanding the molecular mechanisms underlying diseases ranging from nemaline myopathy to heart failure~\cite{MaIrving2022}. Accurate interpretation of these diffraction patterns requires reliable intensity measurements and effective background subtraction. Muscle diffraction patterns have, in addition to the equatorial and meridional peaks and the continuous layer lines arising from the quasi-helical actin and myosin filaments, amorphous scattering from a large fraction of non-coherently diffracting material. In small-angle X-ray fiber diffraction experiments on muscle fibers, therefore, the signal of interest consists of diffraction peaks of varying intensity superimposed on a strong, spatially non-uniform diffuse background that must be removed prior to analysis~\cite{squire2003ccp13_software}.
+
+Historically, fiber diffraction data have been analyzed mostly using one-dimensional projections followed by background removal and parametric peak evaluation. Such one-dimensional analyses are effective for sharp reflections along the meridional and equatorial axes, where a large fraction of the signal is concentrated. However, they are less suitable for studying continuous features such as layer lines, where distinguishing diffraction signal from background is inherently difficult. A robust approach to background removal applied directly to two-dimensional diffraction patterns would therefore enable more comprehensive extraction of structural information, including features that are not typically analyzed systematically.
+
+Existing two-dimensional background subtraction methods commonly rely on non-parametric techniques, such as morphological filtering or iterative smoothing. These approaches typically require manual parameter selection and may inadvertently remove weak diffraction signals. Because the intensity of the background often exceeds that of the signal by orders of magnitude, even small errors in background subtraction can significantly affect downstream quantitative analysis. An objective, physics-informed framework for evaluating background subtraction performance would facilitate systematic comparison of existing methods and support the development of improved approaches. More broadly, such approaches towards reliable separation of weak signals from complex backgrounds have the potential to enhance data fidelity across a wide range of scientific imaging applications.
+
+
+\subsection{Problem Statement}
+
+The separation of signal from background is a fundamental problem in quantitative imaging. In current approaches to background removal for muscle fiber diffraction patterns, operator intervention is typically required to visually assess subtraction quality and to manually adjust algorithm parameters. Such manual processing introduces several challenges. First, weak diffraction signals may be lost due to the large intensity contrast between background and peaks, combined with the presence of noise that can mask low-intensity features. Second, reliance on visual assessment introduces subjectivity, leading to solutions that may be plausible but not optimal. Finally, reproducibility depends on careful documentation and reuse of user-selected parameters. The absence of a standardized, quantitative evaluation framework limits the ability to objectively compare background subtraction algorithms and impedes systematic parameter optimization. This lack of objective assessment hinders reproducibility and slows methodological progress.
+
+
+\subsection{Scope}
+
+This work presents a unified framework for improving the analysis of weak diffraction signals in the presence of complex, non-uniform backgrounds. The framework replaces subjective visual assessment with quantitative, physics-informed evaluation criteria and combines these metrics with synthetic-signal validation and automated parameter optimization. The main contributions are as follows:
+
+
+\begin{enumerate}
+\item \textbf{System of Objective Evaluation Measures.} A set of quantitative metrics, derived from
+physical properties of the signal generation process, which allow for unsupervised comparison of background subtraction methods.
+\item \textbf{Faint Detail Preservation.} Injection of faint synthetic features to penalize signal loss during subtraction.
+\item \textbf{Benchmarking and Optimization Framework.} A unified loss and optimization pipeline for automated method-specific parameter selection.
+\end{enumerate}
+
+Although developed for muscle diffraction, the framework is applicable to other imaging problems with complex, non-uniform backgrounds.
+
+The framework addresses the need for improved background subtraction using existing methods while also providing a tool for ongoing methodological development in quantitative image analysis. An overview of the evaluation and optimization workflow used to identify optimal background subtraction parameters for muscle fiber diffraction patterns is shown in Figure~\ref{fig:flow}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figs/Fig1_diagram_process.png}
+\caption{General flow of operations. For each image, following initial preprocessing using standard techniques, relevant parameters and features are estimated, synthetic signal components are generated, and a systematic parameter search is performed.}
+\label{fig:flow}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+%%%%%%%%%%%%%%%%%%%%%%
+
+Background removal strategies in diffraction imaging depend strongly on both the dimensionality of the data and the structural characteristics of the sample. At one extreme is macromolecular solution scattering (SAS) where the scattering signal is isotropic arising from typically only two components, the macromolecule and the solvent. The background subtracted scattering signal from the macromolecules is simply the scattering from solution minus the scattering of the solvent alone. Data reduction packages for macromolecular SAS data are well developed and include the ATSAS package~\cite{franke2025atsas4} and BioXTAS~Raw~\cite{hopkins2024bioxtas_raw2}. SASview provides similar functionality for materials science applications~\cite{krzywon2025sasview612}. At the other extreme from SAS is macromolecular crystallographic data, where the samples have three-dimensional crystallographic ordering and diffract to high resolution. Amorphous regions are minimal and the solvent yields relatively flat and featureless scattering that can be removed with simple local operations. In this domain, there have been many software packages developed, including the well-known community-supported CCP4 package~\cite{agirre2023ccp4_suite} as well as others.
+
+Fibrous systems lie between the two extreme cases, having longitudinally aligned assemblies of rod shaped molecules but otherwise lack three-dimensional crystalline order making data analysis challenging~\cite{Fraser_a13879}. Striated muscles represent a particulary challenging example system, made up of partially crystalline arrays of actin and myosin containing myofilaments with helical substructures embedded in an amorphous substrate composed of soluble proteins in the cytoplasm, connective tissues, nerves and blood vessels. Consequently, the diffraction signals from the myofilaments resulting in the equatorial and meridional reflections and continuous modulated bands of intensity along the layer lines, are superimposed on a strong amorphous background scattering. There is also a very strong equatorial streak underlying the strong equatorial reflections arising from the hexagonally packed myofilaments. Together, these features prohibit direct application of standard crystallographic approaches motivating the development of data reduction packages specific for muscle diffraction. 
+
+In the 1990s the now disbanded CCP13 project produced a foundational data analysis suite offering a pipeline for analysis of two-dimensional images: determining fiber and detector geometry, background subtraction, integrated layer line intensities and model refinement~\cite{squire2003ccp13_software, shotton1998ccp13_software_dev, denny1995ccp13_updates}. The later FiberFix package~\cite{HeEtAl2007} was intended as a more user-friendly, integrated version of the CCP13 suite that combines core functionality into a single program and offers a GUI. It offered background subtraction using the roving window, radially symmetric and iterative smoothing procedures described below. Neither CCP13 nor Fiberfix are currently supported. Recently, MuscleX~\cite{JiratrakanvongEtAl2024} has been developed as an integrated, open-source software package for X-ray fiber diffraction patterns from striated muscle and other fibrous systems. It builds on and replaces much of FibreFix/CCP13 functionality, especially for muscle and time-resolved work. It offers multiple background subtraction methods, listed below, and provides an interface for visual assessment and parameter tuning. A difficulty for the field is that none of the available algorithms as implemented in CCP13 or MuscleX can provide completely satisfactory background subtracted patterns for entire images. Algorithm and parameter choices for the background subtraction routines are usually guided by qualitative visual assessment by domain experts, motivating the need for standardized, quantitative evaluation criteria to compare and optimize background-removal methods.
+
+\subsection{One-dimensional background subtraction}
+
+Background removal in diffraction analysis is traditionally performed on one-dimensional intensity profiles extracted along directions of interest, most commonly the equator and meridian. In standard practice, diffraction peaks are analyzed individually, and background intensity is estimated by averaging signal in regions adjacent to each peak, which is then subtracted from the integrated peak intensity~\cite{NederKorsunskiy2018}. This approach is simple and effective for isolated reflections, but it depends on careful selection of background regions and does not account for spatial variation in the background.
+
+Another commonly used technique applies the convex hull algorithm~\cite{jarvis1973convex_hull} to one-dimensional intensity profiles to separate diffraction peaks from a smoothly varying background~\cite{lee2019musclex}. While robust to large-scale intensity variations, the convex hull method does not explicitly model background noise, and this can introduce systematic errors in quantitative measurements. For crystalline powder diffraction patterns, a variety of methods estimate a slowly varying smooth curve underneath the sharp peaks~\cite{bruckner2000background, PolarBackground2024, ning2014beads, baek2015baseline, prescher2015dioptas}; however, muscle diffraction peaks are less well defined and are more difficult to isolate from the background.
+
+
+Parametric background models are also widely used in one-dimensional analyses, especially in crystalline patterns~\cite{toby2013gsas2} and polymer fibers~\cite{grubb1992high_modulus_pe_fiber}. Low-order polynomials, Chebyshev polynomials, or spline functions are commonly employed to represent slowly varying backgrounds, while exponential components may be introduced to model steeper background variations~\cite{rajkumar2007fibrefix}. Although these approaches, when applied to fiber diffraction patterns, are effective for sharp reflections along the equator and meridian, they inherently discard spatial information contained in the two-dimensional shapes of diffraction features. As a result, one-dimensional methods have limitations for analyzing continuous diffraction features such as layer lines, where the two-dimensional shapes may contain important structural information.
+
+\subsection{Two-dimensional background subtraction}
+
+Before applying any background subtraction technique, a sample-free measurement is typically subtracted to remove instrumental artifacts and air scattering. Two-dimensional background subtraction methods operate directly on diffraction patterns and aim to preserve spatial information that is lost in one-dimensional projections.
+
+Some two-dimensional approaches rely on explicit assumptions about the geometry or smoothness of the background. Radial symmetry methods assume that the background intensity is symmetric about the beam center and estimate it by averaging pixel intensities over concentric rings~\cite{rajkumar2007fibrefix}. This method is practical for crystalline powder diffraction where the background is isotropic and can often contain rings or halos~\cite{ashiotis2015pyfai}. While computationally efficient, this assumption breaks down in the presence of anisotropic background features, such as the equatorial streak characteristic of muscle fiber diffraction. Partition-based methods divide the diffraction pattern into local regions, estimate the background within each region, and interpolate between regions to form a continuous background image. Examples include the roving window method~\cite{HeEtAl2007} and the radial convex hull approach, which applies one-dimensional convex hull subtraction to angular projections of the pattern~\cite{lee2019musclex}. Although these methods can adapt to spatially varying backgrounds, their performance depends sensitively on partition size and angular resolution and may introduce artifacts in regions with steep background gradients. In particular, the radial convex hull method tends to perform poorly at high scattering angles, where angular sectors span large regions of the detector.
+
+Other methods treat background subtraction as an image processing problem, exploiting differences in spatial scale or frequency content between background and diffraction features. Iterative low-pass filtering assumes that background variations occur at lower spatial frequencies than diffraction peaks and estimates the background through repeated smoothing~\cite{IvanovaMakowski1998}. Its effectiveness depends strongly on the chosen filter scale and the number of iterations, and weak or low-contrast diffraction features may be partially removed. Morphological filtering techniques, such as white top-hat operations~\cite{GonzalezWoodsDIP4e}, estimate the background using a structuring element and subtract it from the original image. Performance depends on the size of the structuring element relative to feature size, and inappropriate choices may suppress extended or low-intensity diffraction signals. Frequency-domain approaches based on Fourier or wavelet transforms separate image components by spatial frequency. These techniques are effective for crystalline diffraction patterns with sharp features~\cite{PolarBackground2024, WaveletBiomedOptExpress2021, renedecotret2017baseline}, but are less suitable for fiber diffraction, where signal and background overlap in frequency space. Kernel-based rolling-ball methods~\cite{Sternberg1983} similarly perform well for crystalline samples, but are generally less effective for fiber diffraction data.
+
+More recently, data-driven approaches have been explored. Supervised deep learning methods can be trained to perform various image processing tasks, including background subtraction, when sufficient labeled data are available~\cite{archana2024dl_image_processing_review}. However, with fiber diffraction patterns, the lack of ground-truth background and the difficulty of generating representative training datasets limit the practical applicability of such approaches. A neural network has been used to learn muscle fiber diffraction backgrounds based on non-parametric method estimates~\cite{ArangurenCarmona2020}. The model is trained on non-ground truth labels, and it is also not constrained and may alter the pattern, hindering further analysis. Deep learning has also been widely used for function approximation~\cite{devore2021nn_approximation}; however, there is no agreed upon functional form of the background in muscle fiber diffraction patterns, which varies across samples and experimental conditions. Traditionally in machine learning, background subtraction refers to object detection which involves precise edge detection and is often utilized for processing video data~\cite{bouwmans2019dnn_background_subtraction}. The diffraction features that are superimposed on top of the background may be considered the foreground; however, their edges are not well-defined. Background removal in other contexts can also refer to noise removal~\cite{jiang2025efficient_denoising_survey}; in fiber diffraction, noise should be preserved while the high intensity smooth background component should be removed.  In patterns from crystalline systems, where background removal is less of a challenge compared to fiber diffraction, deep learning generally has been used for a variety of tasks, including pattern classification~\cite{aguiar2020crystallographic_prediction, ziletti2018dl_crystal_classification}, labelling~\cite{chavez2025mlexchange_labeling}, interpretation of patterns~\cite{szymanski2021probabilistic_multiphase_xrd} and inpainting of missing data~\cite{chavez2022dl_inpainting_xray,roberts2024dlsia}.
+
+%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%%%%
+
+We evaluate and optimize background subtraction for muscle fiber diffraction patterns using physics-informed metrics, synthetic-signal validation that addresses missing ground truth data and using region-specific masking. An aggregate loss function is used to guide automated parameter search. The experimental design, including algorithm variants and datasets, is described.
+
+
+\subsection{Evaluation Framework}
+
+An ideal background-subtracted diffraction image (i) preserves diffraction features, (ii) avoids non-physical artifacts, especially extended negative regions indicative of oversubtraction, (iii) leaves a smooth, near-zero residual in background-only regions, and (iv) yields consistent results for images acquired under similar experimental conditions. These objectives motivate the metrics below.
+
+
+\subsubsection{Quantitative Metrics}\\
+
+In order to capture deviations from the described objectives in a reproducible way, quantitative metrics are defined.
+
+Oversubtraction is measured by $f_{\mathrm{neg,con}}$, the fraction of negative pixels in connected components larger than a minimum size (e.g.\ 9 pixels), which is ideally zero. Noise tends to create isolated negatives, while oversubtraction creates contiguous regions.
+
+Residual baseline is summarized by $f_B$, the fraction of pixels within a small threshold of zero. The threshold is estimated near the pattern edge, where background scattering is expected to be minimal. We use $1-f_B$ as a penalty when structured background remains.
+
+Background smoothness in masked background regions is measured by
+
+\begin{equation}
+\mathrm{S}_{\mathrm{BG}} =
+\frac{1}{N} \sum_i \left| I(y_i + 1) - I(y_i) \right|,
+\end{equation}
+where the summation is performed over rows within masked background regions to exclude known diffraction features. Smooth residual backgrounds produce low values.
+
+\subsubsection{Validation Using Synthetic Structures}
+
+Because experimental diffraction images do not provide ground-truth background, synthetic diffraction features are introduced to evaluate preservation of faint signals after background subtraction (see Section~3.2.2). 
+
+Preservation of synthetic signal is quantified using the mean squared error between the background-subtracted image and a reference image containing only the injected synthetic features, denoted $\mathrm{MSE}_{\mathrm{syn}}$. Ideally, this value is zero, indicating perfect preservation of synthetic signal. 
+Overlap with real features may increase this metric.
+
+Oversubtraction of synthetic features is further assessed by measuring the fraction of negative-valued pixels remaining after removing the injected signal, denoted $f_{\mathrm{neg,syn}}$. This metric emphasizes non-physical negative excursions and is ideally zero.
+
+The quantitative metrics used in the evaluation framework are summarized in Table~\ref{tab:loss_terms}.
+
+
+\begin{table}[t]
+\caption{Quantitative metrics used for evaluating background subtraction. 
+All metrics are normalized by\\\hspace{0.1\textwidth}a global mean across all datasets prior to aggregation in the loss function.}
+\label{tab:loss_terms}
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}llp{7cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Description} \\
+\midrule
+Background smoothness & $S_{\mathrm{BG}}$ & Mean absolute vertical derivative of the residual background, quantifying smoothness in background-dominated regions. \\
+Connected negative regions & $f_{\mathrm{neg,con}}$ & Fraction of negative-valued pixels belonging to spatially connected clusters, indicating systematic oversubtraction artifacts. \\
+Synthetic signal oversubtraction & $f_{\mathrm{neg,syn}}$ & Fraction of negative-valued pixels after removal of injected synthetic signal, emphasizing oversubtraction of faint diffraction features. \\
+Synthetic signal distortion & $\mathrm{MSE}_{\mathrm{syn}}$ & Mean squared error between the background-subtracted image and the reference image containing only synthetic features. \\
+Residual baseline level & $1 - f_{B}$ & Penalty for structured residual background, based on the fraction of pixels near zero intensity. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+\subsection{Synthetic Signal Validation and Masking}
+
+This subsection describes the masking strategy and synthetic signal design used for objective evaluation of background subtraction performance in the absence of ground-truth background.
+
+\subsubsection{Region-Specific Masking}
+
+Metrics are computed only in background-dominated regions using complementary masks.
+\begin{itemize}
+\item \textit{Main signal mask:} an annulus excluding beam center and detector edges ($r_{\mathrm{min}}$, $r_{\mathrm{max}}$). This mask excludes regions containing non-representative or saturated signal.
+\item \textit{Equator mask:} a rectangle aligned with the equator. Since the equatorial streak is typically more intense than the surrounding diffuse background, it is treated separately.
+\item \textit{Synthetic mask:} rectangles of extent $2\sigma$ around each injected feature.
+\item \textit{Real-feature mask:} bands at layer-line positions with widths set from estimated FWHM via perpendicular projections. This mask is used to avoid contamination from real diffraction signal.
+\end{itemize}
+
+Together, these masks restrict metric evaluation to regions dominated by background, ensuring that evaluation reflects background subtraction quality rather than signal content.
+
+
+\subsubsection{Synthetic Signal Validation Design}
+
+To address the central limitation in the lack of ground-truth, we inject synthetic diffraction features before subtraction and measure their preservation afterward to quantify signal loss and oversubtraction.
+
+
+Synthetic features are modeled using axis-aligned two-dimensional Gaussian functions elongated along the horizontal axis, reflecting the typical shape of diffraction features such as layer lines. The synthetic feature is defined as
+\begin{equation}
+G(x, y) = A \exp\!\left(
+-\frac{(x-x_0)^2}{2\sigma_x^2}
+-\frac{(y-y_0)^2}{2\sigma_y^2}
+\right),
+\end{equation}
+where $A$ is the amplitude, $(x_0, y_0)$ is the feature center, and $\sigma_x$ and $\sigma_y$ are the standard deviations along the horizontal and vertical axes, respectively.
+
+The shape parameters are selected automatically for each image to match the scale of real diffraction features. Based on observed correlations in experimental data, $\sigma_x$ and $\sigma_y$ are derived from the average FWHM of prominent reflections, specifically the $I_{1,0}$ equatorial peak and the M1 and M3 meridional reflections. Specifically,
+\begin{equation}
+\sigma_x = \frac{I_{1,0}}{5} \times \frac{1}{2\sqrt{2\ln2}}, 
+\qquad
+\sigma_y = \frac{\mathrm{M1}}{20} \times \frac{1}{2\sqrt{2\ln2}}.
+\end{equation}
+
+
+Synthetic amplitudes decay radially as $1/r$, which is a small-angle approximation consistent with Lorentz-type reduction in diffracted intensity with distance from the center of the pattern~\cite{Buerger1940,Denny1995}. The maximum amplitude of synthetic features is chosen to align, at each radius, with the average intensity of real features. For each image, the amplitude is scaled relative to the strongest observed reflection, the $I_{1,0}$ equatorial peak. Setting the maximum synthetic feature amplitude to $A_{\mathrm{max}} = 1\%\, I_{1,0}$ ensures that injected features remain faint while spanning a range of scattering angles.
+
+Features are placed on a regular grid with spacing chosen to avoid known layer-line regions to ensure that synthetic features probe background-dominated regions (Figure~\ref{fig:synthetic_structures}).
+
+\subsubsection{Parameter Sensitivity}
+
+The sensitivity of the evaluation framework to synthetic signal parameters was examined by varying amplitude, feature extent, and sampling frequency, as shown in Figure~\ref{fig:synthetic_structures}. The variations produced similar losses and stable method rankings (Table~\ref{tab:variations}), indicating robustness to reasonable parameter choices. Since the default parameter settings consistently yielded low loss values, they were used for all subsequent analyses.
+
+\begin{table}[t]
+\caption{Sensitivity of the aggregate loss to variations in synthetic signal parameters.
+Average loss values are reported for 10 images from each dataset.
+For each parameter variation, all other parameters were held at their medium setting.
+Results show that the default settings (medium) produce consistently low loss values and stable method rankings.}
+\label{tab:variations}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}lllc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Variation} & \textbf{Setting} & \textbf{Loss} \\ \midrule
+Amplitude $A_{\mathrm{max}}$ & Low & $0.5\%\, I_{1,0}$ & $0.33 \pm 0.20$ \\
+& Medium & $1\%\, I_{1,0}$ & $0.30 \pm 0.18$ \\
+& High & $2\%\, I_{1,0}$ & $0.34 \pm 0.22$ \\ \midrule
+Horizontal extent $\sigma_x$ & Short & $I_{1,0}/10$ & $0.33 \pm 0.20$ \\
+& Medium & $I_{1,0}/5$ & $0.30 \pm 0.18$ \\
+& Long & $I_{1,0}/3$ & $0.34 \pm 0.20$ \\ \midrule
+Vertical extent $\sigma_y$ & Thin & $\mathrm{M1}/30$ & $0.31 \pm 0.26$ \\
+& Medium & $\mathrm{M1}/20$ & $0.30 \pm 0.18$ \\
+& Thick & $\mathrm{M1}/10$ & $0.33 \pm 0.20$ \\ \midrule
+Sampling frequency & Sparse & Every 2 layer lines & $0.36 \pm 0.22$ \\
+& Medium & Every layer line & $0.30 \pm 0.18$ \\
+& Dense & 2 per layer line & $0.40 \pm 0.26$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\columnwidth]{figs/Fig3_synthetic_data_variations.png}
+\caption{Representative placement of synthetic features, visible as small bright elliptical dots. The figure also shows masking of the central beam region, equatorial streak background, and layer line regions (see Section~3.2.1). The synthetic features are distributed to sample background-dominated regions while avoiding overlap with real diffraction signal. Top: synthetic features. Bottom: real diffraction image with superimposed synthetic features.}
+\label{fig:synthetic_structures}
+\end{figure}
+
+\subsection{Optimization Procedure}
+
+This subsection describes how the evaluation metrics are combined into a single objective function, which is minimized to tune each method's parameters.
+
+\subsubsection{Aggregate Loss Function}
+
+Background subtraction quality is quantified by a weighted loss that combines the normalized metrics in Table~\ref{tab:loss_terms}:
+
+\begin{equation}
+%\begin{aligned}
+L =\;
+w_1\, S_{\mathrm{BG}}
++ w_2\, f_{\mathrm{neg,con}}
++ w_3\, f_{\mathrm{neg,syn}}
++ w_4\, \mathrm{MSE}_{\mathrm{syn}}
++ w_5\, \bigl(1 - f_{B}\bigr),
+%\end{aligned}
+\end{equation}
+where each metric is normalized by its mean across datasets to place terms on a comparable scale.
+
+The weights $w_i$ encode the relative importance of different physical and algorithmic considerations and may be adjusted to reflect user priorities. We compared equal weighting ($1\!:\!1\!:\!1\!:\!1\!:\!1$) to a domain-informed scheme ($3\!:\!3\!:\!2\!:\!2\!:\!1$) that emphasizes smoothness and oversubtraction penalties over the baseline term.
+
+Visual inspection was used to identify subtle artifacts not captured numerically. Domain-informed weighting performed better than equal weighting. Further adjustment was applied to emphasize penalties for oversubtraction of faint synthetic features while maintaining smooth residual background, and the final weights used in this study were $[w_1,w_2,w_3,w_4,w_5]=[0.4,0.1,0.3,0.1,0.1]$.
+
+
+No single metric is sufficient to guide optimization, whereas optimization using only the two dominant metrics ($w_1 = w_3 = 0.5$) tends to under-subtract the background, demonstrating the need for a multi-term objective function.
+
+\subsubsection{Parameter Optimization}
+
+Since the background subtraction methods are non-differentiable and parameters are largely discrete, we minimize $L$ using a coordinate-descent strategy in which parameters are optimized sequentially, with all other parameters held fixed at their current best values. Parameters are processed in order of estimated significance. Parameters are optimized within preset bounds and initial values; in this study, optimal values fell within $[0,300]$. These bounds may be adjusted for alternative implementations. Optimization proceeds using a decreasing step-size schedule, with step sizes ranging from 50 to 1 as the loss value improves. After the main coordinate descent loop, the best solution parameters are refined using a local grid search.
+
+Images are processed in parallel using multiprocessing to reduce overall runtime. Additionally, for further computational efficiency, background estimates are computed on downsampled images and subtracted at full resolution; however, downsampling is applied only when it lowers the loss: G-ILPF, B-ILPF, WTH: by factor of 2; RW: by factor of 4; CS/RCH/AVG: none (see Section~3.4.1).
+
+
+
+\subsection{Experimental Design}
+
+This subsection describes the evaluated methods and datasets.
+
+We evaluated a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, which are implemented in MuscleX Quadrant Folding~\cite{JiratrakanvongEtAl2024}, which is based on algorithms originally developed within the CCP13 software suite~\cite{HeEtAl2007}. The selected methods span a range of underlying assumptions and algorithmic strategies, providing a broad basis for comparison. Table~\ref{tab:algorithms} summarizes the methods.
+
+\begin{table}[t]
+\caption{Background subtraction algorithms evaluated in this study.}
+\label{tab:algorithms}
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Abbreviation} & \textbf{Method} & \textbf{Notes} \\
+\midrule
+CS & Circularly Symmetric & Assumes radial symmetry of background \\
+RW & Roving Window & Local averaging using sliding windows \\
+RCH & Radial Convex Hull & Convex hull subtraction on angular projections \\
+G-ILPF & Gaussian Iterative Low-Pass Filter & Iterative smoothing with Gaussian kernel \\
+B-ILPF & Boxcar Iterative Low-Pass Filter & Iterative smoothing with boxcar kernel \\
+WTH & White Top-Hat Filter & Morphological background removal \\
+AVG & Mean Value & Baseline reference; no parameter optimization \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors, including Mar~165~(Rayonix) and EIGER~X~9M~(Dectris) and different sample environments, including samples measured in solution, buffer, and air. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded (Figure~\ref{fig:img_filter}). For optimization and evaluation, up to 50 images were selected from each dataset. In cases of fewer available images after filtering, all remaining images were used.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\columnwidth]{figs/Fig3_image_filtering_quarter2.png}
+\caption{Examples of included (left) and excluded (right) diffraction images based on manual assessment of the presence of well-defined diffraction features. Log intensity is shown for ease of feature visualization. Image on the left contains clear equatorial and layer line features suitable for quantitative analysis, whereas image on the right lacks discernible diffraction structure and is therefore excluded from evaluation.}
+\label{fig:img_filter}
+\end{figure}
+
+\begin{table}[t]
+\caption{Overview of experimental datasets used in the analysis.}
+\label{tab:datasets}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Name & Detector & Environment & Count (Total) & Count (Filtered) & Count (Used) \\ \midrule
+25\_0227 & Mar~165 & Solution & 685 & 347 & 50 \\
+24\_0508 & Mar~165 & Solution & 267 & 246 & 50 \\
+24\_1213 & Mar~165 & Buffer & 242 & 188 & 50 \\
+24\_1213 & Mar~165 & Air & 287 & 237 & 50 \\
+24\_1211 & EIGER~X~9M & Solution & 44 & 38 & 38 \\
+24\_1211 & EIGER~X~9M & Air & 61 & 52 & 50 \\
+P2\_639 & EIGER~X~9M & Solution & 120 & 120 & 50 \\
+P3\_657 & EIGER~X~9M & Solution & 120 & 120 & 50 \\ \midrule
+\textbf{Total} & -- & -- & \textbf{2306} & \textbf{1828} & \textbf{388} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results and Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we compare methods across datasets using the aggregate loss, optimized-parameter variability, and representative examples.
+
+\subsection{Quantitative Comparison of Methods}
+
+Table~\ref{tab:method_performance_new} summarizes aggregate loss and metrics across datasets; lower values indicate better performance. The number of successfully processed images is shown for each method, reflecting differences in algorithm robustness and convergence behavior. Metric breakdowns show method-specific trade-offs.
+% By evaluation metrics individually, we observe that no single metric is sufficient, motivating the composite loss.
+
+The radially symmetric and iterative low-pass filtering achieve the lowest average losses, while AVG performs substantially worse, confirming that spatially structured background modeling is necessary. Table~\ref{tab:method_by_dataset} shows that the best method varies by dataset, motivating dataset-specific optimization. 
+
+
+
+
+\begin{table}[t]
+\caption{Method comparison across all images (mean $\pm$ SD). Lower is better. AVG is a constant-background baseline and is not expected to perform well on spatially varying backgrounds.}
+
+\label{tab:method_performance_new}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+\textbf{Method} & \textbf{Count} & \textbf{Loss} &
+$\mathbf{MSE}_{\mathbf{syn}}$ &
+$\mathbf{f}_{\mathbf{neg,con}}$ &
+$\mathbf{f}_{\mathbf{neg,syn}}$ &
+$\mathbf{1-f_B}$ &
+$\mathbf{S}_{\mathbf{BG}}$ \\ \midrule
+AVG & 388 & 2.15 $\pm$ 0.98 & 2.89 $\pm$ 8.81 & 5.29 $\pm$ 2.07 & 4.21 $\pm$ 0.25 & 0.49 $\pm$ 0.22 & 0.02 $\pm$ 0.01 \\
+RCH & 288 & 0.75 $\pm$ 0.33 & 1.80 $\pm$ 3.01 & 0.22 $\pm$ 0.24 & 1.05 $\pm$ 0.73 & 1.44 $\pm$ 0.83 & 0.22 $\pm$ 0.19 \\
+CS & 388 & 0.33 $\pm$ 0.19 & 0.41 $\pm$ 0.75 & 0.10 $\pm$ 0.20 & 0.39 $\pm$ 0.33 & 1.05 $\pm$ 0.77 & 0.15 $\pm$ 0.10 \\
+RW & 384 & 0.43 $\pm$ 0.18 & 0.26 $\pm$ 0.38 & 0.11 $\pm$ 0.17 & 0.59 $\pm$ 0.50 & 1.57 $\pm$ 0.83 & 0.16 $\pm$ 0.12 \\
+B-ILPF & 388 & 0.35 $\pm$ 0.22 & 0.22 $\pm$ 0.36 & 0.04 $\pm$ 0.05 & 0.61 $\pm$ 0.59 & 0.83 $\pm$ 0.79 & 0.14 $\pm$ 0.11 \\
+G-ILPF & 388 & 0.34 $\pm$ 0.22 & 0.15 $\pm$ 0.29 & 0.04 $\pm$ 0.08 & 0.64 $\pm$ 0.55 & 0.66 $\pm$ 0.70 & 0.16 $\pm$ 0.13 \\
+WTH & 388 & 0.36 $\pm$ 0.24 & 0.37 $\pm$ 0.46 & 0.06 $\pm$ 0.11 & 0.66 $\pm$ 0.65 & 0.72 $\pm$ 0.72 & 0.11 $\pm$ 0.09 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}[t]
+\caption{Loss by dataset (mean $\pm$ SD). Highlights indicate the lowest loss per dataset. There is no consistent method that performs best across all datasets.}
+\label{tab:method_by_dataset}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+\textbf{Method} & \textbf{24\_0508} & \textbf{24\_1211 a.} & \textbf{24\_1211 s.} & \textbf{24\_1213\ a.} & \textbf{24\_1213 b.} & \textbf{25\_0227} & \textbf{P2\_639} & \textbf{P3\_657} \\
+\midrule
+
+% AVG & $2.43 \pm 0.1$ & $2.40 \pm 2.3$ & $1.66 \pm 0.2$ & $2.76 \pm 0.8$ & $1.97 \pm 0.2$ & $2.54 \pm 0.5$ & $1.73 \pm 0.0$ & $1.58 \pm 0.0$ \\
+
+CS & \cellcolor{yellow!30}$0.39 \pm 0.0$ & \cellcolor{yellow!30}\textbf{$0.48 \pm 0.3$} & \cellcolor{yellow!30}\textbf{$0.24 \pm 0.0$} & $0.52 \pm 0.1$ & $0.36 \pm 0.1$ & $0.40 \pm 0.1$ & $0.13 \pm 0.0$ & $0.13 \pm 0.0$ \\
+RW & $0.48 \pm 0.0$ & $0.67 \pm 0.3$ & $0.53 \pm 0.3$ & $0.48 \pm 0.1$ & $0.41 \pm 0.0$ & $0.44 \pm 0.1$ & $0.24 \pm 0.0$ & $0.27 \pm 0.0$ \\
+B-ILPF & $0.44 \pm 0.0$ & $0.62 \pm 0.3$ & $0.40 \pm 0.2$ & $0.40 \pm 0.1$ & $0.35 \pm 0.1$ & $0.43 \pm 0.1$ & $0.05 \pm 0.0$ & $0.11 \pm 0.0$ \\
+G-ILPF & $0.47 \pm 0.0$ & $0.65 \pm 0.3$ & $0.40 \pm 0.2$ & \cellcolor{yellow!30}\textbf{$0.33 \pm 0.1$} & \cellcolor{yellow!30}\textbf{$0.31 \pm 0.0$} & \cellcolor{yellow!30}\textbf{$0.37 \pm 0.1$} & $0.07 \pm 0.0$ & $0.13 \pm 0.0$ \\
+WTH & $0.45 \pm 0.0$ & $0.63 \pm 0.4$ & $0.36 \pm 0.2$ & $0.46 \pm 0.1$ & $0.38 \pm 0.1$ & $0.44 \pm 0.1$ & \cellcolor{yellow!30}\textbf{$0.04 \pm 0.0$} & \cellcolor{yellow!30}\textbf{$0.09 \pm 0.0$} \\
+RCH & $0.98 \pm 0.1$ & $0.86 \pm 0.4$ & $0.58 \pm 0.3$ & $0.92 \pm 0.4$ & $0.61 \pm 0.1$ & $0.52 \pm 0.1$ & $-$ & $-$ \\
+
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Optimized Parameter Variability}
+
+Table~\ref{tab:summary_total_variability} shows that optimized parameters vary substantially across images but are more consistent within datasets, reflecting differences in background structure and motivating dataset-specific optimization.
+Large parameter variability suggests that image-adaptive strategies (e.g., clustering by background properties before tuning) may outperform a single global configuration.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Coefficient variability (SD/mean) across images and datasets (mean $\pm$ SD). Variability is lower within datasets, motivating adaptive tuning.}
+\label{tab:summary_total_variability}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Method & Num Coeffs & Across Images & Across Datasets \\
+\midrule
+CS & 5 & $1.42 \pm 1.8$ & $0.73 \pm 0.2$ \\
+RW & 8 & $0.64 \pm 0.0$ & $0.46 \pm 0.0$ \\
+B-ILPF & 3 & $0.64 \pm 0.1$ & $0.44 \pm 0.0$ \\
+G-ILPF & 2 & $0.78 \pm 0.3$ & $0.19 \pm 0.0$ \\
+WTH & 1 & $0.82 \pm 0.0$ & $0.44 \pm 0.1$ \\
+RCH & 0 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Visual Correspondence with Quantitative Metrics}
+
+Figure~\ref{fig:example_image_loss} illustrates representative examples corresponding to low-loss and high-loss background subtraction outcomes for the same image. In the low-loss example, diffuse background is effectively removed while diffraction features are preserved and the residual baseline remains smooth. In contrast, the high-loss examples exhibit either incomplete background removal, with elevated residual intensity between layer lines, or oversubtraction artifacts. 
+
+\begin{figure}[h]
+\centering
+% \includegraphics[width=0.45\textwidth]{figs/Figure4_low_loss_example.png}
+\fcolorbox{green}{white}{
+    \includegraphics[width=0.42\textwidth]{figs/Figure4_low_loss_example.png}
+}
+\fcolorbox{red}{white}{
+\includegraphics[width=0.42\textwidth]{figs/Figure4_high_loss_example_wth.png}
+}
+\fcolorbox{red}{white}{
+\includegraphics[width=0.42\textwidth]{figs/Figure4_high_loss_example_cs.png}
+}
+\fcolorbox{red}{white}{
+\includegraphics[width=0.42\textwidth]{figs/Figure4_high_loss_example_sg.png}
+}
+% \includegraphics[width=0.45\textwidth]{figs/Figure4_high_loss_example_wth.png}
+
+% \includegraphics[width=0.45\textwidth]{figs/Figure4_high_loss_example_cs.png}
+% \includegraphics[width=0.45\textwidth]{figs/Figure4_high_loss_example_sg.png}
+\caption{Representative results from dataset 2025\_0227. Top Left: low-loss result with smooth residual background and preserved diffraction features (method: G-ILPF). Top Right: WTH high-loss result showing residual background at high angles. Bottom Left: CS high-loss result with large connected oversubtraction regions. Bottom Right: G-ILPF high-loss result with slightly worse preservation of faint features. The visual differences correspond to the aggregate loss values, illustrating that the metrics reflect perceptually meaningful subtraction quality.}
+\label{fig:example_image_loss}
+\end{figure}
+
+
+\subsection{Performance on Faint Diffraction Patterns}
+
+The framework also adapts to images with weak diffraction features. Figure~\ref{fig:example_faint} shows a low-intensity diffraction pattern and the corresponding background estimate. Even in this challenging regime, the evaluation framework guides parameter optimization toward solutions that suppress background while preserving faint structural features. This behavior suggests that the synthetic-signal-based metrics remain informative even when real diffraction signal is weak.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.55\textwidth]{figs/Fig5_Faint_Image_Background2.png}
+\caption{Representative results from dataset P2\_639 for a faint diffraction image and its estimated background. Despite weak diffraction features, the optimized parameters suppress the diffuse background while preserving faint structural signal, indicating that the synthetic-signal-based metrics remain informative in this regime.}
+\label{fig:example_faint}
+\end{figure}
+
+\subsection{Summary of Observations}
+
+
+Overall, the framework enables objective comparison across datasets, identifies methods that perform well on average, and highlights substantial parameter variability that motivates dataset- or image-adaptive tuning.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion} 
+%%%%%%%%%%%%%%%%%%%%
+
+
+We presented a quantitative, physics-informed framework that evaluates and optimizes background subtraction in muscle fiber diffraction using reproducible metrics and synthetic-signal validation. By translating qualitative expectations of successful background removal into objective, reproducible metrics, the framework enables systematic comparison of algorithms and data-driven selection of method parameters. The introduction of synthetic diffraction features provides a practical mechanism for assessing preservation of faint signal in the absence of ground-truth background, addressing a fundamental challenge in experimental diffraction analysis.
+
+Across diverse synchrotron datasets, the framework consistently identified background subtraction strategies that balance artifact suppression, background smoothness, and signal preservation. The best-performing method varies with the analyzed dataset. The results show that no single metric is sufficient in isolation; instead, a composite objective function is required to capture the competing physical and algorithmic constraints inherent to background subtraction. 
+
+A key observation is the substantial variability in optimized parameters across datasets, reflecting differences in background structure due to experimental conditions, detectors, and sample preparation. This variability suggests that fixed, globally tuned parameters are unlikely to be optimal, and that future performance gains will likely require dataset-specific or image-specific adaptation.
+
+Overall, the proposed framework establishes an objective and reproducible foundation for background subtraction in muscle fiber diffraction. By enabling systematic evaluation and parameter optimization, it supports more reliable quantitative analysis and provides a basis for future developments in adaptive and hybrid background modeling strategies, both in muscle diffraction and in other imaging modalities characterized by complex, non-uniform backgrounds.
+
+\section{Future Work}
+
+
+Ongoing work includes supporting the integration of the framework into MuscleX~\cite{JiratrakanvongEtAl2024,madhurapantula2026musclexdi} for automatic method and parameter selection and reduce manual intervention. We have also been exploring hybrid approaches that combine parametric modeling of the equatorial streak with non-parametric methods for general background.
+
+Given this preliminary work, we plan to use it to train a Neural Network for background estimation or parameter prediction. Since the framework allows to semi-automatically label data with background method and parameters, we would like to use it as a preprocessing step to study time resolved dynamics of patterns and backgrounds and track changes to layer lines over time. Additionally, we plan to submit a manuscript to the Journal of Applied Crystallography describing the framework by the end of the Spring 2026 semester.
+
+
+
+\section*{Acknowledgements}
+Research supported by the US National Institutes of Health grant number R01GM144555 (TI).
+
+% \section*{Conflicts of Interest and Data Availability} 
+
+% \bibliographystyle{unsrt}
+% \bibliographystyle{unsrtnat}
+\bibliographystyle{IEEEtran}
+\bibliography{paperDraft_refs}
+
+
+% \section*{Appendix}
+% \appendix
+% \input{Appendix.tex}
+% \input{appendix_other.tex}
+\end{document}
+
+
+
+
+

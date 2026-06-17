@@ -1,0 +1,617 @@
+@article{Ashiotis2015,
+  author  = {Ashiotis, G. and Deschildre, A. and Nawaz, Z. and Wright, J. P. and Karkoulis, D. and Picca, F. E. and Kieffer, J.},
+  title   = {The fast azimuthal integration Python library: pyFAI},
+  journal = {Journal of Applied Crystallography},
+  year    = {2015},
+  volume  = {48},
+  number  = {2},
+  pages   = {510--519},
+  doi     = {10.1107/S1600576715004306}
+}
+
+@article{Barlow2020,
+  author  = {Barlow, Aaron M and Mosta{\c{c}}o-Guidolin, Leila B and Osei, Emmanuel T and Booth, Steven and Hackett, Tillie-Louise},
+  title   = {Super resolution measurement of collagen fibers in biological samples: validation of a commercial solution for multiphoton microscopy},
+  journal = {PLOS ONE},
+  year    = {2020},
+  volume  = {15},
+  number  = {2},
+  pages   = {e0229278}
+}
+
+@article{Basham2015,
+  author  = {Basham, Mark and Filik, Jacob and Wharmby, Michael T. and Chang, Peter C. Y. and El Kassaby, Baha and Gerring, Matthew and Aishima, Jun and {et~al.}},
+  title   = {Data Analysis Workbench (DAWN)},
+  journal = {Journal of Synchrotron Radiation},
+  year    = {2015},
+  volume  = {22},
+  number  = {3},
+  pages   = {853--858}
+}
+
+@misc{ResearchPlanMusico,
+  author  = {Irving, Thomas},
+  title   = {Research Plan Final for the Musico Grant},
+  journal = {NA},
+  year    = {2024},
+  volume  = {},
+  number  = {},
+  pages   = {},
+  doi     = {},
+  url     = {},
+  howpublished = {Unpublished internal report},
+  note         = {Musico grant application document}
+} % [1] Reserach Plan Final for the Musico Grant [Document](../../documents/reports/ResearchPlanfinal.pdf)
+
+
+@misc{MuscleSlidesBIOL555,
+  author       = {Irving, Thomas},
+  title        = {Muscle Lecture Slides for BIOL 555},
+  howpublished = {Lecture slides},
+  year         = {2023},
+  note         = {Course materials shared by the instructor}
+} % [7] Muscle Lecture Slides for BIOL 555 (shared by Prof. Irving) 
+
+
+@book{Vainshtein1966,
+  author    = {Vainshtein, B. K.},
+  title     = {Diffraction of X-rays by Chain Molecules},
+  publisher = {Elsevier},
+  address   = {Amsterdam},
+  year      = {1966},
+  pages     = {414}
+} % [3] Diffraction of X-rays by Chain Molecules, B. K. Vainshtein
+
+@article{LorenzHolmes1993,
+  author  = {Lorenz, Michael and Holmes, Kenneth C.},
+  title   = {Computer Processing and Analysis of X-ray Fibre Diffraction Data},
+  journal = {Journal of Applied Crystallography},
+  year    = {1993},
+  volume  = {26},
+  number  = {1},
+  pages   = {405--421}
+} % [4] Computer Processing and Analysis of X-ray Fibre Diffraction Data, M. LORENZANDK. C. HOLMES, 1993, Journal of Applied Crystallography
+
+@article{MillaneArnott1985,
+  author  = {Millane, Rick P. and Arnott, Struther},
+  title   = {Background Removal in X-ray Fiber Diffraction Patterns},
+  journal = {Journal of Applied Crystallography},
+  year    = {1985},
+  volume  = {18},
+  pages   = {419--423}
+} % [5] Background Removal in X-ray Fiber Diffraction Patterns, RICK P. MILLANE AND STRUTHER ARNOTT, 1985
+
+@article{IvanovaMakowski1998,
+  author  = {Ivanova, Magdalena I. and Makowski, Lee},
+  title   = {Iterative Low-Pass Filtering for Estimation of the Background in Fiber Diffraction Patterns},
+  journal = {Journal of Applied Crystallography},
+  year    = {1998},
+  volume  = {31},
+  pages   = {255--262}
+} % [5] Background Removal in X-ray Fiber Diffraction Patterns, RICK P. MILLANE AND STRUTHER ARNOTT, 1985
+
+@article{MurthyZeroGrubb1997,
+  author  = {Murthy, N. S. and Zero, K. and Grubb, D. T.},
+  title   = {Full-pattern Analysis of Two-dimensional Small-angle Scattering Data from Oriented Polymers Using Elliptical Coordinates},
+  journal = {Polymer},
+  year    = {1997},
+  volume  = {38},
+  number  = {5},
+  pages   = {1021--1028}
+} % [8] N. S. Murthy and K. Zero, D. T. Grubb, Full-pattern analysis of two-dimensional small-angle scattering data from oriented polymers using elliptical coordinates
+
+@article{MaIrving2022,
+  author  = {Ma, Weikang and Irving, Thomas C.},
+  title   = {Small Angle X-ray Diffraction as a Tool for Structural Characterization of Muscle Disease},
+  journal = {International Journal of Molecular Sciences},
+  year    = {2022},
+  volume  = {23},
+  number  = {6},
+  pages   = {3052},
+  doi     = {10.3390/ijms23063052}
+}
+
+@article{HeEtAl2007,
+  author  = {He, Hong and Knott, Robert and Pople, John and Evans, Gary and Nuttall, Jonathan and Cookson, David and Kirian, Richard},
+  title   = {The CCP13 FibreFix program suite: semi-automated analysis of diffraction patterns from non-crystalline materials},
+  journal = {Journal of Applied Crystallography},
+  year    = {2007},
+  volume  = {40},
+  number  = {5},
+  pages   = {e343--e348},
+  doi     = {10.1107/S0021889807036823}
+}
+
+@misc{fibrefix_diamond,
+  author  = {{Diamond Light Source}},
+  title   = {FibreFix},
+  year    = {2019},
+  url     = {https://www.diamond.ac.uk/Instruments/Soft-Condensed-Matter/small-angle/SAXS-Software/CCP13/FibreFix/FibreFix.html},
+  urldate = {2026-02-12},
+  note    = {CCP13 Fibre diffraction software},
+}
+
+
+@article{JiratrakanvongEtAl2024,
+  author  = {Jiratrakanvong, Jantana and Linari, Marco and Piazzesi, Gabriella and Reconditi, Massimo and Caremani, Michele and Narayanan, Theyencheri and Irving, Thomas C.},
+  title   = {MuscleX: data analysis software for fiber diffraction patterns from muscle},
+  journal = {Journal of Synchrotron Radiation},
+  year    = {2024},
+  volume  = {31},
+  number  = {5},
+  pages   = {1401--1408},
+  doi     = {10.1107/S1600577524006820}
+}
+
+@misc{lee2019musclex,
+  author       = {Lee, Xintian and Jiratrakanvong, Jiranun and Nikseresht, Grant and iitbiocat and Lee, Xintian and tomirving},
+  title        = {biocatiit/musclex: Muscle X 1.14.12 (v1.14.12)},
+  year         = {2019},
+  doi          = {10.5281/zenodo.3360909},
+  howpublished = {\url{https://doi.org/10.5281/zenodo.3360909}},
+  note         = {Zenodo},
+}
+
+@book{NederKorsunskiy2018,
+  author    = {Neder, R. B. and Korsunskiy, V. I.},
+  title     = {Two-dimensional X-ray Diffraction},
+  publisher = {Wiley},
+  address   = {Hoboken, NJ},
+  year      = {2018}
+}
+
+
+@article{rajkumar2007fibrefix,
+  author  = {Rajkumar, G. and Al-Khayat, H. A. and Eakins, F. and Knupp, C. and Squire, J. M.},
+  title   = {The CCP13 FibreFix program suite: semi-automated analysis of diffraction patterns from non-crystalline materials},
+  journal = {Journal of Applied Crystallography},
+  year    = {2007},
+  volume  = {40},
+  number  = {Pt 1},
+  pages   = {178--184},
+  doi     = {10.1107/S0021889806048643},
+  url     = {https://doi.org/10.1107/S0021889806048643}
+}
+
+
+@article{Sternberg1983,
+  author  = {Sternberg, Stanley R.},
+  title   = {Biomedical Image Processing},
+  journal = {IEEE Computer},
+  year    = {1983},
+  volume  = {16},
+  number  = {1},
+  pages   = {22--34},
+  doi     = {10.1109/MC.1983.1654163}
+}
+
+@article{Makowski1978,
+  author  = {Makowski, Lee},
+  title   = {Processing of X-ray Diffraction Data from Partially Oriented Specimens},
+  journal = {Journal of Applied Crystallography},
+  year    = {1978},
+  volume  = {11},
+  pages   = {273--283}
+}
+
+@misc{LanganRowingWindow,
+  author       = {Langan, Paul},
+  title        = {Rowing Window Method},
+  howpublished = {Unpublished},
+  year         = {NA},
+  note         = {}
+}
+
+
+@article{PolarBackground2024,
+  author  = {Guo Pu, Xu Zheng, JiChao Jiang},
+  title   = {Polar Coordinate-based Background Removal Algorithm for 2D X-ray Scattering Data},
+  journal = {Review of Scientific Instruments},
+  year    = {2024},
+  volume  = {95},
+  number  = {12},
+  pages   = {125109},
+  doi     = {10.1063/5.0236066}
+}
+
+@article{WaveletBiomedOptExpress2021,
+  author  = {H{\"u}pfel, Manuel and Kobitski, Andrei Yu. and Zhang, Weichun and Nienhaus, G. Ulrich},
+  title   = {Wavelet-based background and noise subtraction for fluorescence microscopy images},
+  journal = {Biomedical Optics Express},
+  year    = {2021},
+  volume  = {12},
+  number  = {2},
+  pages   = {969--980},
+  doi     = {10.1364/BOE.413181},
+  url     = {https://opg.optica.org/boe/fulltext.cfm?uri=boe-12-2-969},
+  note    = {Accessed 17 January 2026}
+}
+
+@book{GonzalezWoodsDIP4e,
+  author    = {Gonzalez, Rafael C. and Woods, Richard E.},
+  title     = {Digital Image Processing},
+  edition   = {4},
+  publisher = {Pearson},
+  address   = {New York},
+  year      = {2018}
+}
+
+@article{Zorn1988,
+  author  = {Zorn, Gerhard},
+  title   = {Pitfalls in the Evaluation of X-ray Diffraction Line Shape},
+  journal = {Australian Journal of Physics},
+  year    = {1988},
+  volume  = {41},
+  number  = {2},
+  pages   = {237--249},
+  doi     = {10.1071/PH880237}
+}
+
+
+@article{Denny1995,
+  author  = {Denny, Richard},
+  title   = {Fibre Diffraction Spot Profiles and the Lorentz Correction},
+  journal = {Fibre Diffraction Review},
+  volume = {5},
+  year    = {1995},
+  pages   = {23--25},
+  note    = {Biophysics Section, Blackett Laboratory, Imperial College, London SW7 2BZ and CCRC, Daresbury Laboratory, Warrington WA4 4AD}
+}
+
+@article{Buerger1940,
+  author  = {Buerger, M. J.},
+  title   = {The Correction of X-ray Diffraction Intensities for Lorentz and Polarization Factors},
+  journal = {Proceedings of the National Academy of Sciences of the United States of America},
+  year    = {1940},
+  volume  = {26},
+  number  = {6},
+  pages   = {376--383},
+  note    = {Communicated September 26, 1940}
+}
+
+% powder diffraction - use smoothing in square areas or circluar for background
+@article{vallcorba2019d2dplot,
+  author  = {Vallcorba, O. and Rius, J.},
+  title   = {d2Dplot: 2D X-ray diffraction data processing and analysis for through-the-substrate microdiffraction},
+  journal = {Journal of Applied Crystallography},
+  year    = {2019},
+  volume  = {52},
+  number  = {2},
+  pages   = {478--484},
+  doi     = {10.1107/S160057671900219X},
+}
+
+
+@article{bruckner2000background,
+  author  = {Br{\"u}ckner, S.},
+  title   = {Estimation of the background in powder diffraction patterns through a robust smoothing procedure},
+  journal = {Journal of Applied Crystallography},
+  year    = {2000},
+  volume  = {33},
+  number  = {3},
+  pages   = {977--979},
+  doi     = {10.1107/S0021889800003617},
+}
+
+
+@inproceedings{ArangurenCarmona2020,
+  author    = {Aranguren Carmona, Rodrigo and Agam, Gady and Irving, Thomas},
+  title     = {Background subtraction in diffraction X-ray images using deep CNN},
+  booktitle = {Color Imaging XXV: Displaying, Processing, Hardcopy, and Applications},
+  year      = {2020},
+  publisher = {Society for Imaging Science and Technology},
+  address   = {Springfield, VA},
+  doi       = {10.2352/ISSN.2470-1173.2020.14.COIMG-344},
+  note      = {Illinois Institute of Technology, Chicago, IL 60616}
+}
+
+@misc{SciPy2020,
+  author       = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and Haberland, Matt and Reddy, Tyler and Cournapeau, David and {et~al.}},
+  title        = {SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python},
+  howpublished = {\url{https://www.nature.com/articles/s41592-019-0686-2}},
+  year         = {2020},
+  note         = {Accessed 17 January 2026}
+}
+
+@misc{StornPrice1997,
+  author       = {Storn, R. and Price, K.},
+  title        = {Differential Evolution - A Simple and Efficient Heuristic for Global Optimization over Continuous Spaces},
+  year         = {1997},
+  note         = {Accessed 17 January 2026}
+} 
+
+@article{murthy2024evolution,
+  author  = {Murthy, N. S. and Grubb, D. T.},
+  title   = {Evolution of elliptical SAXS patterns in aligned systems},
+  journal = {Journal of Applied Crystallography},
+  year    = {2024},
+  volume  = {57},
+  number  = {4},
+  pages   = {1127--1136},
+  doi     = {10.1107/S1600576724004503},
+}
+
+@article{ning2014beads,
+  author  = {Ning, X. and Selesnick, I. W. and Duval, L.},
+  title   = {Chromatogram baseline estimation and denoising using sparsity (BEADS)},
+  journal = {Chemometrics and Intelligent Laboratory Systems},
+  year    = {2014},
+  volume  = {139},
+  pages   = {156--167},
+  doi     = {10.1016/j.chemolab.2014.09.014},
+}
+@article{baek2015baseline,
+  author  = {Baek, S.-J. and Park, A. and Ahn, Y.-J. and Choo, J.},
+  title   = {Baseline correction using asymmetrically reweighted penalized least squares smoothing},
+  journal = {The Analyst},
+  year    = {2015},
+  volume  = {140},
+  number  = {1},
+  pages   = {250--257},
+  doi     = {10.1039/C4AN01061B},
+}
+
+@article{madhurapantula2026musclexdi,
+  author  = {Madhurapantula, R. S. and Jiratrakanvong, J. and Nikseresht, G. and Miskin, N. and Huo, R. and Nabon, J. and Irving, T. C. and Agam, G. and Orgel, J.},
+  title   = {MuscleX-DI: An integrated data analysis package for X-ray scanning diffraction imaging experiments},
+  journal = {Journal of Synchrotron Radiation},
+  year    = {2026},
+  volume  = {33},
+  number  = {1},
+  pages   = {246--257},
+  doi     = {10.1107/S1600577525010859},
+}
+
+@article{renedecotret2017baseline,
+  author  = {Ren{\'e} de Cotret, L. P. and Siwick, B. J.},
+  title   = {A general method for baseline-removal in ultrafast electron powder diffraction data using the dual-tree complex wavelet transform},
+  journal = {Structural Dynamics},
+  year    = {2017},
+  volume  = {4},
+  number  = {4},
+  pages   = {044004},
+  doi     = {10.1063/1.4972518},
+}
+
+@article{bouwmans2019dnn_background_subtraction,
+  author  = {Bouwmans, T. and Javed, S. and Sultana, M. and Jung, S. K.},
+  title   = {Deep neural network concepts for background subtraction: A systematic review and comparative evaluation},
+  journal = {Neural Networks},
+  year    = {2019},
+  volume  = {117},
+  pages   = {8--66},
+  doi     = {10.1016/j.neunet.2019.04.024},
+}
+
+@article{jiang2025efficient_denoising_survey,
+  author  = {Jiang, Bo and Li, Jinxing and Lu, Yao and Cai, Qing and Song, Huaibo and Lu, Guangming},
+  title   = {Efficient image denoising using deep learning: A brief survey},
+  journal = {Information Fusion},
+  year    = {2025},
+  volume  = {118},
+  pages   = {103013},
+  issn    = {1566-2535},
+  doi     = {10.1016/j.inffus.2025.103013},
+}
+
+
+@article{elad2023imagedenoisingdeeplearning,
+author = {Elad, Michael and Kawar, Bahjat and Vaksman, Gregory},
+title = {Image Denoising: The Deep Learning Revolution and Beyond—A Survey Paper},
+journal = {SIAM Journal on Imaging Sciences},
+volume = {16},
+number = {3},
+pages = {1594-1654},
+year = {2023},
+doi = {10.1137/23M1545859},
+}
+
+@article{archana2024dl_image_processing_review,
+  author  = {Archana, R. and Jeevaraj, P. S. E.},
+  title   = {Deep learning models for digital image processing: A review},
+  journal = {Artificial Intelligence Review},
+  year    = {2024},
+  volume  = {57},
+  number  = {1},
+  pages   = {11},
+  doi     = {10.1007/s10462-023-10631-z},
+}
+
+@article{szymanski2021probabilistic_multiphase_xrd,
+  author  = {Szymanski, Nathan J. and Bartel, Christopher J. and Zeng, Yan and Tu, Qingsong and Ceder, Gerbrand},
+  title   = {Probabilistic Deep Learning Approach to Automate the Interpretation of Multi-phase Diffraction Spectra},
+  journal = {Chemistry of Materials},
+  year    = {2021},
+  volume  = {33},
+  number  = {11},
+  pages   = {4204--4215},
+  doi     = {10.1021/acs.chemmater.1c01071},
+}
+
+@article{ziletti2018dl_crystal_classification,
+  author  = {Ziletti, Angelo and Kumar, Devinder and Scheffler, Matthias and Ghiringhelli, Luca M.},
+  title   = {Insightful classification of crystal structures using deep learning},
+  journal = {Nature Communications},
+  year    = {2018},
+  volume  = {9},
+  number  = {1},
+  pages   = {2775},
+  doi     = {10.1038/s41467-018-05169-6},
+}
+@article{aguiar2020crystallographic_prediction,
+  author  = {Aguiar, Jeffery A. and Gong, M. L. and Tasdizen, Tolga},
+  title   = {Crystallographic prediction from diffraction and chemistry data for higher throughput classification using machine learning},
+  journal = {Computational Materials Science},
+  year    = {2020},
+  volume  = {173},
+  pages   = {109409},
+  doi     = {10.1016/j.commatsci.2019.109409},
+}
+
+@article{devore2021nn_approximation,
+  author  = {DeVore, Ronald and Hanin, Boris and Petrova, Guergana},
+  title   = {Neural network approximation},
+  journal = {Acta Numerica},
+  year    = {2021},
+  volume  = {30},
+  pages   = {327--444},
+  doi     = {10.1017/S0962492921000052},
+}
+
+
+
+@article{toby2013gsas2,
+  author  = {Toby, Brian H. and Von Dreele, Robert B.},
+  title   = {GSAS-II: the genesis of a modern open-source all purpose crystallography software package},
+  journal = {Journal of Applied Crystallography},
+  year    = {2013},
+  volume  = {46},
+  number  = {2},
+  pages   = {544--549},
+  doi     = {10.1107/S0021889813003531},
+}
+
+@article{prescher2015dioptas,
+  author  = {Prescher, Clemens and Prakapenka, Vitali B.},
+  title   = {DIOPTAS: a program for reduction of two-dimensional X-ray diffraction data and data exploration},
+  journal = {High Pressure Research},
+  year    = {2015},
+  volume  = {35},
+  number  = {3},
+  pages   = {223--230},
+  doi     = {10.1080/08957959.2015.1059835},
+}
+
+@article{ashiotis2015pyfai,
+  author  = {Ashiotis, Giannis and Deschildre, Aurore and Nawaz, Zubair and Wright, Jonathan P. and Karkoulis, Dimitrios and Picca, Fr{\'e}d{\'e}ric Emmanuel and Kieffer, J{\'e}r{\^o}me},
+  title   = {The fast azimuthal integration Python library: pyFAI},
+  journal = {Journal of Applied Crystallography},
+  year    = {2015},
+  volume  = {48},
+  number  = {2},
+  pages   = {510--519},
+  doi     = {10.1107/S1600576715004306},
+}
+
+@article{grubb1992high_modulus_pe_fiber,
+  author  = {Grubb, David T. and Prasad, Keshav},
+  title   = {High-modulus polyethylene fiber structure as shown by X-ray diffraction},
+  journal = {Macromolecules},
+  year    = {1992},
+  volume  = {25},
+  number  = {18},
+  pages   = {4575--4582},
+  doi     = {10.1021/ma00044a018},
+}
+
+@article{squire2003ccp13_software,
+  author  = {Squire, John and AL-Khayat, Hind and Arnott, Struther and Crawshaw, Jane and Denny, Richard and Diakun, Greg and Dover, David and Forsyth, Trevor and He, Andrew and Knupp, Carlo and Mant, Geoff and Rajkumar, Ganeshalingam and Rodman, Matthew and Shotton, Mark and Windle, Alan},
+  title   = {New CCP13 software and the strategy behind further developments: Stripping and modelling of fibre diffraction data},
+  journal = {Fibre Diffraction Review},
+  year    = {2003},
+  volume  = {11},
+  pages   = {7--19},
+}
+
+@article{rajkumar2005fibrefix,
+  author  = {Rajkumar, Ganeshalingam and AL-Khayat, Hind A. and Eakins, Felicity and He, Andrew and Knupp, Carlo and Squire, John M.},
+  title   = {FibreFix -- A New Integrated CCP13 Software Package},
+  journal = {Fibre Diffraction Review},
+  year    = {2005},
+  volume  = {13},
+  pages   = {11--18},
+}
+
+@article{denny1995ccp13_updates,
+  author  = {Denny, Richard},
+  title   = {CCP13 Program Updates},
+  journal = {Fibre Diffraction Review},
+  year    = {1995},
+  volume  = {4},
+  pages   = {12--16},
+}
+
+@article{squire2003new,
+  title={New CCP13 software and the strategy behind further developments: Stripping and modelling of fibre diffraction data},
+  author={Squire, John},
+  journal={Fibre Diffraction Review},
+  year={2003},
+  volume  = {11},
+  pages = {7--19},
+}
+
+@article{shotton1998ccp13_software_dev,
+  author  = {Shotton, M. W. and Denny, R. C. and Forsyth, V. T.},
+  title   = {CCP13 Software Development},
+  journal = {Fibre Diffraction Review},
+  year    = {1998},
+  volume  = {7},
+  pages   = {40--44},
+}
+
+@article{hopkins2024bioxtas_raw2,
+  author  = {Hopkins, Jesse B.},
+  title   = {BioXTAS RAW 2: new developments for a free open-source program for small-angle scattering data reduction and analysis},
+  journal = {Journal of Applied Crystallography},
+  year    = {2024},
+  volume  = {57},
+  number  = {1},
+  pages   = {194--208},
+  doi     = {10.1107/S1600576723011019},
+}
+
+@misc{krzywon2025sasview612,
+  author       = {Krzywon, Jeff and Adams, Michel and Agouzal, Nouhaila and Alina, Gervaise and others},
+  title        = {SasView Version 6.1.2},
+  year         = {2025},
+  doi          = {10.5281/zenodo.17795298},
+  howpublished = {\url{https://doi.org/10.5281/zenodo.17795298}},
+  note         = {Software},
+}
+
+@article{agirre2023ccp4_suite,
+  author  = {Agirre, Jon and Atanasova, Mihaela and Ballard, Charles C. and Bond, Penelope and Bowen, Alexandra and others},
+  title   = {The CCP4 suite: integrative software for macromolecular crystallography},
+  journal = {Acta Crystallographica Section D: Structural Biology},
+  year    = {2023},
+  volume  = {79},
+  number  = {6},
+  pages   = {449--461},
+  doi     = {10.1107/S2059798323003595},
+}
+
+@article{jarvis1973convex_hull,
+  author  = {Jarvis, R. A.},
+  title   = {On the identification of the convex hull of a finite set of points in the plane},
+  journal = {Information Processing Letters},
+  year    = {1973},
+  volume  = {2},
+  number  = {1},
+  pages   = {18--21},
+}
+
+@article{Fraser_a13879,
+author = "Fraser, R. D. B. and Macrae, T. P. and Miller, A. and Rowlands, R. J.",
+title = "{Digital processing of fibre diffraction patterns}",
+journal = "Journal of Applied Crystallography",
+year = "1976",
+volume = "9",
+number = "2",
+pages = "81--94",
+month = "Apr",
+doi = {10.1107/S0021889876010674},
+url = {https://doi.org/10.1107/S0021889876010674},
+abstract = {A procedure is described for the digital processing of fibre diffraction patterns to yield a quasi-continuous map representing a central section through the cylindrically averaged intensity transform of the specimen. No assumptions are required about the nature of the specimen other than that it has fibre-type symmetry. The specimen intensity transform can be used to obtain integrated intensities for discrete reflections from microcrystalline fibres that are potentially as accurate as those obtained from crystals. Improved procedures for extracting structure amplitudes from specimens with continuous layer lines are also described.},
+}
+
+@article{franke2025atsas4,
+  author  = {Franke, D. and Gr{\"a}wert, T. and Svergun, D. I.},
+  title   = {New features in ATSAS-4, a program suite for small-angle scattering data analysis},
+  journal = {Journal of Applied Crystallography},
+  year    = {2025},
+  volume  = {58},
+  number  = {3},
+  pages   = {1027--1033},
+  doi     = {10.1107/S1600576725002481},
+  pmid    = {40475945},
+}

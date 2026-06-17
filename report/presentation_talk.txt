@@ -1,0 +1,130 @@
+
+
+slide 1
+
+Hello my name is Irina Klein, I am a 1st year PhD student working with Prof. Gady Agam and Prof. Tom Irving from Biology Department. 
+
+Today, I will present a research project I have been working on titled Framework for Global Background Subtraction in Fiber Diffraction Patterns from Striated Muscle. 
+
+slide 2
+first lets discuss some background information and motivation for this work.
+
+
+slide 3 
+
+- X-ray fiber diffraction is a powerful imaging technique used to determine the molecular structure of fibrous materials—such as muscle tissue by analyzing the diffraction patterns produced when X-rays scatter off the material
+
+- Basically, A beam shoots through the sample which is placed in this special chamber and at the end there is a detector that produces the resulting image from the scattering light.'
+
+- The image on the right shows that Muscle fiber consts of different ordered fillaments and their stucture determines the diffraction direction.
+
+- provides unique insight into the molecular structure of muscle
+- valuable for studying the structural consequences of cardiac and skeletal dysfunctions (myopathies)
+
+- The table at the bottom compares fiber diffraction to solution scattering and crystaloographic scattering
+- Where it falls in between the two because muscle fibers are not fully isotropic and not fully structured like crystals. They have crystalline arrays of myofillaments, shown on the right, which are embedded in an amorphous soluble proteins.
+
+- Due to this, one of the biggest differences is the produced background which is much stronger than in other cases and non-uniform. 
+
+slide 4
+
+here you can see a sample muscle diffraction image and the strong background which has this non-symmetrical shape and the faint lines which are the reflections that we are interested in analyzing. This is a screenshot from MuscleX, a tool used for muscle diffraction patterns analysis developed at Illinois Tech. 
+
+To be able to analyze the image and the diffraction features, background has to be removed.
+
+Historically, fiber diffraction data have been analyzed  using one-dimensional projections along the meridional and equatorial axes (the x and the y axes). 
+
+However, a robust approach to background removal applied directly to two-dimensional diffraction patterns would provide consistent structural information of the layer lines.
+
+Existing two-dimensional background subtraction methods commonly rely on non-parametric techniques and require manual parameter selection and may inadvertently remove weak diffraction signals.
+
+slide 5 
+The identified challenges are subjectivity, risk of losing weak signal, lack of ground truth information and reproducibility.
+
+We have identified the problem in the absense of a standardized quantitative evaluation framework that limits the ability to objectively compare background subtraction algorithms and impedes systematic optimization. 
+
+slide 6
+In this work, we propose a set of physics-informed metrics for reproducible, unsupervised comparison of background-subtraction results. We design a way to reduce faint feature loss by injecting faint synthetic features.
+And use a unified loss and optimization pipeline for method-specific parameter selection. 
+
+The General flow of operations shows that for each image, following initial preprocessing using standard techniques, relevant parameters are estimated, synthetic signal components are generated, and then systematically parameter search. 
+
+slide 7 
+related work
+
+slide 8 
+As I mentioned before typically diffraction data is analyzed using projections and there are several methods to remove the background. 
+The center image shows an equitorial projection and the background is removed using convex hull. 
+
+It works well on isolated peaks on the equator or meridian; however, it doesn't allow to study structural information of the 2D shapes. Om the right you can see that the shapes and intensities of the features change when the muscle is relaxed or contracted, which is currently not studied systematically.
+
+slide 9
+There is a number of methods used for background subtraction in 2 dimensions, however, there isn't a definitive best, all have their own trade-offs. 
+- Some rely on explicit assumptions, for example that the background intensity is symmetric about the beam center.
+- Partition-based methods divide the diffraction pattern into local regions, estimate the background within each region, and interpolate between regions. 
+- Some methods treat  background subtraction as an image processing problem, exploiting differences in spatial scale or frequency.
+- Machine learning in this task is challengind due to the lack of ground-truth background and the difficulty of generating representative training datasets, and this problem cannot be treated as object detection due to smooth edges of the features. 
+
+The choise of which one to use and the parameters are left to the operator. 
+
+Some of these approaches were implemented in the legacy CCP13 package for fiber diffraction analysis. Recently, MuscleX was developed. It builds on and replaces much of CCP13 functionality, specifically for muscle and time-resolved work. A lot of these approaches are integrated into MuscleX.
+
+slide 10 
+now, for methodology 
+
+slide 11
+We define a set of meaningful physics-informed metrics to evaluate background subtraction quality and then use an aggregate loss function to guide automated parameter search.
+
+Metrics respresent qualitative objectives as (1) background has to be smooth, it doesn't contain any features. (2) There are minimum negative values, which violates the physics properties of the diffraction process, (3)  featutres especially faint are preserved and (4) the residual background is smooth and near zero. 
+
+Weights encode relative importance and may be adjusted to reflect user priorities. These are the final weights used in this study.
+
+
+slide 12 
+
+To address missing ground truth data, we inject faint synthetic features, which minimic real diffraction features and penalize the loss of these features. 
+More on the choises for the shape and intensity is in the report, but here you may see three placement frequencies that were analyzed when we evaluated sensititivy to these chnages and it also shows how the features are placed in areas around known feature locations. 
+
+
+slide 13
+We selected a diverse set of muscle fiber diffraction datasets acquired using different detector and different sample environments.
+Frames lacking clearly defined diffraction features were excluded.
+
+slide 14
+We evaluated a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, which are implemented in MuscleX.
+
+slide 15 
+Due to non-differentiable operations and discrete parameters, coordinate descent search is done to search for optimal parameters for each method. After each parameter is processes separatelly, the result is refined using a small local grid search.
+
+slide 16
+now, for the results
+
+slide 17
+The radially symmetric and iterative low-pass filtering achieve the lowest average losses, while AVG performs substantially worse, confirming that spatially structured background modeling is necessary.
+The mertics reflect specific trade-off different methods have. 
+
+slide 18 
+Visually, the comparison of low loss (in green) and higher loss (in red) examples reflects the qualitative guiding criteria. 
+
+
+slide 19
+If we study the loss per dataset, we observe that different methods work best for different datasets,  motivating dataset specific choises. 
+
+slide 20 
+the study of the resulting parameters. the two columns on the right we can see the average coefficients of variabiliy. Within datasets they vary a lot less.
+
+Some of the analyzed datasets show high variability, motivating a more adaptive and image-specific aproach.
+
+slide 21
+In this work, we presented a quantitative physics informed framework for the evaluation of background subtraction in fiber diffraction. We concluded that a composite loss is necessary. 
+
+The results on the datasets show that optimal methods are dataset dependent.
+
+This framework will allow to systematically compare background subtraction and will assist in developing improvements.
+
+slide 22
+We are working on integrating this into MuscleX, as well as studying how to best approach the equiator streak. 
+We plan to submit this work to J Applied Crystallography.
+
+slide 23 
+Thank you for your attention. 

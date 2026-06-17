@@ -1,0 +1,49 @@
+
+1) Speed up the background removal by reducing the image size;.
+2) Compare the results on full-size and downsampled image.
+3) Once fast enough, rerun the evaluation on the datasets.
+4) Alternative parameter optimization technique - directed grid search.
+
+
+
+1. sensitivity to the loss change - visual assessment - 
+2. include sensitivite of parameter change in the step 
+3. use coordinate descent 
+4. end loss - score / std dev
+
+relative improvement on diminishing returns - percentage of change in the objective relative to the value of the objective 
+
+
+cluster based on the resulting parameters
+
+
+the values reflevt the user wishes 
+visual assessment of residual background, negativce excursions , features that shouldnt be there 
+introduction of artifacts we cant quantify - cant spurious features 
+user decisions that take into account 
+
+baseline - rename 
+
+
+tracking DL in 
+simulating - faint structures - width, measure  
+
+
+time series changes propogations 
+
+serbia - simulation too clean, disorder
+
+
+missed setting angles - detector is not perpendicular to beam etc
+global refinement using other criteria - symmetry is a criteria
+
+translation / projection matrix 
+
+refining of the center to sub pixels
+
+
+finding missed setting angles on rings  - calibration images have multuple orders
+pyfai might have settings about the missed setting angles from the calibration image
+
+
+
