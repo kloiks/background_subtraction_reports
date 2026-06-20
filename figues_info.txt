@@ -1,0 +1,77 @@
+Total files in figs/: 68
+
+A) Active in paper.tex/Appendix.tex (16):
+  example_ch_Jani_1_1example_1.png
+  example_eq_Granzier_10_1.png
+  example_eq_Granzier_10_1example_1.png
+  example_eq_Jani_2_1example_1.png
+  example_eq_Jani_3_1.png
+  example_eq_MPLL_1_1.png
+  example_eq_MPLL_7_1example_1.png
+  example_no_eq_Granzier_21_1.png
+  example_no_eq_Jani_0_1.png
+  example_no_eq_MPLL_20_1example_1.png
+  example_no_eq_MPLL_3_1.png
+  example_no_eq_wth_Granzier_21_1example_1.png
+  example_wth_Jani_21_1example_1.png
+  expert_comparison.png
+  mean_bgsum_boxplot_3.png
+  mean_loss_boxplot_6.png
+
+B) NOT in report/appendix but actively used by OTHER .tex drafts (22):
+  before_visual.png
+  eq_example_17_1.png
+  eq_example_17_2.png
+  eq_example_1_1.png
+  eq_example_1_2.png
+  eq_example_33_1.png
+  eq_example_33_2.png
+  example_no_eq_Granzier_21_1example_1.png
+  example_sg_Jani_21_1example_1.png
+  expert_framework_2.png
+  expert_human_2.png
+  expert_orig_2.png
+  flow2.jpg
+  hist_rank3.png
+  mean_loss_boxplot3.png
+  parametric_fit_example.png
+  vis_cs_high_loss.png
+  vis_cs_low_loss.png
+  vis_sg_high_loss.png
+  vis_sg_low_loss.png
+  vis_wth_high_loss.png
+  vis_wth_low_loss.png
+
+C) Referenced only in commented-out lines somewhere (0):
+
+D) Fully orphaned -- not referenced anywhere, active or commented (30):
+  cs_F39_loss_graph2.png
+  example_eq_Jani_2_1.png
+  example_eq_jani_0_1.png
+  example_eq_jani_6_1.png
+  example_no_eq_Granzier_10_1.png
+  example_no_eq_Jani_1_1.png
+  example_no_eq_Jani_20_1.png
+  example_no_eq_Jani_2_1.png
+  example_no_eq_MPLL_1.png
+  example_no_eq_MPLL_4_1.png
+  example_no_eq_MPLL_7_1.png
+  expert_framework.png
+  expert_framework_15.png
+  expert_human.png
+  expert_human_15.png
+  expert_orig.png
+  hist_rank.png
+  hist_rank2.png
+  hist_rank_w_eq4.png
+  individual_metrics.png
+  mean_bgsum_boxplot.png
+  mean_bgsum_boxplot_2.png
+  mean_loss_boxplot.png
+  mean_loss_boxplot2.png
+  mean_loss_boxplot_4.png
+  mean_loss_boxplot_5.png
+  rw_F39_loss_graph2.png
+  sb_F39_loss_graph2.png
+  sg_F39_loss_graph2.png
+  wth_F39_loss_graph2.png
