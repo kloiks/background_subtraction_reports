@@ -391,52 +391,29 @@ AVG & Mean Value of Non-Masked Pixels & Baseline reference; no parameter optimiz
 \label{fig:img_filter}
 \end{figure}
 
-% \begin{table}[t]
-% \caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. Subset of images was used for experiments.}
-% \label{tab:datasets}
-% \centering
-% \small
-% \setlength{\tabcolsep}{4pt}
-% \renewcommand{\arraystretch}{1.0}
-% \begin{tabular}{@{}lcccccc@{}}
-% \toprule
-% \textbf{Name} & \textbf{Detector} & \textbf{Environment} & \textbf{Total Images} & \textbf{Filtered} & \textbf{Subselected} \\ \midrule
-% 2025\_0227 & Mar 165 & Solution & 685 & 347 & 50  \\
-% LP\_P2\_F6\_639 & EIGER X 9M & Solution & 120 & 120 & 50  \\
-% LP\_P3\_F1\_657 & EIGER X 9M & Solution & 120 & 120 & 50 \\
-% 2024\_0508 & Mar 165 & Solution & 267 & 246 & 50  \\
-% 2024\_1213 & Mar 165 & Buffer  & 242 & 188 & 50 \\
-% 2024\_1213 & Mar 165 & Air & 287 & 237 & 50 \\
-% 2024\_1211 & EIGER X 9M & Solution & 44 & 38 & 38 \\
-% 2024\_1211 & EIGER X 9M & Air & 61 & 52 & 50 \\ \midrule
-% \textbf{Total} & -- & --  & \textbf{2306} & \textbf{1828} & \textbf{388}\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
 
 \begin{table}[t]
-\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A subset was used for experiments. {\color{red} TODO: Check detectors with Prof. Irving. TODO: add data type!!}}
+\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A subset was used for experiments. {\color{red} TODO: Check detectors and musclex types with Prof. Irving.}}
 \label{tab:datasets}
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.0}
-\begin{tabular}{@{}lccccccc@{}}
+\begin{tabular}{@{}llccccc@{}}
 \toprule
-\textbf{Name} & \textbf{Detector} & \textbf{Environment} & \textbf{Total Images} & \textbf{Filtered} & \textbf{Subselected} \\ \midrule
-2025\_0227 & Mar 165 & Solution & 685 & 345 & 50 \\
-P2\_F6\_639 & EIGER X 9M & Solution & 120 & 120 & 50 \\
-P3\_F4\_675 & EIGER X 9M & Solution & 120 & 120 & 48 \\
-2024\_0508 & Mar 165 & Solution & 267 & 246 & 50 \\
-2024\_1213 & Mar 165 & Buffer & 242 & 188 & 45 \\
-2024\_1213 & Mar 165 & Air & 287 & 237 & 50 \\
-2025\_0402 & Mar 165 & Solution & 640 & 640 & 50 \\
-2026\_0409 & Mar 165 & Air & 304 & 304 & 50 \\
-2026\_0409 & Mar 165 & Solution & 325 & 325 & 50 \\
-2022\_1028 & Mar 165 & Solution & 1282 & 1282 & 50 \\
-MPLL & Mar 165 & Solution & 63 & 63 & 50 \\ \midrule
-\textbf{Total} & -- & -- & \textbf{3111} & \textbf{2108} & \textbf{534} \\
+\textbf{Name} & \textbf{Muscle Type} & \textbf{Detector} & \textbf{Environment} & \textbf{Total} & \textbf{Filtered} & \textbf{Subselected} \\ \midrule
+2025\_0227 & Skinned Pig Cardiac & Mar 165 & Solution & 685 & 345 & 50 \\
+P2\_F6\_639 & Intact Pig Cardiac & EIGER X 9M & Solution & 120 & 120 & 50 \\
+P3\_F4\_675 & Intact Pig Cardiac & EIGER X 9M & Solution & 120 & 120 & 48 \\
+2024\_0508 & Skinned Pig Cardiac & Mar 165 & Solution & 267 & 246 & 50 \\
+2024\_1213 & Skinned Pig Cardiac & Mar 165 & Buffer & 242 & 188 & 45 \\
+2024\_1213 & Skinned Pig Cardiac & Mar 165 & Air & 287 & 237 & 50 \\
+2025\_0402 & Skinned Pig Cardiac & Mar 165 & Solution & 640 & 640 & 50 \\
+2026\_0409 & Skinned Mouse Cardiac & Mar 165 & Air & 304 & 304 & 50 \\
+2026\_0409 & Skinned Mouse Cardiac & Mar 165 & Solution & 325 & 325 & 50 \\
+2022\_1028 & Intact Mouse Skeletal & Mar 165 & Solution & 1282 & 1282 & 50 \\
+MPLL & Skinned Pig Cardiac & Mar 165 & Solution & 63 & 63 & 50 \\ \midrule
+\textbf{Total} & -- & -- & -- & \textbf{3111} & \textbf{2108} & \textbf{534} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -638,7 +615,7 @@ Mean &  & 1.14 & 0.81 & -0.33 \\
 
 \subsection{Visual Correspondence with Quantitative Metrics}
 
-Figure~\ref{fig:visual_no_eq} illustrates representative examples corresponding to low-loss background subtraction outcomes for images from 3 different datasets. In the low-loss examples, diffuse background is effectively removed while diffraction features are preserved and the residual baseline remains smooth. In Appendix Figures~\ref{fig:visual_no_eq_1},~\ref{fig:visual_no_eq_2}, and~\ref{fig:visual_no_eq_3} you can find visual comparison of background subtraction outcomes for low-loss and high-loss for different methods, allowing to appreciate the differences in methods and performance. In the high-loss examples, the methods exhibit either incomplete background removal, with elevated residual intensity between layer lines or excessive background removal. These visual differences correspond to the quantitative loss values, indicating that the evaluation metrics reflect perceptually meaningful aspects of background subtraction quality.
+Figure~\ref{fig:visual_no_eq} illustrates representative examples corresponding to low-loss background subtraction outcomes for images from 3 different datasets. In the low-loss examples, diffuse background is effectively removed while diffraction features are preserved and the residual baseline remains smooth. Appendix Figure~\ref{fig:visual_no_eq_1} shows a comparison of background subtraction outcomes for low-loss and high-loss for different methods for one pattern, allowing to appreciate the differences in methods and performance. In the high-loss examples, the methods exhibit either incomplete background removal, with elevated residual intensity between layer lines or excessive background removal. These visual differences correspond to the quantitative loss values, indicating that the evaluation metrics reflect perceptually meaningful aspects of background subtraction quality.
 
 
 \begin{figure}[htbp]
@@ -813,7 +790,7 @@ Research supported by the US National Institutes of Health grant number R01GM144
 
 \section*{Appendix}
 \appendix
-\input{Appendix.tex}
+\input{framework_appendix.tex}
 \end{document}
 
 
