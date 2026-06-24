@@ -57,7 +57,7 @@ Sensitivity to the synthetic signal parameters was also evaluated. Table~\ref{ta
 \small
 \begin{tabular}{lcccccccr}
 \hline
-Samp. Freq. & ($\sigma_x$, $\sigma_y$) & Loss & MSE$_{\mathbf{syn}}$ & \%Neg$_{\mathbf{con}}$ & \%Neg$_{\mathbf{syn}}$ & $1-\%\mathbf{B}'$ & $\mathbf{S}_{\mathbf{BG}}$ \\
+\textbf{Samp. Freq.} & \textbf{($\sigma_x$, $\sigma_y$)} & \textbf{Loss} & $\mathbf{NMSE}_{\mathbf{syn}}$ & $\mathbf{f}_{\mathbf{neg,con}}$ & $\mathbf{f}_{\mathbf{neg,syn}}$ & $\mathbf{1-f_B}$ & $\mathbf{S}_{\mathbf{BG}}$ \\
 \hline
 dense & (5, 10) & $0.52 \pm 0.13$ & $5.10 \pm 4.57$ & $0.90 \pm 0.65$ & $1.09 \pm 0.39$ & $0.24 \pm 0.12$ & $1.89 \pm 0.33$ \\
 medium & (5, 5) & $0.51 \pm 0.13$ & $4.17 \pm 4.21$ & $0.89 \pm 0.66$ & $1.07 \pm 0.41$ & $0.26 \pm 0.14$ & $1.82 \pm 0.26$ \\
@@ -101,7 +101,7 @@ sparse & (5, 10) & $0.51 \pm 0.12$ & $3.61 \pm 3.52$ & $0.91 \pm 0.67$ & $1.05 \
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{figs/individual_metrics.png}
+\includegraphics[width=0.9\textwidth]{figs/Fig12_appendix_individual_metrics.png}
 \caption{Image sample from dataset 2025\_0227 when guided using metrics individually or a combination of the two most significant. Left of each pair: Background removed image. Right: Background.}
 \label{fig:example_1img_metrics}
 \end{figure}
@@ -111,7 +111,7 @@ sparse & (5, 10) & $0.51 \pm 0.12$ & $3.61 \pm 3.52$ & $0.91 \pm 0.67$ & $1.05 \
 \begin{figure}[htbp]
 \centering
 
-\includegraphics[height=0.9\textheight]{figs/example_no_eq_Jani_0_1_v2.png}
+\includegraphics[height=0.9\textheight]{figs/Fig13_appendix_visual_no_eq.png}
 \caption{Visual comparison of background subtraction outcomes for image from dataset 2025\_0402. Left to right: background-sutracted pattern, background. The original image is shown at the top. Two scales are used for visualization due to high intensity differences between the background, the equatorial streak and the rest of the pattern.}
 \label{fig:visual_no_eq_1}
 \end{figure}
