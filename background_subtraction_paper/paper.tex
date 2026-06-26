@@ -7,6 +7,9 @@
 \usepackage{ragged2e}
 \usepackage{booktabs}
 \usepackage{graphicx}
+% \usepackage{placeins}
+\usepackage{float}
+\usepackage{wrapfig}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{tikz}
@@ -16,9 +19,9 @@
 \usepackage{url}
 \usepackage{hyperref}
 
-\usepackage[font=small,labelfont=bf]{caption}
-\captionsetup[figure]{font=small}
-\captionsetup[table]{font=small}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\captionsetup[figure]{font=footnotesize}
+\captionsetup[table]{font=footnotesize}
 
 
 
@@ -59,6 +62,7 @@ The framework provides an objective, reproducible basis for selecting and tuning
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+\label{sec:introduction}
 %%%%%%%%%%%%%%%%%%%%%%
 
 % Reliable background subtraction is essential for quantitative analysis of muscle fiber diffraction patterns, but remains challenging due to strong, non-uniform scattering that can obscure weak diffraction features. In this section we motivate the problem, summarize limitations of current approaches, and outline the contributions of the proposed framework.
@@ -103,11 +107,13 @@ The proposed framework addresses the need for improved background subtraction us
 
 %%%%%%%%%%%%%%%%%%%%%
 \section{Approach}
+\label{sec:approach}
 %%%%%%%%%%%%%%%%%%%%%
 
 This section describes the methodological framework used to evaluate and optimize background subtraction methods for muscle fiber diffraction patterns. We first describe the currently used background subtraction methods and then, define qualitative objectives and quantitative metrics that capture physically meaningful properties of successful background removal. To enable objective validation in the absence of ground truth, synthetic diffraction features and region-specific masking are introduced. These metrics are then combined into an aggregate loss function that guides parameter optimization for each background subtraction method. Finally, we describe the study design, including algorithm variants and dataset selection.
 
 \subsection{Background}
+\label{sec:background}
 
 Background removal strategies in diffraction studies depend strongly on both the dimensionality of the data and the structural characteristics of the sample. In muscle fiber diffraction, background subtraction is commonly performed either on one-dimensional intensity profiles extracted from the data or directly on two-dimensional diffraction patterns.
 
@@ -121,6 +127,7 @@ More recently, data-driven approaches have been explored. A supervised deep lear
 % Across most two-dimensional methods, the selection of algorithms and parameters typically relies on qualitative visual assessment by domain experts. This reliance introduces subjectivity and increases the risk of suppressing subtle diffraction features. The absence of standardized, quantitative evaluation criteria motivates the development of objective measures for comparing background subtraction methods and guiding systematic parameter optimization, as proposed in this work.
 
 \subsection{Evaluation Framework}
+\label{sec:evaluation_framework}
 
 The evaluation framework is designed to provide objective, physically meaningful criteria for assessing the quality of background subtraction in muscle fiber diffraction images. The framework uses quantitative metrics derived from physical considerations and qualitative expectations, which enables reproducible comparison across methods and parameter settings.
 
@@ -139,7 +146,7 @@ where the summation is performed over rows within masked background regions to e
 
 \paragraph{Validation Using Synthetic Structures}
 
-Because experimental diffraction images do not provide ground-truth background, synthetic diffraction features are introduced to evaluate preservation of faint signals after background subtraction (see Section~3.2.2). These validation metrics focus on signal loss and oversubtraction behavior. \textit{Preservation of synthetic signal} is quantified using the normalized offset-invariant mean squared error between the background-subtracted image and a reference image containing only the injected synthetic features, denoted $\mathrm{NMSE}_{\mathrm{syn}}$. Ideally, this value is zero, indicating perfect preservation of synthetic signal. Although synthetic features are placed in regions known not to contain real diffraction features, partial overlap between synthetic and real structures may increase this metric. Offset is evaluated and subtracted from the pattern to avoid oversubtraction. This metric focuses specifically on the preservation of synthetic signal where the pattern contains positive values. \textit{Oversubtraction of synthetic features} is further assessed by measuring the fraction of negative-valued pixels remaining after synthetic signal subtraction, denoted $f_{\mathrm{neg,syn}}$. This metric emphasizes non-physical negative excursions introduced by background removal and is ideally zero. The quantitative metrics used in the evaluation framework are summarized in Table~\ref{tab:loss_terms}.
+Because experimental diffraction images do not provide ground-truth background, synthetic diffraction features are introduced to evaluate preservation of faint signals after background subtraction (see Section~\ref{sec:sampling_framework}). These validation metrics focus on signal loss and oversubtraction behavior. \textit{Preservation of synthetic signal} is quantified using the normalized offset-invariant mean squared error between the background-subtracted image and a reference image containing only the injected synthetic features, denoted $\mathrm{NMSE}_{\mathrm{syn}}$. Ideally, this value is zero, indicating perfect preservation of synthetic signal. Although synthetic features are placed in regions known not to contain real diffraction features, partial overlap between synthetic and real structures may increase this metric. Offset is evaluated and subtracted from the pattern to avoid oversubtraction. This metric focuses specifically on the preservation of synthetic signal where the pattern contains positive values. \textit{Oversubtraction of synthetic features} is further assessed by measuring the fraction of negative-valued pixels remaining after synthetic signal subtraction, denoted $f_{\mathrm{neg,syn}}$. This metric emphasizes non-physical negative excursions introduced by background removal and is ideally zero. The quantitative metrics used in the evaluation framework are summarized in Table~\ref{tab:loss_terms}.
 
 \begin{table}[t]
 \caption{Quantitative metrics used for evaluating background subtraction. 
@@ -167,6 +174,7 @@ Ensure low residual baseline & Penalty for structured residual background, based
 
 
 \subsection{Sampling Framework for Assessing Detail Preservation}
+\label{sec:sampling_framework}
 
 This subsection describes synthetic signal design used to enable objective evaluation of background subtraction performance as well as region-specific masking to isolate background-dominated areas for metric calculation.
 
@@ -193,6 +201,7 @@ The radial decay of synthetic feature intensity follows a $1/r$ model, where $r$
 \begin{algorithm}[htbp]
 \centering
 \begin{minipage}{0.96\columnwidth}
+\small
 \begin{algorithmic}[1]
 
 \Require Image $I$, prior peak positions $(i'_{0,1}, m'_1)$, controls $(f, \alpha, \beta, z_x, z_y)$
@@ -236,18 +245,29 @@ The radial decay of synthetic feature intensity follows a $1/r$ model, where $r$
 \paragraph{Parameter Sensitivity}
 The sensitivity of the evaluation framework to synthetic signal parameters was examined by varying amplitude, feature extent, and sampling frequency, as shown in Figure~\ref{fig:synthetic_structures}, which sampling frequencies that avoid overlap with real diffraction features. Changes to the synthetic feature amplitude $A_{\mathrm{max}}$ had no measurable effect on the aggregate loss and are therefore omitted from Table~\ref{tab:variations}. Table~\ref{tab:variations} reflects that variations in feature extent and sampling frequency produced similar losses and stable method rankings, indicating robustness to reasonable parameter choices. Since the default parameter settings consistently yielded low loss values, they were used for all subsequent analyses.
 
+% \FloatBarrier 
+% \begin{figure}[htbp]
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\columnwidth]{figs/Fig1_synthetic_data_variations_v2.png}
+\caption{Representative placement of synthetic features, visible as small bright elliptical dots. The figure also shows masking of the central beam region, equatorial streak background, and layer line regions (see Section~\ref{sec:masking}). The synthetic features are distributed to sample background-dominated regions while avoiding overlap with real diffraction signal. Top: synthetic features. Bottom: real diffraction image with superimposed synthetic features. The three columns represent different synthetic feature placement frequencies: sparse, medium, and dense. The intensity of the synthetic features is increased for better visibility.}
+\label{fig:synthetic_structures}
+\end{figure}
 
-\begin{table}[t]
+\paragraph{Region-Specific Masking}
+\label{sec:masking}
+\begin{wraptable}{r}{0.5\linewidth}
 \caption{Sensitivity of the aggregate loss to variations in synthetic signal parameters evaluated on a subset of the data.
 Average loss values are reported for ten images from three datasets.
 For each parameter variation, all other parameters were held at their medium setting.
-Results show that the default settings produce consistently low loss values and stable method rankings.}
+Results show that the default settings produce consistently low loss values and stable method rankings. `LL' stands for layer lines.}
 \label{tab:variations}
 \centering
-\small
+% \footnotesize
+\tiny
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.0}
-\begin{tabular}{@{}lllc@{}}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight}Xl>{\RaggedRight}Xc@{}}
 \toprule
 \textbf{Parameter} & \textbf{Variation} & \textbf{Setting} & \textbf{Loss} \\ \midrule
 Horizontal extent $\sigma_x$ & Short & $I_{1,0}/7$ & $0.51 \pm 0.16$ \\
@@ -256,21 +276,12 @@ Horizontal extent $\sigma_x$ & Short & $I_{1,0}/7$ & $0.51 \pm 0.16$ \\
 Vertical extent $\sigma_y$ & Thin & $\mathrm{M1}/20$ & $0.50 \pm 0.13$ \\
 & Medium & $\mathrm{M1}/10$ & $0.51 \pm 0.12$ \\
 & Thick & $\mathrm{M1}/5$ & $0.51 \pm 0.13$  \\ \midrule
-Sampling frequency $(f_x, f_y)$ & Sparse & Every 2 layer lines & $0.51 \pm 0.12$ \\
-& Medium & Every layer line & $0.51 \pm 0.12$ \\
-& Dense & 2 per layer line & $0.52 \pm 0.13$ \\
+Sampling frequency & Sparse & Every two LL. & $0.51 \pm 0.12$ \\
+$(f_x, f_y)$ & Medium & Every LL. & $0.51 \pm 0.12$ \\
+& Dense & Two between LL. & $0.52 \pm 0.13$ \\
 \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.6\columnwidth]{figs/Fig1_synthetic_data_variations.png}
-\caption{Representative placement of synthetic features, visible as small bright elliptical dots. The figure also shows masking of the central beam region, equatorial streak background, and layer line regions (see Section~3.2.1). The synthetic features are distributed to sample background-dominated regions while avoiding overlap with real diffraction signal. Top: synthetic features. Bottom: real diffraction image with superimposed synthetic features. The three columns represent different synthetic feature placement frequencies: sparse, medium, and dense.}
-\label{fig:synthetic_structures}
-\end{figure}
-
-\paragraph{Region-Specific Masking}
+\end{tabularx}
+\end{wraptable}
 Accurate calculation of evaluation metrics requires separating regions containing diffraction signal from those dominated by background or artifacts. To achieve this, multiple complementary masks are applied. \textit{Main signal mask} is an annulus excluding the beam center and detector edges ($r_{\mathrm{min}}$, $r_{\mathrm{max}}$). This mask excludes regions containing non-representative or saturated signal. \textit{Equator mask} is a rectangle aligned with the equator. The equatorial streak is treated separately, since it is typically more intense than the surrounding diffuse background. \textit{Synthetic mask} consists rectangles of extent $2\sigma$ around each injected feature. \textit{Real-feature mask} consists of bands at layer-line positions with widths set from estimated FWHM via perpendicular projections. This mask is used to avoid contamination from real diffraction signal. Together, these masks restrict metric evaluation to regions dominated by background, ensuring that evaluation reflects background subtraction quality rather than signal content.
 
 % Regions containing non-representative or saturated signal are excluded using a main signal mask. In fiber diffraction images, this mask removes the high-intensity central region associated with the direct beam and detector edges. The mask is defined as an annulus with inner radius $r_{\mathrm{min}}$ and outer radius $r_{\mathrm{max}}$.
@@ -285,6 +296,7 @@ Accurate calculation of evaluation metrics requires separating regions containin
 
 
 \subsection{Optimization Procedure}
+\label{sec:optimization_procedure}
 
 This subsection describes how the evaluation metrics are combined into a single objective function, which is minimized to tune each method's parameters. An overview of the evaluation and optimization workflow used to identify optimal background subtraction parameters for muscle fiber diffraction patterns is shown in Figure~\ref{fig:flow}.
 
@@ -345,20 +357,17 @@ where each metric is normalized by its average value across datasets prior to ag
 
 \paragraph{Parameter Optimization}
 
-The aggregate loss function is minimized to identify optimal parameter values for each background subtraction method. Because these methods typically involve non-differentiable operations and discrete parameter choices (e.g.\ window size or number of smoothing cycles), gradient-based optimization is not well suited. Instead, direct search strategies that rely solely on function evaluations are employed, despite their higher computational cost. To minimize $L$ we use a coordinate-descent strategy in which parameters are optimized sequentially, in the order of their estimated significance, with all other parameters held fixed at their current best values. Input parameters are either integer-valued or exhibit no qualitative sensitivity to fractional changes. For each algorithm, predefined initial values and parameter bounds are specified. Across the datasets considered here, optimized parameter values for all methods fall within the range $[0, 2000]$, although these bounds may be adjusted for alternative implementations. Optimization proceeds using a decreasing multi-resolution step-size schedule, with step sizes ranging from 150 to 1. As the loss value improves, the step size is restarted from fine to coarse to avoid getting stuck in local minima. Images are processed in parallel using multiprocessing to reduce overall runtime. Additionally, for further computational efficiency, images are downsampled prior to background estimation and evaluated at full resolution. Only the estimated background is downsampled; it is then subtracted from the original-resolution image to preserve diffraction signal fidelity. The impact of downsampling depends on the background subtraction method. Downsampling is applied only when it leads to reduced loss values: a factor of 2 is used for the background subtraction methods: G-ILPF, B-ILPF, RW, and WTH; and no downsampling for CS, RCH, or AVG (see Section~3.4.1).
+The aggregate loss function is minimized to identify optimal parameter values for each background subtraction method. Because these methods typically involve non-differentiable operations and discrete parameter choices (e.g.\ window size or number of smoothing cycles), gradient-based optimization is not well suited. Instead, direct search strategies that rely solely on function evaluations are employed, despite their higher computational cost. To minimize $L$ we use a coordinate-descent strategy in which parameters are optimized sequentially, in the order of their estimated significance, with all other parameters held fixed at their current best values. Input parameters are either integer-valued or exhibit no qualitative sensitivity to fractional changes. For each algorithm, predefined initial values and parameter bounds are specified. Across the datasets considered here, optimized parameter values for all methods fall within the range $[0, 2000]$, although these bounds may be adjusted for alternative implementations. Optimization proceeds using a decreasing multi-resolution step-size schedule, with step sizes ranging from 150 to 1. As the loss value improves, the step size is restarted from fine to coarse to avoid getting stuck in local minima. Images are processed in parallel using multiprocessing to reduce overall runtime. Additionally, for further computational efficiency, images are downsampled prior to background estimation and evaluated at full resolution. Only the estimated background is downsampled; it is then subtracted from the original-resolution image to preserve diffraction signal fidelity. The impact of downsampling depends on the background subtraction method. Downsampling is applied only when it leads to reduced loss values: a factor of 2 is used for the background subtraction methods: G-ILPF, B-ILPF, RW, and WTH; and no downsampling for CS, RCH, or AVG.
 
 % After the main coordinate descent loop, a localized grid search is performed around the best solution to jointly refine parameters.
 
 
 \subsection{Experimental Design}
+\label{sec:experimental_design}
 
 % This subsection describes the background subtraction algorithms optimized using the framework and the diffraction datasets used for experiments and evaluation.
 
 We optimize a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, implemented in MuscleX Quadrant Folding~\cite{JiratrakanvongEtAl2024}, which is based on algorithms originally developed within the CCP13 software suite~\cite{HeEtAl2007}. The selected methods span a range of underlying assumptions and algorithmic strategies, providing a broad basis for comparison. A summary of the tested algorithms is provided in Table~\ref{tab:algorithms}. Any newly developed or improved method for background subtraction in fiber diffraction can be evaluated using the proposed framework, providing a consistent basis.
-
-Applying guided filtering to smooth diffraction images prior to background estimation improves performance for several non-parametric methods, particularly the white top-hat (WTH) filter, which is sensitive to high-frequency noise. In this study, a smoothing filter was applied to all studied background subtraction methods as it produced visually plausible results. Downsampling the patterns has a similar effect, reducing computational load while smoothing the pattern and thus improving performance. Importantly, smoothing is applied only to estimate the background; the background-subtracted image is computed using the original, unsmoothed data, ensuring that diffraction features are preserved.
-
-To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors and sample environments, including samples measured in solution, buffer, and air. The data used in our study were taken on either the Mar 165 CCD detector (Rayonix Inc.) or the EIGER X 9M pixel array detector (Dectris AG). Images were manually filtered to exclude frames lacking clearly defined diffraction features, as preservation of diffraction peaks is required for meaningful evaluation of background subtraction performance. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded, as shown in Figure~\ref{fig:img_filter}. For optimization and evaluation, up to 50 images were selected from each dataset. In cases of fewer available images after filtering, all remaining images were used.
 
 \begin{table}[t]
 \caption{Background subtraction algorithms for fiber diffraction analysis optimized and tested in this study. Mean value is used as a baseline reference without parameter optimization.}
@@ -384,16 +393,19 @@ AVG & Mean Value of Non-Masked Pixels & Baseline reference; no parameter optimiz
 \end{table}
 
 
-\begin{figure}[htbp]
+Applying guided filtering to smooth diffraction images prior to background estimation improves performance for several non-parametric methods, particularly the white top-hat (WTH) filter, which is sensitive to high-frequency noise. In this study, a smoothing filter was applied to all studied background subtraction methods as it produced visually plausible results. Downsampling the patterns has a similar effect, reducing computational load while smoothing the pattern and thus improving performance. Importantly, smoothing is applied only to estimate the background; the background-subtracted image is computed using the original, unsmoothed data, ensuring that diffraction features are preserved.
+
+\begin{wrapfigure}{r}{0.5\linewidth}
 \centering
-\includegraphics[width=0.6\columnwidth]{figs/Fig3_image_filtering_quarter2.png}
+\includegraphics[width=\linewidth]{figs/Fig3_image_filtering_quarter2.png}
 \caption{Examples of included and excluded diffraction images based on manual assessment of the presence of well-defined diffraction features. Images on the left contain clear equatorial and layer line features suitable for quantitative analysis, whereas images on the right lack discernible diffraction structure and are therefore excluded from evaluation.}
 \label{fig:img_filter}
-\end{figure}
+\end{wrapfigure}
+To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors and sample environments, including samples measured in solution, buffer, and air. The data used in our study were taken on either the Mar 165 CCD detector (Rayonix Inc.) or the EIGER X 9M pixel array detector (Dectris AG). Images were manually filtered to exclude frames lacking clearly defined diffraction features, as preservation of diffraction peaks is required for meaningful evaluation of background subtraction performance. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded, as shown in Figure~\ref{fig:img_filter}. For optimization and evaluation, up to 50 images were selected from each dataset. In cases of fewer available images after filtering, all remaining images were used.
 
 
-\begin{table}[t]
-\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A subset was used for experiments. {\color{red} TODO: Check detectors and musclex types with Prof. Irving.}}
+\begin{table}[h]
+\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A subset was used for experiments.}
 \label{tab:datasets}
 \centering
 \small
@@ -419,19 +431,22 @@ MPLL & Skinned Pig Cardiac & Mar 165 & Solution & 63 & 63 & 50 \\ \midrule
 \end{table}
 
 
-\subsection{Iterative Two-Stage Background Subtraction}
+\subsection{Equatorial Streak}
+\label{sec:equatorial_streak}
 
-% This subsection describes the subtraction of the isotropic general background and the anisotropic equatorial streak using a parametric model. This approach can be combined with the optimization framework described above.
 
-Muscle fiber diffraction patterns exhibit a pronounced equatorial streak arising from aligned rod-like structures, primerily the actic-containing thin fillamentd and myosin-containing thick filaments. This feature presents a particular challenge for background subtraction due to its high intensity and anisotropic shape. Among the non-parametric methods, the radial convex hull (RCH) approach is the most effective at suppressing the equatorial streak and produces visually plausible results, especially at low angles. If the goal is the analysis of low angle data, RCH is often a good choice. However, RCH often introduces artifacts at higher scattering angles, where angular projection cones span larger regions of the detector. Figure~\ref{fig:ch_example} shows an example of the equatorial streak background subtraction using the RCH method. Combining RCH with other background subtraction methods can produce visually plausible results, but transitions between methods may introduce additional artifacts.
+Muscle fiber diffraction patterns exhibit a pronounced equatorial streak arising from aligned cylindrical structures within muscle fibers, namely the actin-containing thin filaments and myosin-containing thick filaments. This feature presents a particular challenge for background subtraction in muscle fiber diffraction due to its high intensity and anisotropic shape. Among the non-parametric methods, the radial convex hull (RCH) approach is the most effective at suppressing the equatorial streak and produces visually plausible results, especially at low angles. If the goal is the analysis of low angle data, RCH is often a good choice. However, RCH often introduces artifacts at higher scattering angles, where angular projection cones span larger regions of the detector. Figure~\ref{fig:ch_example} shows an example of the equatorial streak background subtraction using the RCH method. Combining RCH with other background subtraction methods can produce visually plausible results, but transitions between methods may introduce additional artifacts.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\linewidth]{figs/Fig4_ch_example_Jani_1.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig4_ch_example_Jani_1_zoomed.png}
 \caption{Example of the equatorial streak background subtraction using the RCH method. Left to right: original image, background-subtracted image with RCH, backgrounds. The equatorial streak is removed but radial streak artifacts are introduced at higher scattering angles. Two scales are used for visualization due to the large intensity differences betweenthe equatorial streak and the rest of the pattern.}
 \label{fig:ch_example}
 \end{figure}
 
+
+\subsection{Iterative Two-Stage Background Subtraction}
+\label{sec:two_stage}
 
 
 This subsection describes an approach for removing background across the whole pattern by jointly modeling the anisotropic equatorial streak and the surrounding isotropic general background. Fitting each component once and treating the residual as final is not sufficient: the equator and the general background are not spatially independent, so a single equatorial fit is biased by the presence of the general background beneath it, and a general-background fit performed only once after equator subtraction still leaves a substantial fraction of isotropic scattering uncorrected in and around the equatorial region. To address this, the equatorial and general-background fits are refined iteratively, each using the other's current estimate as input, until both have converged to a consistent decomposition of the whole pattern into the individual background components.
@@ -444,16 +459,9 @@ B(q) = \sum_{j=0}^{3} a_j\, T_j(\tilde q) + A_{\mathrm{p}}\, (q + q_0)^{-p},
 \end{equation}
 where $T_j$ denotes Chebyshev polynomials and $q$ is the radial coordinate. Model parameters are estimated by least-squares fitting to radial intensity projections. To account for slight equatorial elongation, projections are integrated between angles $0-5^{\circ}$ from the meridian, $5-10^{\circ}$, and $10-60^{\circ}$. Two-dimensional background is interpolated using the one-dimensional fitted projections and subtracted from the original image, resulting in a background-subtracted image that retains the equatorial streak while removing the general background. This step is crucial to ensure that the subsequent parametric modeling of the equatorial streak is not confounded by the presence of the general background, which could bias parameter estimation and lead to suboptimal subtraction results. This one-dimensional projection-based estimate, $B_0$, is used only to seed the first round of the iterative refinement described next; from the second round onward it is replaced by the two-dimensional general-background fit.
 
-\paragraph{Equatorial Streak Modeling.}
-
-Parametric modeling of equatorial streaks has previously been developed for polymer diffraction data using elliptical coordinates and Pearson VII functions~\cite{MurthyZeroGrubb1997}. Rod-like particles in both polymer and biological samples produce streak-like diffraction features in reciprocal space, suggesting that similar models may be applicable to muscle fiber diffraction. The streak is modeled using the parametric form used for polymer diffraction data in elliptical coordinates~\cite{MurthyZeroGrubb1997} and fitted via least-squares minimization. Because two-dimensional fitting is computationally intensive, the diffraction patterns are downsampled by a factor of two during the fitting stage. Rather than finalizing the fit after a single pass, the equatorial streak and the general background are then refined together, as described next.
-
-\paragraph{Iterative Refinement.}
-
-Figure~\ref{fig:two_stage_pipeline} summarizes the resulting pipeline. After the first round, seeded by the projection-based general background $B_0$ above, each subsequent round $k$ re-fits the equatorial streak $E_k$ on $\mathrm{img} - G_{k-1}$ and the general background $G_k$ on $\mathrm{img} - E_k$, using the two-dimensional general-background fit from the previous round in place of the projection-based seed. From the second round onward, the general background is parameterized directly in two dimensions as an exponential decay plus a flat baseline plus one additional radially symmetric term, selected per image from a small set of candidate forms (Lorentzian, power-law, and stretched-exponential). The candidate that minimizes oversubtraction, with fit quality used only as a tie-break, is selected independently for each image, since no single form was found to be best across all datasets in a model-comparison screen of the candidate set. This adaptive, per-image selection is appropriate when the goal is the best possible background fit for each individual image. If instead the goal is to compare the fitted background parameters themselves across images or datasets -- for example, to study how the general-background shape changes with experimental condition -- the functional form should be fixed to a single common choice across all images, since the fitted parameters are only directly comparable when they describe the same functional form. The best-performing round is selected automatically using an oversubtraction-based criterion, and two independent post-fit scale factors -- applied to the equatorial streak and to the general baseline -- guard against residual oversubtraction without requiring a refit. An example of the resulting fitted backhgrounds is shown in Figure~\ref{fig:visual_eq_none}.
-
-\begin{figure}[htbp]
+\begin{wrapfigure}{r}{0.5\linewidth}
 \centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
   font=\scriptsize,
   every node/.style={align=center},
@@ -489,16 +497,28 @@ Figure~\ref{fig:two_stage_pipeline} summarizes the resulting pipeline. After the
 \draw[arr] (sel.south) -- (fin.north);
 \draw[arr] (sel.south) -- (safe.north);
 
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{Iterative two-stage background subtraction pipeline. Round 1 is seeded by the projection-based general background $B_0$ (Parametric Background Modelling), giving the first equatorial fit $E_1$ and general-background fit $G_1$. In rounds $2,\dots,N$, $E_k$ is fitted on $\mathrm{img}-G_{k-1}$ and $G_k$ on $\mathrm{img}-E_k$. The best round is selected using an oversubtraction-based criterion, giving the final residual $\mathrm{img}-E-G$ (``final'') and a variant with the background scaled to further reduce oversubtraction if present(``safe'').}
 \label{fig:two_stage_pipeline}
-\end{figure}
+\end{wrapfigure}
+
+\paragraph{Equatorial Streak Modeling.}
+
+Parametric modeling of equatorial streaks has previously been developed for polymer diffraction data using elliptical coordinates and Pearson VII functions~\cite{MurthyZeroGrubb1997}. Rod-like particles in both polymer and biological samples produce streak-like diffraction features in reciprocal space, suggesting that similar models may be applicable to muscle fiber diffraction. The streak is modeled using the parametric form used for polymer diffraction data in elliptical coordinates~\cite{MurthyZeroGrubb1997} and fitted via least-squares minimization. Because two-dimensional fitting is computationally intensive, the diffraction patterns are downsampled by a factor of two during the fitting stage. Rather than finalizing the fit after a single pass, the equatorial streak and the general background are then refined together, as described next.
 
 
+\paragraph{Iterative Refinement.}
 
-\begin{figure}[htbp]
+Figure~\ref{fig:two_stage_pipeline} summarizes the resulting pipeline. After the first round, seeded by the projection-based general background $B_0$ above, each subsequent round $k$ re-fits the equatorial streak $E_k$ on $\mathrm{img} - G_{k-1}$ and the general background $G_k$ on $\mathrm{img} - E_k$, using the two-dimensional general-background fit from the previous round in place of the projection-based seed. From the second round onward, the general background is parameterized directly in two dimensions as an exponential decay plus a flat baseline plus one additional radially symmetric term, selected per image from a small set of candidate forms (Lorentzian, power-law, and stretched-exponential). The candidate that minimizes oversubtraction, with fit quality used only as a tie-break, is selected independently for each image, since no single form was found to be best across all datasets in a model-comparison screen of the candidate set.
+
+
+This adaptive, per-image selection is appropriate when the goal is the best possible background fit for each individual image. If instead the goal is to compare the fitted background parameters themselves across images or datasets -- for example, to study how the general-background shape changes with experimental condition -- the functional form should be fixed to a single common choice across all images, since the fitted parameters are only directly comparable when they describe the same functional form. The best-performing round is selected automatically using an oversubtraction-based criterion, and two independent post-fit scale factors -- applied to the equatorial streak and to the general baseline -- guard against residual oversubtraction without requiring a refit. An example of the resulting fitted backhgrounds is shown in Figure~\ref{fig:visual_eq_none}.
+
+
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.8\linewidth]{figs/Fig6_visual_eq_Weikang_4.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig6_visual_eq_Weikang_4_half.png}
 \hspace{0.01\linewidth}
 \caption{Examples of background subtraction outcomes with parametric fitted background. Left to right: original image before subtraction, background-sutracted pattern, fitted general background, and fitted equatorial streak. Two scales are used for visualization due to high intensity differences between the equatorial streak and the rest of the pattern. Most of the background is subtracted with some high-angle residual background left over. }
 \label{fig:visual_eq_none}
@@ -507,32 +527,35 @@ Figure~\ref{fig:two_stage_pipeline} summarizes the resulting pipeline. After the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results and Discussion}
+\label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This section summarizes the performance of the framework in optimizing the background subtraction methods. We aim to evaluate whether an optimal solution to the problem of background subtraction can be identified given the lack of ground-truth background. The goal is not to identify a single universally optimal method, but to illustrate how the framework provides a consistent, quantitative basis for comparing methods and analyzing their behavior across diverse datasets. Methods may be compared using the aggregate loss function and its constituent metrics, with lower values indicating improved background removal, reduced artifacts, and better preservation of faint diffraction features.
 
-We first demonstrate convergence and consistency of the outputs of the optimization framework. Then, we present a quantitative comparison of the optimized methods across datasets, followed by analysis of optimized parameters and representative visual examples. Finally, we evaluate the iterative two-stage refinement described in Section~2.6 -- our combined approach for whole-pattern background subtraction, including the equatorial streak -- using the same standardized metrics, reported separately for the equatorial region, the general region, and the full pattern.
+We first demonstrate convergence and consistency of the outputs of the optimization framework. Then, we present a quantitative comparison of the optimized methods across datasets, followed by analysis of optimized parameters and representative visual examples. Finally, we evaluate the iterative two-stage refinement described in Section~\ref{sec:two_stage} -- our combined approach for whole-pattern background subtraction, including the equatorial streak -- using the same standardized metrics, reported separately for the equatorial region, the general region, and the full pattern.
 
 % Next, we evaluate it against a set of human expert labelled patterns to assess whether the proposed framework improves upon existing approach and corresponds to perceptually meaningful background subtraction quality.
 
 \subsection{Convergence and Consistency of Optimization}
+\label{sec:convergence}
 
-The optimization framework demonstrates robust convergence and consistency across different datasets. Figure~\ref{fig:consistency_ranking} reflects low average loss dispersion within datasets for all but two datasets, which suggests the need for image-subset tuning. It also shows that although the best-performing method varies with dataset, WTH is ranked first in 6 of the 11 datasets, with the remaining datasets split among G-ILPF, RW, and AVG. Figure ~\ref{fig:consistency_bgsum} shows the average background intensity per dataset, which is consistent within datasets and varies more in the datasets that contain patterns taken at different exposure times, where the intensity is expected to vary with exposure time.
-Optimization traces reflect that the optimization process is stable and makes choices based on the assigned weights. All the methods converge to similar loss values and the stopping criteria is either no loss improvement or very small change.
+The optimization framework demonstrates robust convergence and consistency across different datasets. Figure~\ref{fig:consistency_ranking} reflects low average loss dispersion within datasets for all but three datasets, which suggests the need for image-subset tuning. It also shows that although the best-performing method varies with dataset, WTH is ranked first in 6 of the 11 datasets, with the remaining datasets split among G-ILPF, RW, and AVG. Figure ~\ref{fig:consistency_bgsum} shows the average background intensity per dataset, which is consistent within datasets, which contain pattern taken with the same exposure time. Optimization traces reflect that the optimization process is stable and makes choices based on the assigned weights. All the methods converge to similar loss values and the stopping criteria is either no loss improvement or very small change.
+
+%  and varies more in the datasets that contain patterns taken at different exposure times, where the intensity is expected to vary with exposure time.
 
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figs/Fig7_consistency_ranking.png}
-\caption{Consistency of optimization results wihtin datasets. Distribution of best-per-image loss by dataset. Most datasets show low dispersion, except for two datasets, suggesting the need for image-subset tuning. Best method per dataset is shown in brackets.}
+\includegraphics[width=0.8\linewidth]{figs/Fig7_consistency_ranking.png}
+\caption{Consistency of optimization results wihtin datasets. Distribution of best-per-image loss by dataset. Most datasets show low dispersion, except for three datasets, suggesting the need for image-subset tuning. Best method per dataset is shown in brackets.}
 \label{fig:consistency_ranking}
 \end{figure}
 
 
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figs/Fig8_consistency_bgsum.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig8_consistency_bgsum.png}
 \caption{Consistency of optimization results within datasets. Distribution of average background intensity per dataset. The background intensity is consistent within datasets and varies more in the dataset that contains patterns taken at different exposure times. Best method per dataset is shown in brackets.}
 \label{fig:consistency_bgsum}
 \end{figure}
@@ -540,12 +563,12 @@ Optimization traces reflect that the optimization process is stable and makes ch
 
 
 
-
 \subsection{Quantitative Comparison of Methods}
+\label{sec:quant_comparison}
 
 Table~\ref{tab:method_performance_new} reports the aggregate loss and individual metric values for each background subtraction method, averaged over all evaluated datasets. Lower values indicate better performance for all reported metrics. Overall, the white-top-hat approach produces the lowest average loss values in this study. The iterative low pass filtering approaches also perform competitively, with different trade-offs across individual metrics. The AVG baseline, which is calculated as the average of the non-masked regions, shows that CS and RCH methods do not perform well due to the synthetic data distortion and roughness of the background. Since the equator streak is masked out, the evaluation focuses on high angle background, where RCH method does not perform well due to the artifacts introduced at high angles. The average baseline confirms that spatially structured background modeling is essential for reliable subtraction, since for AVG the fraction of the baseline residuals is high, which is the main driver for backgroundsubtraction. The AVG method is expected to perform poorly on patterns with high background intensity due to oversubtraction; however, it might perform competitively on patterns with low background intensity at high angles, for example in the datasets P2\_F6\_639 and P3\_F4\_675, where there is very little background intensity. The individual metric values reveal trade-offs between methods. For example, low-pass filtering approaches and white-top-hat generally achieve low synthetic feature oversubtraction and low synthetic feature distortion, indicating good preservation of faint injected features, while the circularly symmetric method tends to oversubtract synthetic signal. No single metric dominates performance across all methods (see Appendix Figure~\ref{fig:example_1img_metrics}), underscoring the need for a composite evaluation criterion.
 
-\begin{table}[t]
+\begin{table}[h]
 \caption{Comparison of background subtraction methods across all evaluated images. Values are reported as mean $\pm$ st.dev. to emphasize the variability of performance across datasets rather than absolute rankings. Lower values indicate better performance for each metric. The AVG method is a constant-background baseline included as a sanity check and is not expected to perform well on spatially varying backgrounds; it might however perform well on pattern with low background intensity. Best values are highlighted in bold and second-best in underline.}
 \label{tab:method_performance_new}
 \centering
@@ -562,9 +585,7 @@ WTH & \textbf{0.58 $\pm$ 0.23} & 2.81 $\pm$ 3.57 & 1.12 $\pm$ 0.66 & \underline{
 G-ILPF & \underline{0.61 $\pm$ 0.24} & 1.50 $\pm$ 1.65 & 1.10 $\pm$ 0.57 & 1.18 $\pm$ 0.23 & 0.35 $\pm$ 0.30 & 2.06 $\pm$ 0.80 \\
 B-ILPF & 0.67 $\pm$ 0.20 & 3.00 $\pm$ 3.50 & 1.37 $\pm$ 0.71 & 1.25 $\pm$ 0.20 & \textbf{0.25 $\pm$ 0.21} & 3.19 $\pm$ 1.46 \\
 CS & 1.01 $\pm$ 0.54 & 2.11 $\pm$ 10.89 & \underline{0.86 $\pm$ 0.73} & 1.02 $\pm$ 0.37 & 0.80 $\pm$ 0.73 & 2.82 $\pm$ 1.47 \\
-
 RCH & 1.78 $\pm$ 0.45 & 13.05 $\pm$ 25.89 & \textbf{0.10 $\pm$ 0.08} & \textbf{0.80 $\pm$ 0.26} & 1.55 $\pm$ 0.71 & 3.80 $\pm$ 1.69 \\
-
 RW & 0.71 $\pm$ 0.27 & \underline{1.02 $\pm$ 1.37} & 1.77 $\pm$ 0.55 & 1.00 $\pm$ 0.31 & \underline{0.27 $\pm$ 0.21}  & 3.56 $\pm$ 1.31  \\
 
 \bottomrule
@@ -575,10 +596,11 @@ RW & 0.71 $\pm$ 0.27 & \underline{1.02 $\pm$ 1.37} & 1.77 $\pm$ 0.55 & 1.00 $\pm
 
 
 \subsection{Optimized Parameter Variability}
+\label{sec:param_variability}
 
 Optimized parameter variability for each method is summarized in Table~\ref{tab:summary_total_variability}. The fitted coefficients show considerable variability across all images. This variability reflects differences in background structure arising from experimental conditions, detector characteristics, and sample preparation. For several methods, the large variability across all images indicates that optimal parameters depend strongly on dataset-specific characteristics. Within datasets the variability is significantly lower; however, it is still considerable. This observation suggests that further performance gains may be achievable by clustering diffraction patterns based on background properties and selecting method parameters accordingly, rather than using a single global configuration. Part of this residual spread may reflect parameter degeneracy rather than genuinely distinct optimal solution: the low within-dataset dispersion in loss (Figure~\ref{fig:consistency_ranking}) and background intensity (Figure~\ref{fig:consistency_bgsum}) indicates that different coefficient combinations can produce comparably good subtraction outcomes for the same dataset. Under this interpretation, the optimizer may converge to different but similarly effective parameter sets depending on initialization or image-specific noise, rather than any single configuration being uniquely optimal. Overall, the large spread in optimized coefficients demonstrates that parameter values are not stable across datasets, reinforcing the need for image-specific or dataset-adaptive background subtraction strategies.
 
-\begin{table}[t]
+\begin{table}[h]
 \centering
 \small
 \caption{Coefficient variability (st.dev./mean) across images and datasets (mean $\pm$ st.dev). Even though variability is lower within datasets, adaptive dataset-specific and image-specific tuning should be considered.}
@@ -616,17 +638,18 @@ Mean &  & 1.14 & 0.81 & -0.33 \\
 
 
 \subsection{Visual Correspondence with Quantitative Metrics}
+\label{sec:visual_correspondence}
 
 Figure~\ref{fig:visual_no_eq} illustrates representative examples corresponding to low-loss background subtraction outcomes for images from 3 different datasets. In the low-loss examples, diffuse background is effectively removed while diffraction features are preserved and the residual baseline remains smooth. Appendix Figure~\ref{fig:visual_no_eq_1} shows a comparison of background subtraction outcomes for low-loss and high-loss for different methods for one pattern, allowing to appreciate the differences in methods and performance. In the high-loss examples, the methods exhibit either incomplete background removal, with elevated residual intensity between layer lines or excessive background removal. These visual differences correspond to the quantitative loss values, indicating that the evaluation metrics reflect perceptually meaningful aspects of background subtraction quality.
 
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\linewidth]{figs/Fig9_visual_no_eq_Jani_21.png}
 \hspace{0.01\linewidth}
 \includegraphics[width=0.8\linewidth]{figs/Fig9_visual_no_eq_MPLL_20.png}
 \hspace{0.01\linewidth}
-\includegraphics[width=0.8\linewidth]{figs/Fig9_visual_no_eq_Granzier_21.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig9_visual_no_eq_sg_Granzier_21.png}
 \caption{Examples of successful background subtraction outcomes for different images. Each row is a different pattern from three datasets. Left to right: original image before subtraction, background-sutracted pattern, and background. Two scales are used for visualization due to high intensity differences between the background, the equatorial streak and the rest of the pattern. The selected method and paramemeters effectively remove the background while preserving faint features for both high intensity shown in the top two rows and low intensity pattern in the bottom row.}
 \label{fig:visual_no_eq}
 \end{figure}
@@ -664,21 +687,22 @@ Figure~\ref{fig:visual_no_eq} illustrates representative examples corresponding 
 % \end{figure}
 
 \subsection{Evaluation of Iterative Two-Stage Background Subtraction}
+\label{sec:two_stage_eval}
 
-The iterative two-stage pipeline described in Section~2.6 produces a single residual, $\mathrm{img} - E - G$, covering the entire pattern, including both the equatorial streak and the surrounding general background. We evaluate the performance of this approach by analyzing the residual in both the general high-angle region (same as in the previous section) and the equatorial region. Reporting a single full-pattern number would obscure how the two fitted components contribute to the result in each region, since the low angle equatorial and high angle general regions require different masking. For the equatorial region evaluation, the aggregate loss is computed with a modified set of weights relative to Section~2.4: the smoothness term is dropped ($\lambda_1 = 0$), since in the equatorial region, the background is expected to be steep. Relative to the default weighting used there ($[\lambda_1,\ldots,\lambda_5] = [0.1, 0.05, 0.05, 0.01, 0.8]$), the weight removed from smoothness is redistributed evenly to the two oversubtraction terms, $f_{\mathrm{neg,con}}$ and $f_{\mathrm{neg,syn}}$, while $\mathrm{NMSE}_{\mathrm{syn}}$ and $1-f_B$ keep their default weights, giving $[\lambda_1, \lambda_2, \lambda_3, \lambda_4, \lambda_5] = [0, 0.1, 0.1, 0.01, 0.8]$. The evaluation of the general background region is performed in the same way as in the previous section.
+The iterative two-stage pipeline described in Section~\ref{sec:two_stage} produces a single residual, $\mathrm{img} - E - G$, covering the entire pattern, including both the equatorial streak and the surrounding general background. We evaluate the performance of this approach by analyzing the residual in both the general high-angle region (same as in the previous section) and the equatorial region. Reporting a single full-pattern number would obscure how the two fitted components contribute to the result in each region, since the low angle equatorial and high angle general regions require different masking. For the equatorial region evaluation, the aggregate loss is computed with a modified set of weights relative to Section~\ref{sec:optimization_procedure}: the smoothness term is dropped ($\lambda_1 = 0$), since in the equatorial region, the background is expected to be steep. Relative to the default weighting used there ($[\lambda_1,\ldots,\lambda_5] = [0.1, 0.05, 0.05, 0.01, 0.8]$), the weight removed from smoothness is redistributed evenly to the two oversubtraction terms, $f_{\mathrm{neg,con}}$ and $f_{\mathrm{neg,syn}}$, while $\mathrm{NMSE}_{\mathrm{syn}}$ and $1-f_B$ keep their default weights, giving $[\lambda_1, \lambda_2, \lambda_3, \lambda_4, \lambda_5] = [0, 0.1, 0.1, 0.01, 0.8]$. The evaluation of the general background region is performed in the same way as in the previous section.
 
 A key advantage of the iterative two-stage approach is its ability to perform background subtraction on the whole pattern, ensuring that the equatorial streak and the general background are both properly accounted for. Representative examples of the equatorial streak fitting and the optimized general background produced by the iterative pipeline are shown in Figure~\ref{fig:visual_eq}. Due to the large intensity differences between the background, the equatorial streak and the rest of the pattern, multiple scales are used for visualization. 
 
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Weikang_4.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Weikang_4_v2.png}
 \hspace{0.01\linewidth}
-\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Jani_21.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Jani_21_v2.png}
 \hspace{0.01\linewidth}
 \includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_MPLL_2.png}
 \hspace{0.01\linewidth}
-\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Granzier_4.png}
+\includegraphics[width=0.8\linewidth]{figs/Fig11_visual_eq_Granzier_4_v2.png}
 \caption{Examples of successful background subtraction outcomes for different patterns with fitted equatorial streaks. Each row is a different pattern from four datasets. Left to right: original image before subtraction, background-sutracted pattern, fitted general background, fitted equatorial streak, and the non-parametric background for the remaining residual. Two scales are used for visualization due to high intensity differences between the equatorial streak and the rest of the pattern. The equatorial streak is removed and the smooth background is removed from the pattern.}
 \label{fig:visual_eq}
 \end{figure}
@@ -689,8 +713,8 @@ A key advantage of the iterative two-stage approach is its ability to perform ba
 
 Table~\ref{tab:two_stage_full} reports the resulting metrics over the same region as in the previous analysis (beam center, detector edges and the equator region masked) for the radial convex hull baseline (RCH), for the iterative two-stage fit alone (Fit), and for the iterative fit combined with each framework method applied to the residual general background (Fit+G-ILPF, Fit+WTH, Fit+B-ILPF, Fit+RW).
 
-\begin{table}[t]
-\caption{Cross-dataset comparison of background subtraction methods over the general background region of the pattern (equator masked). RCH is the radial convex hull baseline from Table~\ref{tab:algorithms}; Fit is the iterative two-stage equatorial-plus-general fit (Section~2.6) without further refinement; the remaining rows combine that fit with each framework method applied to the residual general background. The aggregate loss drops the smoothness term. Values are mean $\pm$ st.dev.\ across images. Best values are highlighted in bold and second-best in underline; tied values are underlined jointly.}
+\begin{table}[H]
+\caption{Cross-dataset comparison of background subtraction methods over the general background region of the pattern (equator masked). RCH is the radial convex hull baseline from Table~\ref{tab:algorithms}; Fit is the iterative two-stage equatorial-plus-general fit (Section~\ref{sec:two_stage}) without further refinement; the remaining rows combine that fit with each framework method applied to the residual general background. The aggregate loss drops the smoothness term. Values are mean $\pm$ st.dev.\ across images. Best values are highlighted in bold and second-best in underline; tied values are underlined jointly.}
 \label{tab:two_stage_full}
 \centering
 \small
@@ -718,13 +742,13 @@ Fit+RW & \underline{0.35 $\pm$ 0.42} & 1.17 $\pm$ 0.22 & \textbf{0.85 $\pm$ 0.44
 The iterative fit alone results in zero $\mathrm{NMSE}_{\mathrm{syn}}$ and $f_{\mathrm{neg,syn}}$, reflecting negligible local oversubtraction, and produces the smoothest background, but as expected by design leaves the highest residual baseline. Applying non-parametric methods using the framework to the remaining residual background reduces the loss substantially: Fit+RW reaches the lowest loss, and all four combinations outperform the RCH baseline. This confirms that the iterative fit removes the dominant, anisotropic equatorial streak and most of the general background, but a residual slowly varying component remains that a non-parametric framework method can remove on top of the fit, producing a cleaner background than either RCH alone or the iterative fit alone.
 
 \paragraph{Equatorial-Region Comparison.}
-To isolate the contribution of the equatorial-streak fit itself, Table~\ref{tab:two_stage_equator} reports the same set of methods restricted to the equator mask alone (Section~2.3), using the aggregate loss with the smoothness term dropped.
+To isolate the contribution of the equatorial-streak fit itself, Table~\ref{tab:two_stage_equator} reports the same set of methods restricted to the equator mask alone (Section~\ref{sec:masking}), using the aggregate loss with the smoothness term dropped.
 
 
 
 
 \begin{table}[t]
-\caption{Comparison of background subtraction methods restricted to the equatorial region (Section~2.3). Method definitions, weights, and column conventions are as in Table~\ref{tab:two_stage_full}; metrics here are computed using the equator mask only. Best values are highlighted in bold and second-best in underline; tied values are underlined jointly. Loss doesn't include the smoothness term.}
+\caption{Comparison of background subtraction methods restricted to the equatorial region (Section~\ref{sec:masking}). Method definitions, weights, and column conventions are as in Table~\ref{tab:two_stage_full}; metrics here are computed using the equator mask only. Best values are highlighted in bold and second-best in underline; tied values are underlined jointly. Loss doesn't include the smoothness term.}
 \label{tab:two_stage_equator}
 \centering
 \small
@@ -749,12 +773,13 @@ Within the equatorial region, the iterative fit alone already achieves a lower l
 
 
 \subsection{Summary of Observations}
+\label{sec:summary}
 
 % Taken together, these results demonstrate that the proposed optimization framework provides a consistent and objective basis for comparing background subtraction methods across diverse datasets. The framework identifies methods that perform well on average while also revealing substantial variability in optimal parameter values.
 
 % This variability motivates future work on dataset-specific or image-specific parameter selection strategies. Importantly, the framework is intended to guide parameter selection and method adaptation, rather than to prescribe a single fixed algorithm or parameter set. 
 
-Taken together, these results demonstrate that the proposed optimization framework provides a consistent and objective basis for comparing background subtraction methods across diverse datasets. Combined with the iterative fitting (Section~2.6), the framework allows background subtraction across the whole pattern, a significant improvement over existing approaches that typically work only on specific regions of the pattern. This separation of background components will enable more accurate analysis of diffraction features across the entire pattern and contribute to future studies of how background structure changes across experimental conditions, since the background itself may contain useful information.
+Taken together, these results demonstrate that the proposed optimization framework provides a consistent and objective basis for comparing background subtraction methods across diverse datasets. Combined with the iterative fitting (Section~\ref{sec:two_stage}), the framework allows background subtraction across the whole pattern, a significant improvement over existing approaches that typically work only on specific regions of the pattern. This separation of background components will enable more accurate analysis of diffraction features across the entire pattern and contribute to future studies of how background structure changes across experimental conditions, since the background itself may contain useful information.
 
 % \paragraph{Limitations and Recommended Approach}
 The appropriate choice of background subtraction strategy still depends on the data analysis goal: for low angles only, the RCH method is often efficient, sufficient and robust; for layer lines and high angles, the equator may be masked and the optimization framework applied to the rest of the pattern; for background subtraction across the whole pattern, the iterative combined approach with equatorial and general background fitting may be used.
@@ -764,12 +789,13 @@ The appropriate choice of background subtraction strategy still depends on the d
 
 
 %%%%%%%%%%%%%%%%%%%%
-\section{Conclusion} 
+\section{Conclusion}
+\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%
 
 We presented a quantitative, physics-informed framework for the evaluation and optimization of background subtraction methods in muscle fiber diffraction images, replacing subjective visual assessment with reproducible metrics, synthetic-signal validation, and an automated parameter search. Out of the tested non-parametric background subtraction methods, no single method dominated universally, which is the central argument for a framework that selects and tunes methods per dataset rather than prescribing one fixed algorithm.
 % 
-% Across the eleven datasets evaluated, the white top-hat filter (WTH) achieved the lowest average loss and ranked first in six of the eleven datasets, with G-ILPF, RW, and AVG taking the remaining top ranks (Section~3.1). 
+% Across the eleven datasets evaluated, the white top-hat filter (WTH) achieved the lowest average loss and ranked first in six of the eleven datasets, with G-ILPF, RW, and AVG taking the remaining top ranks (Section~\ref{sec:convergence}).
 
 % The proposed metrics track perceptually meaningful subtraction quality. Against a human-expert-processed dataset, the framework achieved a lower aggregate loss, a substantially lower residual baseline, and a smoother result than the expert's RCH-based workflow, at the cost of higher oversubtraction (Section~3.5) -- a trade-off expected from RCH's conservative, envelope-based construction and adjustable through the loss weights.
 
