@@ -171,9 +171,9 @@ Analysis of two-dimensional fiber diffraction patterns from partially crystallin
 
 Background removal strategies in diffraction studies depend strongly on both the dimensionality of the data and the structural assumptions they make.
 \label{sec:background}
-Usually, background removal in diffraction analysis is performed on one-dimensional intensity profiles obtained by projection along directions of interest, most commonly the equator and meridian. In standard practice, diffraction peaks are analyzed individually, and background intensity is estimated by averaging signal in regions adjacent to each peak, which is then subtracted from the integrated peak intensity~\citep{NederKorsunskiy2018}. This approach is simple and effective for isolated reflections, but depends on careful selection of background regions and does not account for spatial variation in the background. Another commonly used technique applies the convex hull algorithm~\citep{jarvis1973convex_hull} to one-dimensional intensity profiles to separate diffraction peaks from a smoothly varying background~\citep{lee2019musclex}. While robust to large-scale intensity variations, the convex hull method does not explicitly model background noise, and this can introduce systematic errors in quantitative measurements. Parametric background models, such as low-order polynomials, Chebyshev polynomials, or spline functions,are commonly employed to represent slowly varying backgrounds, while exponential components may be introduced to model steeper background variations~\citep{rajkumar2007fibrefix}. Although these approaches are effective for sharp reflections along the equator and meridian, they inherently discard spatial information contained in the two-dimensional shapes of diffraction features. As a result, one-dimensional methods provide limited access to continuous diffraction features such as layer lines, which contain important structural information.
+Usually, background removal in diffraction analysis is performed on one-dimensional intensity profiles obtained by projection along directions of interest, most commonly the equator and meridian. In standard practice, diffraction peaks are analyzed individually, and background intensity is estimated by averaging signal in regions adjacent to each peak, which is then subtracted from the integrated peak intensity~\citep{He2018}. This approach is simple and effective for isolated reflections, but depends on careful selection of background regions and does not account for spatial variation in the background. Another commonly used technique applies the convex hull algorithm~\citep{jarvis1973convex_hull} to one-dimensional intensity profiles to separate diffraction peaks from a smoothly varying background~\citep{lee2019musclex}. While robust to large-scale intensity variations, the convex hull method does not explicitly model background noise, and this can introduce systematic errors in quantitative measurements. Parametric background models, such as low-order polynomials, Chebyshev polynomials, or spline functions,are commonly employed to represent slowly varying backgrounds, while exponential components may be introduced to model steeper background variations~\citep{rajkumar2007fibrefix}. Although these approaches are effective for sharp reflections along the equator and meridian, they inherently discard spatial information contained in the two-dimensional shapes of diffraction features. As a result, one-dimensional methods provide limited access to continuous diffraction features such as layer lines, which contain important structural information.
 
-Two-dimensional background subtraction methods operate directly on diffraction patterns and aim to preserve spatial information that is lost in one-dimensional projections. Before applying any background subtraction technique, a sample-free measurement is typically subtracted to remove instrumental artifacts and air scattering. Some two-dimensional approaches rely on explicit assumptions about the geometry or smoothness of the background. Radial symmetry methods assume that the background intensity is symmetric about the beam center and estimate it by averaging pixel intensities over concentric rings~\citep{rajkumar2007fibrefix}. While computationally efficient, this assumption breaks down in the presence of anisotropic background features, such as the equatorial streak characteristic of muscle fiber diffraction. Partition-based methods divide the diffraction pattern into local regions, estimate the background within each region, and interpolate between regions to form a continuous background image. Examples include the roving window method~\citep{HeEtAl2007} and the radial convex hull approach, which applies one-dimensional convex hull subtraction to angular projections of the pattern~\citep{lee2019musclex}. Although these methods can adapt to spatially varying backgrounds, their performance depends sensitively on partition size and angular resolution and may introduce artifacts in regions with steep background gradients. In particular, the radial convex hull method tends to perform poorly at high scattering angles, where angular sectors span large regions of the detector.
+Two-dimensional background subtraction methods operate directly on diffraction patterns and aim to preserve spatial information that is lost in one-dimensional projections. Before applying any background subtraction technique, a sample-free measurement is typically subtracted to remove instrumental artifacts and air scattering. Some two-dimensional approaches rely on explicit assumptions about the geometry or smoothness of the background. Radial symmetry methods assume that the background intensity is symmetric about the beam center and estimate it by averaging pixel intensities over concentric rings~\citep{rajkumar2007fibrefix}. While computationally efficient, this assumption breaks down in the presence of anisotropic background features, such as the equatorial streak characteristic of muscle fiber diffraction. Partition-based methods divide the diffraction pattern into local regions, estimate the background within each region, and interpolate between regions to form a continuous background image. Examples include the roving window method~\citep{rajkumar2007fibrefix} and the radial convex hull approach, which applies one-dimensional convex hull subtraction to angular projections of the pattern~\citep{lee2019musclex}. Although these methods can adapt to spatially varying backgrounds, their performance depends sensitively on partition size and angular resolution and may introduce artifacts in regions with steep background gradients. In particular, the radial convex hull method tends to perform poorly at high scattering angles, where angular sectors span large regions of the detector.
 
 Other methods treat background subtraction as an image processing problem, exploiting differences in spatial scale or frequency content between background and diffraction features. Iterative low-pass filtering assumes that background variations occur at lower spatial frequencies than diffraction peaks and estimates the background through repeated smoothing~\citep{IvanovaMakowski1998}. Its effectiveness depends strongly on the chosen filter scale and the number of iterations, and weak or low-contrast diffraction features may be partially removed. Morphological filtering techniques, such as white top-hat operations~\citep{GonzalezWoodsDIP4e}, estimate the background using a structuring element and subtract it from the original image. Performance depends on the size of the structuring element relative to feature size, and inappropriate choices may suppress extended or low-intensity diffraction signals. Frequency-domain approaches based on Fourier or wavelet transforms separate image components by spatial frequency. These techniques are effective for crystalline diffraction patterns with sharp features~\citep{PolarBackground2024, WaveletBiomedOptExpress2021, renedecotret2017baseline}, but are less suitable for fiber diffraction, where signal and background overlap in frequency space. Kernel-based rolling-ball methods~\citep{Sternberg1983} similarly perform well for crystalline samples, but are generally less effective for fiber diffraction data.
 
@@ -680,7 +680,7 @@ The aggregate loss function is minimized to identify optimal parameter values fo
 \label{fig:img_filter}
 \end{wrapfigure}
 
-We optimize a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, implemented in MuscleX Quadrant Folding~\citep{JiratrakanvongEtAl2024}, which is based on algorithms originally developed within the CCP13 software suite~\citep{HeEtAl2007}. The selected methods span a range of underlying assumptions and algorithmic strategies, providing a broad basis for comparison. A summary of the tested algorithms is provided in Table~\ref{tab:algorithms}. Any newly developed or improved method for background subtraction in fiber diffraction can be evaluated using the proposed framework, providing a consistent basis.
+We optimize a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, implemented in MuscleX Quadrant Folding~\citep{JiratrakanvongEtAl2024}, which is based on algorithms originally developed within the CCP13 software suite~\citep{rajkumar2007fibrefix}. The selected methods span a range of underlying assumptions and algorithmic strategies, providing a broad basis for comparison. A summary of the tested algorithms is provided in Table~\ref{tab:algorithms}. Any newly developed or improved method for background subtraction in fiber diffraction can be evaluated using the proposed framework, providing a consistent basis.
 
 To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors and sample environments, including samples measured in solution, buffer, and air. The data used in our study were taken on either the Mar 165 CCD detector (Rayonix Inc.) or the EIGER X 9M pixel array detector (Dectris AG). Images were manually filtered to exclude frames lacking clearly defined diffraction features, as preservation of diffraction peaks is required for meaningful evaluation of background subtraction performance. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded, as shown in Figure~\ref{fig:img_filter}. For optimization and evaluation, close to 50 images were selected from each dataset.
 
@@ -814,7 +814,7 @@ The framework has been integrated into the MuscleX version 2.0.0~\citep{lee2019m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
-\supplementary{The following supporting information can be downloaded at \linksupplementary{s1}. Code for the optimization framework and the evaluation metrics is available at \url{https://github.com/musclex/musclex}.}
+\supplementary{The following supporting information can be downloaded at \linksupplementary{s1}. Code for the optimization framework and the evaluation metrics is available at \url{https://github.com/biocatiit/musclex}.}
 
 % Only for journal Methods and Protocols:
 % If you wish to submit a video article, please do so with any other supplementary material.
@@ -848,7 +848,8 @@ The framework has been integrated into the MuscleX version 2.0.0~\citep{lee2019m
 
 \informedconsent{Not applicable.}
 
-\dataavailability{A part of the original data presented in the study are openly available in [repository name] at [link], reference number [reference number]. The remaining data presented in this study are available on request from the corresponding author. The source code for the optimization framework and the evaluation metrics is available at \url{https://github.com/username/repo}.} 
+\dataavailability{The data presented in this study are available on request from the corresponding author. The source code for the optimization framework and the evaluation metrics is available at \url{https://github.com/biocatiit/musclex}.} 
+% A part of the original data presented in the study are openly available in [repository name] at [link], reference number [reference number]. The remaining data presented in this study are available on request from the corresponding author. 
 
 %\durcstatement{Current research is limited to the [please insert a specific academic field, e.g., XXX], which is beneficial [share benefits and/or primary use] and does not pose a threat to public health or national security. Authors acknowledge the dual-use potential of the research involving xxx and confirm that all necessary precautions have been taken to prevent potential misuse. As an ethical responsibility, authors strictly adhere to relevant national and international laws about DURC. Authors advocate for responsible deployment, ethical considerations, regulatory compliance, and transparent reporting to mitigate misuse risks and foster beneficial outcomes.}
 
@@ -1004,31 +1005,29 @@ for visualization due to high intensity differences between the background, the 
 Ma, W.; Irving, T.C. Small Angle X-ray Diffraction as a Tool for Structural Characterization of Muscle Disease. {\em Int. J. Mol. Sci.} {\bf 2022}, {\em 23}, 3052.
 % Reference 2
 \bibitem{squire2003ccp13_software}
-Squire, J.; Al-Khayat, H.; Arnott, S.; Crawshaw, J.; Denny, R.; Diakun, G.; Dover, D.; Forsyth, T.; He, A.; Knupp, C.; Mant, G.; Rajkumar, G.; Rodman, M.; Shotton, M.; Windle, A. New CCP13 Software and the Strategy behind Further Developments: Stripping and Modelling of Fibre Diffraction Data. {\em Fibre Diffr. Rev.} {\bf 2003}, {\em 11}, 7--19.
+Squire, J.; Al-Khayat, H.; Arnott, S.; Crawshaw, J.; Denny, R.; Diakun, G.; Dover, D.; Forsyth, T.; He, A.; Knupp, C.; Mant, G.; Rajkumar, G.; Rodman, M.; Shotton, M.; Windle, A. New CCP13 Software and the Strategy Behind Further Developments: Stripping and Modelling of Fibre Diffraction Data. {\em Fibre Diffr. Rev.} {\bf 2003}, {\em 11}, 7--19.
 % Reference 3
-\bibitem{NederKorsunskiy2018}
-Neder, R.B.; Korsunskiy, V.I. \textit{Two-Dimensional X-ray Diffraction}; Wiley: Hoboken, NJ, USA, 2018.
+\bibitem{He2018}
+He, B.B. \textit{Two-Dimensional X-ray Diffraction}, 2nd ed.; Wiley: Hoboken, NJ, USA, 2018.
 % Reference 4
 \bibitem{jarvis1973convex_hull}
 Jarvis, R.A. On the Identification of the Convex Hull of a Finite Set of Points in the Plane. {\em Inf. Process. Lett.} {\bf 1973}, {\em 2}, 18--21.
 % Reference 5
 \bibitem{lee2019musclex}
-Lee, X.; Jiratrakanvong, J.; Nikseresht, G.; Lee, X.; Irving, T.C. MuscleX, Version 1.14.12, 2019. Available online: https://doi.org/10.5281/zenodo.3360909 (accessed on Day Month Year).
+Lee, X.; Jiratrakanvong, J.; Nikseresht, G.; Irving, T.; Agam, G. MuscleX, Version 1.14.12, 2019. Available online: https://doi.org/10.5281/zenodo.3360909 (accessed on 3 July 2026).
 % Reference 6
 \bibitem{rajkumar2007fibrefix}
-Rajkumar, G.; Al-Khayat, H.A.; Eakins, F.; Knupp, C.; Squire, J.M. The CCP13 FibreFix Program Suite: Semi-Automated Analysis of Diffraction Patterns from Non-Crystalline Materials. {\em J. Appl. Crystallogr.} {\bf 2007}, {\em 40}, 178--184.
-% Reference 7
-\bibitem{HeEtAl2007}
-He, H.; Knott, R.; Pople, J.; Evans, G.; Nuttall, J.; Cookson, D.; Kirian, R. The CCP13 FibreFix Program Suite: Semi-Automated Analysis of Diffraction Patterns from Non-Crystalline Materials. {\em J. Appl. Crystallogr.} {\bf 2007}, {\em 40}, 178--184.
+Rajkumar, G.; Al-Khayat, H.A.; Eakins, F.; Knupp, C.; Squire, J.M. The CCP13 FibreFix Program Suite: Semi-Automated Analysis of Diffraction Patterns from Non-Crystalline Materials. {\em J. Appl. Cryst.} {\bf 2007}, {\em 40}, 178--184.
+
 % Reference 8
 \bibitem{IvanovaMakowski1998}
-Ivanova, M.I.; Makowski, L. Iterative Low-Pass Filtering for Estimation of the Background in Fiber Diffraction Patterns. {\em J. Appl. Crystallogr.} {\bf 1998}, {\em 31}, 255--262.
+Ivanova, M.I.; Makowski, L. Iterative Low-Pass Filtering for Estimation of the Background in Fiber Diffraction Patterns. {\em Acta Crystallogr. A} {\bf 1998}, {\em 54}, 626--631.
 % Reference 9
 \bibitem{GonzalezWoodsDIP4e}
 Gonzalez, R.C.; Woods, R.E. \textit{Digital Image Processing}, 4th ed.; Pearson: New York, NY, USA, 2018.
 % Reference 10
 \bibitem{PolarBackground2024}
-Pu, G.; Zheng, X.; Jiang, J. Polar Coordinate-Based Background Removal Algorithm for 2D X-ray Scattering Data. {\em Rev. Sci. Instrum.} {\bf 2024}, {\em 95}, 125109.
+Guo, P.; Zheng, X.; Jiang, J.; Yin, S.; Zhang, C.; Yang, B.; Cui, Y.; Yang, T.; Gu, Y.; Li, X.; Zhang, X. Polar Coordinate-Based Background Removal Algorithm for 2D X-ray Scattering Data. {\em Rev. Sci. Instrum.} {\bf 2024}, {\em 95}, 125109.
 % Reference 11
 \bibitem{WaveletBiomedOptExpress2021}
 H\"upfel, M.; Kobitski, A.Y.; Zhang, W.; Nienhaus, G.U. Wavelet-Based Background and Noise Subtraction for Fluorescence Microscopy Images. {\em Biomed. Opt. Express} {\bf 2021}, {\em 12}, 969--980.
@@ -1037,7 +1036,7 @@ H\"upfel, M.; Kobitski, A.Y.; Zhang, W.; Nienhaus, G.U. Wavelet-Based Background
 Ren\'e de Cotret, L.P.; Siwick, B.J. A General Method for Baseline-Removal in Ultrafast Electron Powder Diffraction Data Using the Dual-Tree Complex Wavelet Transform. {\em Struct. Dyn.} {\bf 2017}, {\em 4}, 044004.
 % Reference 13
 \bibitem{Sternberg1983}
-Sternberg, S.R. Biomedical Image Processing. {\em IEEE Comput.} {\bf 1983}, {\em 16}, 22--34.
+Sternberg, S.R. Biomedical Image Processing. {\em Computer} {\bf 1983}, {\em 16}, 22--34.
 % Reference 14
 \bibitem{ArangurenCarmona2020}
 Aranguren Carmona, R.; Agam, G.; Irving, T. Background Subtraction in Diffraction X-ray Images Using Deep CNN. {\em Electron. Imaging} {\bf 2020}, {\em 32}, 344-1--344-6.
@@ -1049,7 +1048,7 @@ Buerger, M.J. The Correction of X-ray Diffraction Intensities for Lorentz and Po
 Denny, R. Fibre Diffraction Spot Profiles and the Lorentz Correction. {\em Fibre Diffr. Rev.} {\bf 1995}, {\em 5}, 23--25.
 % Reference 17
 \bibitem{JiratrakanvongEtAl2024}
-Jiratrakanvong, J.; Linari, M.; Piazzesi, G.; Reconditi, M.; Caremani, M.; Narayanan, T.; Irving, T.C. MuscleX: Data Analysis Software for Fiber Diffraction Patterns from Muscle. {\em J. Synchrotron Radiat.} {\bf 2024}, {\em 31}, 1401--1408.
+Jiratrakanvong, J.; Shao, J.; Li, J.; Menendez Alvarez, M.; Li, X.; Das, P.; Nikseresht, G.; Miskin, N.; Huo, R.; Nabon, J.; Leduc, T.; Zhang, E.; Ma, W.; Agam, G.; Irving, T.C. MuscleX: Data Analysis Software for Fiber Diffraction Patterns from Muscle. {\em J. Synchrotron Radiat.} {\bf 2024}, {\em 31}, 1401--1408.
 % Reference 18
 \bibitem{MurthyZeroGrubb1997}
 Murthy, N.S.; Zero, K.; Grubb, D.T. Full-Pattern Analysis of Two-Dimensional Small-Angle Scattering Data from Oriented Polymers Using Elliptical Coordinates. {\em Polymer} {\bf 1997}, {\em 38}, 1021--1028.
