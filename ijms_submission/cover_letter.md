@@ -1,0 +1,23 @@
+# Cover Letter
+
+To the Editors,
+International Journal of Molecular Sciences
+
+Dear Editor,
+
+We are pleased to submit our manuscript titled "A Framework for Global Background Subtraction in Fiber Diffraction Patterns from Striated Muscle" for consideration to the International Journal of Molecular Sciences.
+
+X-ray fiber diffraction is a technique that provides unique insight into the sarcomere-level molecular structure of muscle and has proven valuable for studying the structural consequences of cardiac and skeletal myopathies. Analysis of muscle diffraction patterns can therefore contribute to understanding the molecular mechanisms underlying diseases ranging from nemaline myopathy to heart failure. The quantitative interpretation of these diffraction patterns and the evaluation of features such as equatorial reflections, meridional peaks and layer lines depends on the reliable separation of weak diffraction signal from a strong, spatially non-uniform diffuse background. In current practice, this step is performed heuristically: an operator visually assesses subtraction quality and manually tunes algorithm parameters, which introduces subjectivity, risks the loss of faint but meaningful features and undermines reproducibility. There has been no standardized, quantitative basis for choosing two-dimensional background-subtraction methods and optimizing the parameters.
+
+To address this gap, we present a unified framework that replaces subjective visual assessment with physically-grounded, quantitative evaluation criteria given the lack of a ground-truth background. It combines (i) a set of image-quality metrics derived from the physics of the signal-generation process, (ii) injection of faint synthetic diffraction features to explicitly penalize the loss of weak signal, and (iii) a global optimization procedure that selects method-specific parameters balancing background subtraction against signal preservation. This allows a direct and objective quantitative comparison of the commonly used subtraction methods within a single consistent pipeline. Applied to synchrotron diffraction patterns from striated muscle, the optimized parameters substantially improve the consistency of background removal and reduce artifacts relative to default or ad hoc settings, while preserving key structural features. We further introduce an iterative two-stage procedure that jointly models the anisotropic equatorial streak and the general background, extending reliable subtraction to the whole pattern. Importantly, the aggregate loss correlates with expert visual assessment. The framework has been incorporated into MuscleX, an open-source software package for muscle fiber diffraction analysis, making it available to the community.
+
+Prior approaches to two-dimensional background subtraction in fiber diffraction are based on specific structural assumptions and are typically evaluated only by visual inspection. Fiber diffraction lacks a ground-truth background and no objective standard has existed for comparing these methods or systematically tuning their parameters. Our contribution is not a single new algorithm but a reproducible evaluation and optimization framework within which existing methods can be fairly compared. This provides both an immediate practical tool and a foundation for ongoing methodological development in quantitative diffraction image analysis.
+
+This manuscript is original, has not been published previously, and is not under consideration elsewhere. All authors have approved the submission and declare no conflict of interest. We believe the work will be of interest to the journal's readership in structural and molecular biology, and we thank you for considering it for publication.
+
+Sincerely,
+
+Irina Klein, Gady Agam, and Thomas C. Irving\
+Illinois Institute of Technology, Chicago, IL, USA\
+Corresponding authors: irving@illinoistech.edu; iklein@illinoistech.edu
+
