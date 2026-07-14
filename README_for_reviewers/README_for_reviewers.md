@@ -100,6 +100,8 @@ Runs the iterative 2D fit (equatorial streak + general background) per image and
 musclex qf -h -s B_apply_fitting.json -f . -o B_results -d
 ```
 
+The fit takes a couple of minutes per image, so processing a folder can run for a while. If you're running this over SSH or don't want the process killed when your terminal closes, run it inside `tmux` (or `screen`) so you can detach and reattach later, e.g. `tmux new -s musclex`, run the command, then detach with `Ctrl-b d`.
+
 ### Use case C — fitting + optimize on top
 
 Runs and subtracts the fit, then optimizes a non-parametric background on the residual (order: fit → subtract → optimize).
@@ -107,6 +109,8 @@ Runs and subtracts the fit, then optimizes a non-parametric background on the re
 ```bash
 musclex qf -h -s C_fitting_plus_optimize.json -f . -o C_results -d
 ```
+
+As with Use case B, the fitting step takes a couple of minutes per image — consider running this inside `tmux`/`screen` for longer folders.
 
 Each settings file is annotated: keys prefixed with `//` are comments, and the active parameters (methods searched, ROI, equator/layer-line mask, iterations) are pinned to each dataset's values for reproducibility. Comment out a pinned mask value to let MuscleX auto-detect it.
 
@@ -185,7 +189,7 @@ Note that for the all the metrics to be saved, the **"Save result metrics to csv
    - **Downsample factor**: downsampling during the streak fit (default 2).
    <!-- - **Use step-0 projection background**: enables the 1D projection seed ($B_0$) for round 1. -->
    - **Auto-reduce (equator && baseline)**: applies the post-fit scale factors that guard against oversubtraction; set percentages manually if disabled.
-3. Click **"Run Fit"**, review the resulting residual pattern (quadrant folded - $E$ - $G$), the fitted background and the meridional/equatorial profiles. Toggle between the views using the **"View:"** options. 
+3. Click **"Run Fit"** (this takes a couple of minutes), review the resulting residual pattern (quadrant folded - $E$ - $G$), the fitted background and the meridional/equatorial profiles. Toggle between the views using the **"View:"** options. 
 
 <img src="figs/it_fitting_result1.png" alt="QF_results" width="800">
 
