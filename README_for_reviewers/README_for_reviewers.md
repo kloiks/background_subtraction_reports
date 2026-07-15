@@ -133,7 +133,7 @@ Click **"Load Settings"** and select the `UI_load_dataset_settings.json` file fo
 
 This will initialize the equator/layer-line mask, and other parameters to match the manuscript's results. You can then run any of the three use cases from the GUI.
 
-### Non-parametric subtraction and optimization
+### Case A. Non-parametric subtraction and optimization
 
 Open the **"Results"** tab to see the quadrant-folded image and/or the background-subtracted image (if subtraction is enabled).
 
@@ -142,7 +142,7 @@ Open the **"Results"** tab to see the quadrant-folded image and/or the backgroun
 
 To run the non-parametric search:
 
-1. Expand the **"Background Subtraction"** section and select **"Automated Processing"** in the **"Options"** dropdown.
+1. Expand the **"Background Subtraction"** section. Then expand the **"Non-parametric Background Fitting"** section and select **"Automated Processing"** in the **"Options"** dropdown.
 <!-- <img src="figs/background_subtraction_panel.png" alt="QF_results" width="500"> -->
 <img src="figs/auto_processing_select.png" alt="QF_results" width="400">
 
@@ -177,7 +177,7 @@ To run the non-parametric search:
 
 Note that for the all the metrics to be saved, the **"Save result metrics to csv"** has to be checked. Otherwise, only loss is saved in `<output>/qf_results/summary.csv`.
 
-### Iterative two-stage fitting
+### Case B. Iterative two-stage fitting
 
 1. In the **"Background Subtraction"** panel, expand **"Parametric Background Fitting"** and click **"Iterative 2D Background Fitting Dialog."**
 
@@ -189,13 +189,26 @@ Note that for the all the metrics to be saved, the **"Save result metrics to csv
    - **Downsample factor**: downsampling during the streak fit (default 2).
    <!-- - **Use step-0 projection background**: enables the 1D projection seed ($B_0$) for round 1. -->
    - **Auto-reduce (equator && baseline)**: applies the post-fit scale factors that guard against oversubtraction; set percentages manually if disabled.
-3. Click **"Run Fit"** (this takes a couple of minutes), review the resulting residual pattern (quadrant folded - $E$ - $G$), the fitted background and the meridional/equatorial profiles. Toggle between the views using the **"View:"** options. 
+3. Click **"Run Fit"** (this takes a couple of minutes), review the resulting residual pattern (quadrant folded - $E$ - $G$), the fitted background and the meridional/equatorial profiles. Toggle between the views using the **"View:"** options. You may adjust the clipping ranges using **"Min/Max"** or leave the **"Auto range"**.
 
 <img src="figs/it_fitting_result1.png" alt="QF_results" width="800">
 
 <img src="figs/it_fitting_result2.png" alt="QF_results" width="800">
 
 After confirming the fit, chick **"Apply (use residual) && Close"** to subtract the fit and return to the main window.
+
+### Case C. Iterative fitting + slowly varying non-parametric component on top
+
+Combines Cases A and B: the iterative fit removes the equatorial streak and general background first, then a non-parametric method mops up the remaining slowly-varying component on the residual (order: fit → subtract → optimize).
+
+1. Run the iterative fit and apply it as in **Case B**, steps 1–3 above (configure the fit, click **"Run Fit"**, review the residual, then **"Apply (use residual) && Close"**).
+2. With the fit residual now shown as the working image, expand **"Background Subtraction"** and select **"Automated Processing"**, then proceed as in **Case A**, steps 1–5 above (choose methods via **"Advanced Configuration"** or use **"Apply Default Optimization"**, then apply).
+3. The **"Results"** tab shows the final background-subtracted pattern (fit + non-parametric residual removed) and both of the backgrounds which can be viewed by changing the **"Show:"** to **"Background (Fit) / (Non-param)"**.
+
+<img src="figs/case_c.png" alt="QF_results" width="800">
+
+
+
 
 ---
 

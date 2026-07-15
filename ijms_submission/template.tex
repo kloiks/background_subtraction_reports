@@ -92,7 +92,7 @@ $^{1}$ \quad Computer Science Department, Illinois Institute of Technology, Chic
 $^{2}$ \quad Biology Department, Illinois Institute of Technology, Chicago, IL 60616, USA}
 
 % Contact information of the corresponding author
-\corres{Correspondence: iklein@illinoistech.edu (I.K.); irving@illinoistech.edu  (T.C.I.)}
+\corres{Correspondence: irving@illinoistech.edu  (T.C.I.); iklein@illinoistech.edu (I.K.)}
 
 % Current address and/or shared authorship
 %\firstnote{Current address: Affiliation.}  
@@ -503,7 +503,7 @@ No single background subtraction method dominates across all metrics or all data
 
 The parametric and non-parametric approaches address complementary failure modes and are most effective in combination. The iterative two-stage fit removes the dominant, anisotropic equatorial streak and most of the general background with negligible oversubtraction, but by design leaves a residual baseline; applying a non-parametric framework method to that residual removes the remaining slowly varying component and yields the lowest loss, in both the general-background region and the equatorial region itself. The combination of the iterative fitting with the framework therefore allows background subtraction across the whole pattern, a significant improvement over existing approaches that typically operate only on specific regions of the pattern. This separation of background components will enable more accurate analysis of diffraction features across the entire pattern and could contribute to future studies of how background structure changes with experimental conditions, since the background itself may carry useful information.
 
-The appropriate choice of background subtraction strategy still depends on the data analysis goal: for low angles only, the RCH method is often efficient, sufficient and robust; for layer lines and high angles, the equator may be masked and the optimization framework applied to the rest of the pattern; for background subtraction across the whole pattern, the iterative approach for the equatorial and general background fitting combined with the framework may be used.
+The appropriate choice of background subtraction strategy still depends on the data analysis goal: for low angles only, the RCH method is often efficient, sufficient and robust; for quantifiation of layer lines and higher angle meridionals, the equator may be masked and the optimization framework applied to the rest of the pattern; for background subtraction across the whole pattern, the iterative approach for the equatorial and general background fitting combined with the framework may be used.
 
 Two limitations constrain how broadly these results generalize. First, optimized parameters vary substantially across datasets, and to a lesser extent within them (Table~\ref{tab:summary_total_variability}), so a single globally tuned parameter set is unlikely to be optimal; dataset- or image-specific tuning should be applied rather than fixed defaults. Part of the residual within-dataset spread appears to reflect parameter degeneracy rather than genuinely distinct optima, since different coefficient combinations can produce comparably low loss and background intensity. Second, the loss weights require operator judgment: the framework automates the parameter search within a method but not the choice of how strongly to penalize each failure mode for a given task, and some artifacts, such as faint negative excursions or subtle layer-line distortion, remain difficult to capture numerically. We therefore recommend a hybrid workflow: automated search combined with human verification on a small image subset, followed by weight adjustment and full-dataset optimization, rather than a fully unsupervised pipeline.
 
@@ -682,12 +682,12 @@ The aggregate loss function is minimized to identify optimal parameter values fo
 
 We optimize a representative set of background subtraction algorithms commonly used for fiber diffraction analysis, implemented in MuscleX Quadrant Folding~\citep{JiratrakanvongEtAl2024}, which is based on algorithms originally developed within the CCP13 software suite~\citep{rajkumar2007fibrefix}. The selected methods span a range of underlying assumptions and algorithmic strategies, providing a broad basis for comparison. A summary of the tested algorithms is provided in Table~\ref{tab:algorithms}. Any newly developed or improved method for background subtraction in fiber diffraction can be evaluated using the proposed framework, providing a consistent basis.
 
-To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors and sample environments, including samples measured in solution, buffer, and air. The data used in our study were taken on either the Mar 165 CCD detector (Rayonix Inc.) or the EIGER X 9M pixel array detector (Dectris AG). Images were manually filtered to exclude frames lacking clearly defined diffraction features, as preservation of diffraction peaks is required for meaningful evaluation of background subtraction performance. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded, as shown in Figure~\ref{fig:img_filter}. For optimization and evaluation, close to 50 images were selected from each dataset.
+To assess robustness across experimental conditions, we selected a diverse set of muscle fiber diffraction datasets acquired using different detectors and sample environments, including samples measured in solution and air. The data used in our study were taken on either the Mar 165 CCD detector (Rayonix Inc.) or the EIGER X 9M pixel array detector (Dectris AG). Images were manually filtered to exclude frames lacking clearly defined diffraction features, as preservation of diffraction peaks is required for meaningful evaluation of background subtraction performance. Table~\ref{tab:datasets} lists datasets used in this study. Frames lacking clearly defined diffraction features were excluded, as shown in Figure~\ref{fig:img_filter}. For optimization and evaluation, close to 50 images were selected from each dataset.
 
 Applying guided filtering to smooth diffraction images prior to background estimation improves performance for several non-parametric methods, particularly the white top-hat (WTH) filter, which is sensitive to high-frequency noise. In this study, a smoothing filter was applied to all studied background subtraction methods as it produced visually plausible results. Downsampling the patterns has a similar effect, reducing computational load while smoothing the pattern and thus improving performance. Importantly, smoothing is applied only to estimate the background; the background-subtracted image is computed using the original, unsmoothed data, ensuring that diffraction features are preserved.
 
 \begin{table}[h]
-\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A subset was used for experiments.}
+\caption{Experimental datasets used in the analysis. Images lacking clearly defined diffraction features were excluded. A random subset was used for experiments.}
 \label{tab:datasets}
 \centering
 \footnotesize
@@ -700,7 +700,7 @@ Applying guided filtering to smooth diffraction images prior to background estim
 P2\_F6\_639 & Intact Pig Cardiac & EIGER X 9M & Solution & 120 & 120 & 50 \\
 P3\_F4\_675 & Intact Pig Cardiac & EIGER X 9M & Solution & 120 & 120 & 48 \\
 2024\_0508 & Skinned Pig Cardiac & Mar 165 & Solution & 267 & 246 & 50 \\
-2024\_1213 & Skinned Pig Cardiac & Mar 165 & Buffer & 242 & 188 & 45 \\
+2024\_1213 & Skinned Pig Cardiac & Mar 165 & Solution & 242 & 188 & 45 \\
 2024\_1213 & Skinned Pig Cardiac & Mar 165 & Air & 287 & 237 & 50 \\
 2025\_0402 & Skinned Pig Cardiac & Mar 165 & Solution & 640 & 640 & 50 \\
 2026\_0409 & Skinned Mouse Cardiac & Mar 165 & Air & 304 & 304 & 50 \\
@@ -789,7 +789,7 @@ This adaptive, per-image selection is appropriate when the goal is the best poss
 \centering
 \includegraphics[width=0.7\linewidth]{figs/Fig6_visual_eq_Weikang_4_half_v3.png}
 \hspace{0.01\linewidth}
-\caption{Examples of background subtraction outcomes with parametric fitted background. Left to right: original image before subtraction, background-sutracted pattern, fitted general background, and fitted equatorial streak. Two scales are used for visualization due to high intensity differences between the equatorial streak and the rest of the pattern. Most of the background is subtracted with some high-angle residual background left over. }
+\caption{Examples of background subtraction outcomes with parametric fitted background. Left to right: original image before subtraction, background-sutracted pattern, fitted general background, and fitted equatorial streak. Two scales are used for visualization due to high intensity differences between the equatorial streak and the rest of the pattern. Most of the background is subtracted with some high-angle residual background left over that can be removed by a final pass of non-parametric background removal. }
 \label{fig:visual_eq_none}
 \end{figure}
 
