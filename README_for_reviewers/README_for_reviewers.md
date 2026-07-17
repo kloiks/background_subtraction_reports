@@ -113,6 +113,8 @@ Runs the iterative 2D fit (equatorial streak + general background) per image and
 musclex qf -h -s cli_settings/file1_B_apply_fitting.json -i file1_pattern_2025_0227_AB.tif -o B_results -d
 ```
 
+The fit takes a couple of minutes per image, so processing a folder can run for a while. If you're running this over SSH or don't want the process killed when your terminal closes, run it inside `tmux` (or `screen`) so you can detach and reattach later, e.g. `tmux new -s musclex`, run the command, then detach with `Ctrl-b d`.
+
 ### Use case C — fitting + optimize on top (pattern 2)
 
 Runs and subtracts the fit, then optimizes a non-parametric background on the residual (order: fit → subtract → optimize).
@@ -120,6 +122,8 @@ Runs and subtracts the fit, then optimizes a non-parametric background on the re
 ```bash
 musclex qf -h -s cli_settings/file2_C_fitting_plus_optimize.json -i file2_pattern_MPLL_C.tif -o C_results -d
 ```
+
+As with Use case B, the fitting step takes a couple of minutes per image — consider running this inside `tmux`/`screen` for longer folders.
 
 Each settings file is annotated: keys prefixed with `//` are comments, and the active parameters (methods searched, ROI, equator/layer-line mask, iterations) are pinned to each dataset's values for reproducibility. Comment out a pinned mask value to let MuscleX auto-detect it.
 
