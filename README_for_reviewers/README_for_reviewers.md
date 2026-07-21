@@ -190,7 +190,10 @@ To run the non-parametric search:
 
 <img src="figs/results_A.png" alt="QF_results" width="1200">
 
-Note that for the all the metrics to be saved, the **"Save result metrics to csv"** has to be checked. Otherwise, only loss is saved in `<output>/qf_results/summary.csv`.
+Note that the background is subtracted at higher angles, while the high-intensity
+background near the pattern center and along the equator is largely retained. This is the expected behavior: it provides a relatively fast way to obtain a background-subtracted pattern suitable for studying the meridional reflections and layer lines.
+
+For the all the metrics to be saved, the **"Save result metrics to csv"** has to be checked. Otherwise, only loss is saved in `<output>/qf_results/summary.csv`.
 
 ### Case B. Iterative two-stage fitting
 
@@ -198,7 +201,7 @@ Uses pattern 1 (`file1_pattern_2025_0227_AB.tif`). See the [Background Fitting d
 
 1. In the **"Background Subtraction"** panel, expand **"Parametric Background Fitting"** and click **"Iterative 2D Background Fitting Dialog."**
 
-<img src="figs/iterative_fit_button.png" alt="QF_results" width="400">
+<img src="figs/iterative_fit_button.png" alt="QF_results" width="400"> 
 
 2. (Optional; may leave defaults) Configure the fit:
    - **Component 2**: general-background form (`auto`, `lorentzian`, `powerlaw`, `stretched`); `auto` reproduces the per-image model selection. Components 1 (exponential decay) and 3 (constant baseline) are fixed.
@@ -212,7 +215,7 @@ Uses pattern 1 (`file1_pattern_2025_0227_AB.tif`). See the [Background Fitting d
 
 <img src="figs/it_fit_res2.png" alt="QF_results" width="800"> 
 
-After confirming the fit, chick **"Apply && Close"** to subtract the fit and return to the main window.
+After confirming the fit, chick **"Apply & Close"** to subtract the fit and return to the main window.
 
 Note, that after applying the fitted background the non-parametric background is set to None. If there is leftover residual background, it may be removed using a non-parametric approach using the optimization framework. For image `file1`, if we run the optimization framework on top of the subtracted image, it will not apply other background subtraction methods as the pattern is clean and contains little residual. The next use case using `file2` demonstrates when it is preferred to apply both the fitting and the optimization framework. 
 
