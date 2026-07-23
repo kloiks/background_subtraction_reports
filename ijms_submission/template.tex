@@ -228,7 +228,7 @@ The normalized metrics are combined into a unified loss to balance background su
   node distance=3mm
 ]
 
-\node[box, text width=20mm] (p1) {Preprocess Diffraction Image: Centerize, Rotate, Quadrant Fold};
+\node[box, text width=20mm] (p1) {Preprocess Diffraction Image: Center, Rotate, Quadrant Fold};
 \node[box, text width=20mm, right=of p1] (p2) {Estimate\\Parameters \& Detect Main Features};
 \node[box, text width=20mm, right=of p2] (p3) {Create\\Artificial\\Structure \&\\Masks};
 \node[box, text width=25mm, right=of p3] (p4) {Coordinate\\Descent Background\\Removal\\Parameter Search \&\\Comparison of Methods};
@@ -508,7 +508,7 @@ A background subtracted diffraction pattern should fulfill several qualitative c
 
 \subsubsection{Quantitative Metrics}
 
-Some metrics use the background-subtracted image to evaluate the residual and whether artifacts were introduced. \textit{Oversubtraction} is assessed as the fraction of negative pixels in connected clusters larger than a specified minimum (e.g.\ nine pixels). This metric, denoted $f_{\mathrm{neg,con}}$, is ideally zero. Random noise produces isolated negative pixels and is excluded from this calculation. \textit{Residual background level} is calculated using the fraction of pixels with intensity within a specified threshold away from zero, denoted $f_{B}$. Low values reflect low residual while allowing for noise. The threshold is estimated using the average intensity near the edge of the pattern, where background is expected to be minimal. \textit{Background smoothness}, denoted $\mathrm{S}_{\mathrm{BG}}$, is calculated using the subtracted background pattern. It is defined as
+Some metrics use the background subtracted image to evaluate the residual and whether artifacts were introduced. \textit{Oversubtraction} is assessed as the fraction of negative pixels in connected clusters larger than a specified minimum (e.g.\ nine pixels). This metric, denoted $f_{\mathrm{neg,con}}$, is ideally zero. Random noise produces isolated negative pixels and is excluded from this calculation. \textit{Residual background level} is calculated using the fraction of pixels with intensity within a specified threshold away from zero, denoted $f_{B}$. Low values reflect low residual while allowing for noise. The threshold is estimated using the average intensity near the edge of the pattern, where background is expected to be minimal. \textit{Background smoothness}, denoted $\mathrm{S}_{\mathrm{BG}}$, is calculated using the subtracted background pattern. It is defined as
 \begin{equation}
 \mathrm{S}_{\mathrm{BG}} =
 \frac{1}{N} \sum_i \left| I(y_i + 1) - I(y_i) \right|,
