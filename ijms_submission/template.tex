@@ -63,7 +63,6 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{wrapfig}
-\usepackage{needspace}
 \usetikzlibrary{arrows.meta, positioning}
 
 %=================================================================
@@ -854,10 +853,10 @@ The framework and the iterative fitting have been integrated into MuscleX versio
 %% Only for journal Encyclopedia
 %\entrylink{The Link to this entry published on the encyclopedia platform.}
 
-\needspace{16\baselineskip}
+\begin{samepage}
 \abbreviations{Abbreviations}{%
 The following abbreviations are used in this manuscript:\\
-\noindent 
+\noindent
 \begin{tabular}{@{}ll}
 \footnotesize
 AVG & Mean value of non-masked pixels (baseline)\\
@@ -874,6 +873,7 @@ RW & Roving window\\
 WTH & White top-hat filter
 \end{tabular}
 }
+\end{samepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Optional
